@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+table {
+    width: 100%;
+    background-color: #edf2f4;
+}
+
+table, thead, tbody, th, tr, td {
+    border: 1px solid #fff;
+    padding: 0.5em;
+    text-align: center;
+    border-radius: 5px;
+}
+
+a{
+    color: #086788;
+    opacity: 0.9;
+}
+
+a:hover{
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.btn-delete{
+    background-color: #d90429;
+    color: #fff;
+    border: 1px solid #fff;
+    width: 50%;
+}
+
+.bg-light-gray {
+    background-color: #edf2f4;
+}
+
+.bg-black{
+    background-color: #212529;
+}
+
+.txt-white{
+    color: #fff;
+}
+
+.status-col-0{
+    background-color: #495057;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 3px;
+    padding: 3px 10px 3px 10px;
+}
+
+.status-col-1{
+    background-color: #355070;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 3px;
+    padding: 3px 10px 3px 10px;
+}
+
+.status-col-2{
+    background-color: #0fa3b1;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 3px;
+    padding: 3px 10px 3px 10px;
+}
+
+.p-h-1 {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+.p-h-2 {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
