@@ -22,7 +22,11 @@ mongoose.connect(process.env.MONGO)
 
 const __dirname = path.resolve();
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: ["https://dashboard-mern-sandy.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true
+}));
 // app.use(express.static(path.join(__dirname, '/client/dist')));
 
 // app.get('*', (req, res) => {
@@ -47,11 +51,6 @@ app.use('/api/client', clientRoutes);
 app.use('/api/project', projectRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/client/auth', clientAuthRoutes);
-
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   next();
-// });
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
