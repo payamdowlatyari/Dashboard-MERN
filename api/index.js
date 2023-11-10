@@ -8,7 +8,7 @@ import projectRoutes from './routes/project.route.js'
 import clientAuthRoutes from './routes/clientAuth.route.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import path from 'path';
+// import path from 'path';
 dotenv.config();
 
 const port = process.env.PORT || 8000
@@ -20,13 +20,18 @@ mongoose.connect(process.env.MONGO)
     console.log(err);
   });
 
-const __dirname = path.resolve();
 const app = express();
 app.use(cors({
-    origin: ["https://dashboard-mern-sandy.vercel.app"],
+    origin: ["https://dashboard-mern-r47l.vercel.app"],
     methods: ["POST", "GET"],
     credentials: true
 }));
+
+// const __dirname = path.resolve();
+
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static('client/build'));
+// }
 // app.use(express.static(path.join(__dirname, '/client/dist')));
 
 // app.get('*', (req, res) => {
