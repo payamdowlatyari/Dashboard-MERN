@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from '../redux/reducers/clientSlice';
+import { Avatar } from 'primereact/avatar';
 
 export default function Header() {
   const { currentClient} = useSelector((state) => state.client);
@@ -17,30 +18,36 @@ export default function Header() {
   }
 
   return (
-    <div className='bg-black txt-white'>
-      <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
-      <div className='flex'>
-        <Link to='/'>
-          <h1 className='font-bold txt-white'>Logo</h1>
+    <div className='navbar bg-black txt-white'>
+      <div className='flex nav-left'>
+
+        <Link className='font-bold txt-white' to='/'>
+          Home
         </Link>
-        <Link to='/dashboard'>
-          <h1 className='p-h-2 txt-white'>Dashboard</h1>
+        <Link className='p-h-2 txt-white' to='/dashboard'>
+          Dashboard
         </Link>
         </div>
-          <div className='flex'>
+          <div className='flex nav-right'>
            {currentClient? ( 
-          <span onClick={handleSignOut} className='cursor-pointer p-h-2'>
-          <i className="fa fa-sign-out"></i>
+          <span onClick={handleSignOut} 
+          className='cursor-pointer txt-white'>
+            <i className="fa fa-sign-out"></i>
+
           </span>) : (<span></span>)} 
-          <Link to='/profile'>
-            {currentClient ? (
-              <img src={currentClient.profilePicture} alt='profile' className='h-7 w-7 rounded-full object-cover' />
-            ) : (
-              <span>Sign In</span>
+          
+            {currentClient ? ( 
+            <Link to='/profile'>
+            <Avatar image={currentClient.profilePicture} 
+            shape="circle" />
+            </Link>
+            ) : ( 
+              <Link className='font-bold txt-white' to='/sign-in'>
+                Login
+             </Link>
             )}
-          </Link>
+     
           </div>
-      </div>
     </div>
   );
 }

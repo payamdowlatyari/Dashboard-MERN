@@ -1,83 +1,115 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 body {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  margin: 0;
+  background-color: #e7ecef;
 }
 
 table {
-    width: 100%;
-    background-color: #edf2f4;
+  width: 100%;
+  background-color: #e7ecef;
 }
 
 table, thead, tbody, th, tr, td {
-    border: 1px solid #fff;
-    padding: 0.5em;
-    text-align: center;
-    border-radius: 5px;
+  border: 1px solid #fff;
+  padding: 0.5em;
+  text-align: center;
+  border-radius: 5px;
 }
 
 a{
-    color: #086788;
-    opacity: 0.9;
+  opacity: 0.9;
+  text-decoration: none;
+  margin: 5px;
 }
 
 a:hover{
-    opacity: 1;
-    transition: 0.3s;
+  opacity: 1;
+  transition: 0.3s;
 }
 
-.btn-delete{
-    background-color: #d90429;
-    color: #fff;
-    border: 1px solid #fff;
-    width: 50%;
+form{
+  align-items: center;
+}
+
+input, button {
+  margin: 5px;
+}
+
+.main{
+  margin: 2em;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 2em;
+}
+
+.dashboard-main{
+  padding: 2em;
+}
+
+.footer{
+  position: absolute;
+  bottom: 0;
+  margin: 0 auto;
+  font-size: small;
+  display: inline-block;
+  justify-content: center;
+}
+
+.footer a {
+  justify-content: center;
+  padding: 0.5em;
+}
+
+.p-inputtext-sm{
+  margin: 5px;
+  display: block;
+  min-width: 250px;
 }
 
 .bg-light-gray {
-    background-color: #edf2f4;
+  background-color: #edf2f4;
 }
 
 .bg-black{
-    background-color: #212529;
+  background-color: #0a1128;
 }
 
 .txt-white{
-    color: #fff;
-}
-
-.status-col-0{
-    background-color: #495057;
-    color: #fff;
-    font-size: 12px;
-    border-radius: 3px;
-    padding: 3px 10px 3px 10px;
-}
-
-.status-col-1{
-    background-color: #355070;
-    color: #fff;
-    font-size: 12px;
-    border-radius: 3px;
-    padding: 3px 10px 3px 10px;
-}
-
-.status-col-2{
-    background-color: #0fa3b1;
-    color: #fff;
-    font-size: 12px;
-    border-radius: 3px;
-    padding: 3px 10px 3px 10px;
+  color: #fff;
 }
 
 .p-h-1 {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 .p-h-2 {
-    padding-left: 1em;
-    padding-right: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
+.navbar{
+  height: 3em;
+  padding: 0.75em;
+}
+
+.nav-left {
+  display: inline-block;
+}
+
+.nav-right{
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  padding-right: 20px;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+.fa-sign-out{
+  align-items: center;
+}

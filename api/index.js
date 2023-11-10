@@ -7,6 +7,7 @@ import clientRoutes from './routes/client.route.js';
 import projectRoutes from './routes/project.route.js'
 import clientAuthRoutes from './routes/clientAuth.route.js';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import path from 'path';
 dotenv.config();
 
@@ -21,6 +22,7 @@ mongoose.connect(process.env.MONGO)
 
 const __dirname = path.resolve();
 const app = express();
+app.use(cors());
 // app.use(express.static(path.join(__dirname, '/client/dist')));
 
 // app.get('*', (req, res) => {
@@ -46,6 +48,13 @@ app.use('/api/project', projectRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/client/auth', clientAuthRoutes);
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
+  next();
+});
+
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || 'Internal Server Error';
@@ -55,3 +64,6 @@ app.use((err, req, res, next) => {
     statusCode,
   });
 });
+
+// Export the Express API
+export default app;

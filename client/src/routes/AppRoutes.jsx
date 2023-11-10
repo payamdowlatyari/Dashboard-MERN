@@ -6,11 +6,11 @@ import SignUp from '../pages/Client/SignUp';
 import Profile from '../pages/Client/Profile';
 import Header from '../components/Header';
 import PrivateRoute from './PrivateRoute';
+import Footer from '../components/Footer';
 
 export default function AppRoutes() {
   return (
     <BrowserRouter>
-      {/* header */}
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
@@ -21,6 +21,7 @@ export default function AppRoutes() {
           <Route path='/profile' element={<Profile />} />
         </Route>
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 }
