@@ -48,12 +48,10 @@ app.use('/api/project', projectRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/client/auth', clientAuthRoutes);
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   next();
+// });
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
