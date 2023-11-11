@@ -54,7 +54,7 @@ const getProjects = async () => {
             {projectsData.length > 0 && 
               (  
                 projectsData?.map(project => (
-                  //  (project.ownerId.includes(currentClient._id)) && 
+                   (project.ownerId.includes(currentClient._id)) && 
                     <Project 
                         key={project._id}
                         project={project}

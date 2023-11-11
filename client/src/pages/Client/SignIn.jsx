@@ -13,6 +13,7 @@ import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Message } from 'primereact/message';
 import { Card } from 'primereact/card';
+import { Tag } from 'primereact/tag';
 
 export default function SignIn() {
 
@@ -45,7 +46,7 @@ export default function SignIn() {
   return (
     <div className="card">
        <Card title="Sign In">
-            <div className="flex flex-column md:flex-row">
+            <div className="flex flex-wrap">
                 <div className="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
                 <form onSubmit={handleSubmit}>  
                     <div className="flex flex-wrap justify-content-center align-items-center gap-2">
@@ -67,12 +68,12 @@ export default function SignIn() {
                            />
                     </div>
                     <Button 
-                      // disabled={loading}
+                      disabled={loading}
                       label={loading ? 'Loading...' : 'Sign In'} 
-                      icon="pi pi-user" 
-                      className="w-10rem mx-auto"
+                      className="mx-auto"
                       severity="info" 
-                      text
+                      text raised
+                      size="small"
                       ></Button>
                       {/* <OAuth /> */}
                   </form>
@@ -87,7 +88,11 @@ export default function SignIn() {
                 </div>
                 <div className="w-full md:w-5 flex align-items-center justify-content-center py-5">
                 <Link 
-                to='/sign-up'>Sign Up</Link>
+                to='/sign-up'>
+                  <Tag severity="info"
+                value="Sign Up">
+              </Tag>
+                </Link>
                 {error ? <Message severity="error" text={error.message}/> || 
                 <Message severity="error" text="Something went wrong!"/> : ''}
                 </div>

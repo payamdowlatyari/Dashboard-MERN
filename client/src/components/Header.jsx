@@ -30,12 +30,13 @@ export default function Header() {
           <div className='flex nav-right'>
            {currentClient? ( 
           <span onClick={handleSignOut} 
-          className='cursor-pointer txt-white'>
+          className='cursor-pointer'>
             <i className="fa fa-sign-out"></i>
           </span>) : (<span></span>)}       
             {currentClient ? ( 
             <Link to='/profile'>
-            <Avatar image={currentClient.profilePicture} 
+            <Avatar 
+            image={currentClient.profilePicture} 
             shape="circle" />
             </Link>
             ) : ( 
@@ -43,8 +44,7 @@ export default function Header() {
                 Login
              </Link>
             )}
-     
-          </div>
+        </div>
     </div>
   );
 }

@@ -108,14 +108,14 @@ export default function Profile() {
       allow write: if
       request.resource.size < 2 * 1024 * 1024 &&
       request.resource.contentType.matches('image/.*') */}
-      <Avatar 
+      {/* <Avatar 
       image={formData.profilePicture || currentClient.profilePicture}
       onClick={() => fileRef.current.click()}
       alt='profile'
       className="mr-2" 
       size="xlarge" 
       shape="circle" 
-      />
+      /> */}
         <p className='p-messages'>
           {imageError ? (
           <Message severity="error" text="Error uploading image (file size must be less than 2 MB)!" />
@@ -153,14 +153,16 @@ export default function Profile() {
         <Button 
           severity='success'
           label={loading ? 'Loading...' : 'Update'} 
-          text
+          size="small"
+          text raised
           />
       </form>
         <Button 
           onClick={handleSignOut} 
           severity="danger"
-          label={loading ? 'Loading...' : 'Sign out'} 
-          text
+          label={loading ? 'Loading...' : 'Sign Out'} 
+          size="small"
+          text raised
         />  
         <div className='p-messages'>
         {error && <Message severity="error" text="Something went wrong!" />}
