@@ -34,18 +34,6 @@ const clientSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    deleteClientStart: (state) => {
-      state.loading = true;
-    },
-    deleteClientSuccess: (state) => {
-      state.currentClient = null;
-      state.loading = false;
-      state.error = false;
-    },
-    deleteClientFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
     signOut: (state) => {
       state.currentClient = null;
       state.loading = false;
@@ -61,9 +49,6 @@ export const {
   updateClientFailure,
   updateClientStart,
   updateClientSuccess,
-  deleteClientFailure,
-  deleteClientStart,
-  deleteClientSuccess,
   signOut,
 } = clientSlice.actions;
 

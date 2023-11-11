@@ -21,10 +21,12 @@ mongoose.connect(process.env.MONGO)
   });
 
 const app = express();
+app.use(express.json());
+app.use(cookieParser());
 app.use(cors({
-    origin: ["https://dashboard-mern-r47l.vercel.app"],
-    methods: ["POST", "GET"],
-    credentials: true
+  credentials: true,
+    origin: ["http://localhost:3000", "https://dashboard-mern-r47l.vercel.app"],
+    methods: ["POST", "GET", "DELETE"]
 }));
 
 // const __dirname = path.resolve();
@@ -37,9 +39,6 @@ app.use(cors({
 // app.get('*', (req, res) => {
 //   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 // });
-
-app.use(express.json());
-app.use(cookieParser());
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);

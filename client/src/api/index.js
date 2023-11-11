@@ -1,5 +1,17 @@
 
-// export const fetchPosts = () => axios.get(url);
-// export const createPost = (newPost) => axios.post(url, newPost);
-// export const updatePost = (id, updatedPost) => axios.patch(`${url}/${id}`, updatedPost);
-// export const deletePost = (id) => axios.delete(`${url}/${id}`);
+import axios from 'axios'
+
+let url = process.env.REACT_APP_API;
+if (process.env.NODE_ENV === "development") 
+    url = 'http://localhost:8000';
+
+// client auth
+export const signIn =(formData)=> axios.post(`${url}/api/client/auth/signin`, formData, { withCredentials: true })
+export const signUp =(formData)=> axios.post(`${url}/api/client/auth/signup`, formData, { withCredentials: true })
+export const signOutClinet = () => axios.get(`${url}/api/client/auth/signout`);
+
+// client
+export const profileUpdate = (id, formData) => axios.post(`${url}/api/client/update/${id}`, formData, { withCredentials: true });
+
+// project
+export const fetchProjects = () => axios.get(`${url}/api/project`);

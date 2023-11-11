@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { signUp } from '../../api'; 
 // import OAuth from '../../components/OAuth';
 
 export default function SignUp() {
@@ -18,24 +19,14 @@ export default function SignUp() {
       setLoading(true);
       setError(false);
 
-      const res = await fetch('/api/client/auth/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-      console.log(data);
-
+      const res = await signUp(formData);
+      console.log(res);
       setLoading(false);
-      if (data.success === false) {
+      if (res.status !== 201) {
         setError(true);
         return;
       }
       navigate('/sign-in');
-
     } catch (error) {
       setLoading(false);
       setError(true);

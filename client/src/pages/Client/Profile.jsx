@@ -12,11 +12,9 @@ import {
   updateClientStart,
   updateClientSuccess,
   updateClientFailure,
-  deleteClientStart,
-  deleteClientSuccess,
-  deleteClientFailure,
   signOut,
 } from '../../redux/reducers/clientSlice';
+import { profileUpdate, signOutClinet } from '../../api'; 
 import {Button} from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Message } from 'primereact/message';
@@ -53,6 +51,7 @@ export default function Profile() {
       },
       (error) => {
         setImageError(true);
+        console.log(error);
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
@@ -69,45 +68,22 @@ export default function Profile() {
     e.preventDefault();
     try {
       dispatch(updateClientStart());
-      const res = await fetch(`/api/client/update/${currentClient._id}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      if (data.success === false) {
-        dispatch(updateClientFailure(data));
+      const res = await profileUpdate(currentClient._id, formData);
+      console.log(res)
+      if (res.status !== 201) {
+        dispatch(updateClientFailure(res.data));
         return;
       }
-      dispatch(updateClientSuccess(data));
+      dispatch(updateClientSuccess(res.data));
       setUpdateSuccess(true);
     } catch (error) {
       dispatch(updateClientFailure(error));
     }
   };
 
-  const handleDeleteAccount = async () => {
-    try {
-      dispatch(deleteClientStart());
-      const res = await fetch(`/api/client/delete/${currentClient._id}`, {
-        method: 'DELETE',
-      });
-      const data = await res.json();
-      if (data.success === false) {
-        dispatch(deleteClientFailure(data));
-        return;
-      }
-      dispatch(deleteClientSuccess(data));
-    } catch (error) {
-      dispatch(deleteClientFailure(error));
-    }
-  };
-
   const handleSignOut = async () => {
     try {
-      await fetch('/api/client/auth/signout');
+      await signOutClinet();
       dispatch(signOut())
     } catch (error) {
       console.log(error);
@@ -176,20 +152,14 @@ export default function Profile() {
         />
         <Button 
           severity='success'
-          label='Update'
+          label={loading ? 'Loading...' : 'Update'} 
           text
           />
       </form>
-        <Button
-          onClick={handleDeleteAccount}
-          severity="danger"
-          label='Delete Account'
-          text
-        /> 
         <Button 
           onClick={handleSignOut} 
           severity="danger"
-          label='Sign out'
+          label={loading ? 'Loading...' : 'Sign out'} 
           text
         />  
         <div className='p-messages'>

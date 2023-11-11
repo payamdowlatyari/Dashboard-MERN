@@ -71,11 +71,18 @@ export const updateClient = async (req, res, next) => {
 
 // delete client
 export const deleteClient = async (req, res, next) => {
-  if (req.client.id !== req.params.id) {
+
+  const { client } = req.body;
+  const { id } = req.params;
+
+  console.log(client);
+  console.log(id)
+
+  if (client._id !== id) {
     return next(errorHandler(401, 'You can delete only your account!'));
   }
   try {
-    await Client.findByIdAndDelete(req.params.id);
+    await Client.findByIdAndDelete(id);
     res.status(200).json('User has been deleted...');
   } catch (error) {
     next(error);

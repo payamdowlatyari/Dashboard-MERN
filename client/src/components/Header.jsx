@@ -20,7 +20,6 @@ export default function Header() {
   return (
     <div className='navbar bg-black txt-white'>
       <div className='flex nav-left'>
-
         <Link className='font-bold txt-white' to='/'>
           Home
         </Link>
@@ -33,9 +32,7 @@ export default function Header() {
           <span onClick={handleSignOut} 
           className='cursor-pointer txt-white'>
             <i className="fa fa-sign-out"></i>
-
-          </span>) : (<span></span>)} 
-          
+          </span>) : (<span></span>)}       
             {currentClient ? ( 
             <Link to='/profile'>
             <Avatar image={currentClient.profilePicture} 
