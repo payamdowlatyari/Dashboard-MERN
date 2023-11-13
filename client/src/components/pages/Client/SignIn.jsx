@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { signIn } from '../../api';
+import { signIn } from '../../../api';
 import {
   signInStart,
   signInSuccess,
   signInFailure,
-} from '../../redux/reducers/clientSlice';
+} from '../../../redux/reducers/clientSlice';
 import { useDispatch, useSelector } from 'react-redux';
 // import OAuth from '../components/OAuth';
 import { Divider } from 'primereact/divider';

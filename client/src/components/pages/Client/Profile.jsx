@@ -6,15 +6,15 @@ import {
   ref,
   uploadBytesResumable,
 } from 'firebase/storage';
-import { app } from '../../firebase';
+import { app } from '../../../firebase';
 import { useDispatch } from 'react-redux';
 import {
   updateClientStart,
   updateClientSuccess,
   updateClientFailure,
   signOut,
-} from '../../redux/reducers/clientSlice';
-import { profileUpdate, signOutClinet } from '../../api'; 
+} from '../../../redux/reducers/clientSlice';
+import { profileUpdate, signOutClinet } from '../../../api'; 
 import {Button} from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Message } from 'primereact/message';

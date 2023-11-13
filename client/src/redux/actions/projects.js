@@ -1,23 +1,23 @@
 
-export const getPosts = () => async (dispatch) => {
+// export const getPosts = () => async (dispatch) => {
 
-    try {
-        // const { data } = await api.fetchPosts();
-        const res = await fetch('/api/project', {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(),
-          });
-          const data = await res.json();
-          if (data.success === true) 
-            return data;
-        // dispatch({ type: 'FETCH_ALL', payload: data });
-    } catch (error) {
-        console.log(error.message);
-    }
-}
+//     try {
+//         // const { data } = await api.fetchPosts();
+//         const res = await fetch('/api/project', {
+//             method: 'GET',
+//             headers: {
+//               'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify(),
+//           });
+//           const data = await res.json();
+//           if (data.success === true) 
+//             return data;
+//         // dispatch({ type: 'FETCH_ALL', payload: data });
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+// }
 
 // try {
 //     dispatch(signInStart());

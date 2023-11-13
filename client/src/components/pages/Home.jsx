@@ -7,7 +7,6 @@ import { Divider } from 'primereact/divider';
 export default function Home() {
   const { currentClient} = useSelector((state) => state.client);
   console.log(currentClient)
-  console.log(process.env)
 
   return (
     <div className='container'>

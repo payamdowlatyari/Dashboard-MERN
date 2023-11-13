@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { signUp } from '../../api'; 
+import { signUp } from '../../../api'; 
 import { Divider } from 'primereact/divider';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
@@ -27,7 +27,6 @@ export default function SignUp() {
       setError(false);
 
       const res = await signUp(formData);
-      console.log(res);
       setLoading(false);
       if (res.status !== 201) {
         setError(true);
