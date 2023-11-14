@@ -73,14 +73,12 @@ const getProjects = async () => {
                   <tr>
                     <td>
                     <Link 
-                    to={`/project/${project._id}`}> 
-                    
+                    to={`/project/${project._id}`}>                     
                     <Button 
                     label={project.name} 
                     severity="info" 
                     text size="small"
                     />
-
                     </Link>
                     </td>
                     <td>

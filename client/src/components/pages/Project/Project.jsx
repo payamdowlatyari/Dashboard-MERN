@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 import {
@@ -13,17 +13,15 @@ import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { Panel } from 'primereact/panel';
 import { Badge } from 'primereact/badge';
-import { Chip } from 'primereact/chip';
 
 import Comment from "./Comment";
+import NewComment from "./NewComment";
 
 export default function Project() {
     
 const { id } = useParams();
 const ref = useRef(null);
-const { projectItem, loading, error} = useSelector((state) => state.projects);
-
-const [projectDetails, setProjectDetails] = useState({});
+const { projectItem} = useSelector((state) => state.projects);
 
 const dispatch = useDispatch();
 
@@ -34,20 +32,19 @@ const dispatch = useDispatch();
     const getProjectDetails = async () => {
       try {
           dispatch(getProject());
-        const res = await getProjectById(id);
-      //   console.log(res.data)      
+          const res = await getProjectById(id);
+
         if (res.status === 200) {
           dispatch(getProjectSuccess(res.data));
-          setProjectDetails(res.data)  
         }
-        console.log(projectDetails)
+
       } catch (error) {
-        dispatch(getProjectFailure(error));
+          dispatch(getProjectFailure(error));
       }
   }
  
     return (
-        <div className='dashboard-main'>
+        <div className='main'>
           <div className='card'>
               {projectItem && 
               <Card title={projectItem.name}>
@@ -56,9 +53,12 @@ const dispatch = useDispatch();
                 : (projectItem.status === 1 ? 
                     <Tag value="In Progress" severity='warning'></Tag>: 
                     <Tag severity="info" value="New"></Tag>)}
-                
-                  <p className="p-v-2 p-h-1">{projectItem.description} 
-                  <span className="txt-gray p-h-2 small">{projectItem.endDate.substring(0, 10)}               
+                                  <p className="p-v-1 p-h-1">{projectItem.description} </p>
+
+                  <p className="txt-dark-gray txt-right p-h-1 small">Start Date: 
+                  <span className="txt-gray p-h-1">{projectItem.startDate.substring(0, 10)}               
+                  </span>Due Date: 
+                  <span className="txt-gray p-h-1">{projectItem.endDate.substring(0, 10)}               
                   </span></p> 
                   <Panel ref={ref} 
                     header={projectItem.comments ? 
@@ -74,32 +74,12 @@ const dispatch = useDispatch();
                               <Comment/> 
                               : <p className="txt-dark-gray mid-small">No Comments</p>}
                   </Panel>
+                  <p className="txt-gray p-h-1">
+                      <NewComment projectId={id}/>
+                      </p>
               </Card>  
               }
           </div>
         </div>
-        // <tbody>
-        //     <tr>
-        //         <td>
-        //         {project.name}
-        //         </td>
-        //         <td>
-        //         {project.description} 
-        //         </td>
-        //         <td>
-        //         {project.startDate.substring(0, 10)} 
-        //         </td>
-        //         <td>
-        //         {project.endDate.substring(0, 10)} 
-        //         </td>
-        //         <td>
-        //         {project.status === 2 ? 
-        //         <Tag severity="success" value="Completed"></Tag>
-        //         : (project.status === 1 ? 
-        //             <Tag value="In Progress"></Tag>: 
-        //             <Tag severity="info" value="New"></Tag>)}
-        //         </td>
-        //     </tr>
-        // </tbody>
     );
 }

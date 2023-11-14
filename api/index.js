@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use(cors({
   credentials: true,
     origin: ["http://localhost:3000", "https://dashboard-mern-r47l.vercel.app"],
-    methods: ["POST", "GET", "DELETE"]
+    methods: ["POST", "GET", "PUT","DELETE"]
 }));
 
 // const __dirname = path.resolve();

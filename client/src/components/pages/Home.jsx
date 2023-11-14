@@ -9,7 +9,7 @@ export default function Home() {
   console.log(currentClient)
 
   return (
-    <div className='container'>
+    <div className='main'>
       <div className="card">
         <Card title={currentClient? `Welcome ${currentClient.username}!`: 'Welocme friend!'}> 
         <Divider />

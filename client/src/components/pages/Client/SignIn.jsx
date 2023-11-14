@@ -44,15 +44,17 @@ export default function SignIn() {
     }
   };
   return (
-    <div className="card">
+    <div className='main'> 
+      <div className="card">
        <Card title="Sign In">
-            <div className="flex flex-wrap">
+            <div className="flex card-flex">
                 <div className="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
                 <form onSubmit={handleSubmit}>  
                     <div className="flex flex-wrap justify-content-center align-items-center gap-2">
                         <InputText 
+                          tooltip="Enter your email"
                           onChange={handleChange}
-                          className="w-12rem" 
+                          className="w-12rem full-with" 
                           type='email'
                           placeholder='Email'
                           id='email'
@@ -60,32 +62,34 @@ export default function SignIn() {
                     </div>
                     <div className="flex flex-wrap justify-content-center align-items-center gap-2">
                         <InputText 
+                          tooltip="Enter your password"
                           id="password" 
                           type="password" 
-                          className="w-12rem"
+                          className="w-12rem full-with"
                           placeholder='Password'
                           onChange={handleChange}
                            />
                     </div>
+                    <div className="flex flex-wrap justify-content-center align-items-center gap-2">
                     <Button 
                       disabled={loading}
                       label={loading ? 'Loading...' : 'Sign In'} 
-                      className="mx-auto"
+                      className="mx-auto full-with"
                       severity="info" 
                       text raised
                       size="small"
                       ></Button>
+                      </div>
                       {/* <OAuth /> */}
                   </form>
                 </div>
-                <div className="w-full md:w-2">
-                    {/* <Divider layout="vertical" className="hidden md:flex">
-                        <b>OR</b>
-                    </Divider> */}
+                <div className="w-full md:w-2 divider">
                     <Divider layout="horizontal" className="flex md:hidden" align="center">
                         <b>OR</b>
                     </Divider>
                 </div>
+
+              <div className="flex card-flex">
                 <div className="w-full md:w-5 flex align-items-center justify-content-center py-5">
                 <Link 
                 to='/sign-up'>
@@ -97,7 +101,9 @@ export default function SignIn() {
                 <Message severity="error" text="Something went wrong!"/> : ''}
                 </div>
             </div>
+            </div>
             </Card>
+          </div>
         </div>
   );
 }

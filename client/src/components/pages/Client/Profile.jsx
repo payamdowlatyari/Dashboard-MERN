@@ -1,5 +1,5 @@
-import { useSelector } from 'react-redux';
-import { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   getDownloadURL,
   getStorage,
@@ -7,7 +7,6 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { app } from '../../../firebase';
-import { useDispatch } from 'react-redux';
 import {
   updateClientStart,
   updateClientSuccess,
@@ -19,8 +18,8 @@ import {Button} from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Message } from 'primereact/message';
 import { Card } from 'primereact/card';
-import { Avatar } from 'primereact/avatar';
-
+import { Divider } from 'primereact/divider';
+// import { Avatar } from 'primereact/avatar';
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -32,6 +31,7 @@ export default function Profile() {
   const [updateSuccess, setUpdateSuccess] = useState(false);
 
   const { currentClient, loading, error } = useSelector((state) => state.client);
+
   useEffect(() => {
     if (image) {
       handleFileUpload(image);
@@ -127,43 +127,60 @@ export default function Profile() {
             ''
           )}
         </p>
+        <div className='align-items-center justify-content-center'>
         <InputText
           defaultValue={currentClient.username}
           type='text'
           id='username'
           placeholder='Username'
-          className="p-inputtext-sm"
+          className="p-inputtext-sm full-with"
           onChange={handleChange}
         />
+        </div>
+        <div className='align-items-center justify-content-center'>
         <InputText
           defaultValue={currentClient.email}
           type='email'
           id='email'
           placeholder='Email'
-          className="p-inputtext-sm"
+          className="p-inputtext-sm full-with"
           onChange={handleChange}
         />
+        </div>
+        <div className='align-items-center justify-content-center'>
         <InputText
           type='password'
           id='password'
           placeholder='Password'
-          className="p-inputtext-sm"
+          className="p-inputtext-sm full-with"
           onChange={handleChange}
         />
+        </div>
+        <div className='align-items-center justify-content-center'>
         <Button 
           severity='success'
+          className='full-with'
           label={loading ? 'Loading...' : 'Update'} 
           size="small"
           text raised
           />
+        </div>
       </form>
+      <div className="w-full md:w-2 divider">
+                    <Divider layout="horizontal" className="flex md:hidden" align="center">
+                        <b>OR</b>
+                    </Divider>
+                </div>
+      <div className='align-items-center justify-content-center'>
         <Button 
           onClick={handleSignOut} 
           severity="danger"
+          className='full-with'
           label={loading ? 'Loading...' : 'Sign Out'} 
           size="small"
           text raised
         />  
+        </div>
         <div className='p-messages'>
         {error && <Message severity="error" text="Something went wrong!" />}
         {updateSuccess && <Message severity="success" text="User is updated successfully!" />}

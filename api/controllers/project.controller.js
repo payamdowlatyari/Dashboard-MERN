@@ -77,3 +77,20 @@ export const deleteProject = async (req, res, next) => {
   }
 }
 
+// add comment
+export const addComment = async (req, res) => {
+    const { id: _id } = req.params
+    
+    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send(`No project with id: ${_id}`);
+    
+    const project = await Project.findById(_id);
+
+    try {
+        project.comments.unshift(req.body.comment)
+        await project.save()
+        res.status(200).json(project);
+        
+    } catch (error) {
+        res.status(409).json(error.message);
+    }
+}

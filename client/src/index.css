@@ -29,39 +29,38 @@ a:hover{
 
 form{
   align-items: center;
+  min-width: 250px;
+  margin: 5px;
 }
 
 input, button {
-  margin: 5px;
+  margin: 3px 0px 3px;
   max-width: 300px;
 }
 
 .main{
   margin: 2em;
+  min-height: 100vh;
 }
 
 .container {
   margin: 0 auto;
-  padding: 2em;
-}
-
-.dashboard-main{
-  margin: 0 auto;
-  padding: 2em;
 }
 
 .footer{
-  position: absolute;
+  background-color: #e7ecef;
   bottom: 0;
   margin: 0 auto;
+  padding: 0.25em 0.25em 0.25em 0.25em;
   font-size: small;
-  display: inline-block;
-  justify-content: center;
+  display: block;
+  text-align: center;
 }
 
 .footer a {
   justify-content: center;
-  padding: 0.5em;
+  color: #495057;
+  margin: 0.5em 0.25em 0.5em 0.25em;
 }
 
 .p-inputtext-sm{
@@ -133,9 +132,19 @@ input, button {
   padding-bottom: 1em;
 }
 
+.full-with {
+  width: 100%;
+}
+
+.txt-right {
+  text-align: end;
+}
+
 .navbar{
   height: 3em;
   padding: 0.75em;
+  position: sticky;
+  top: 0;
 }
 
 .nav-left {
@@ -161,3 +170,11 @@ input, button {
   padding: 0.25em 1.25em;
 }
 
+.justify-content-center{
+  display: flex;
+  justify-content: center;
+}
+
+.divider{
+  padding: 2em;
+}

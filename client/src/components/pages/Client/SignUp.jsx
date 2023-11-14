@@ -39,15 +39,17 @@ export default function SignUp() {
     }
   };
   return (
-    <div className="card">
-    <Card title="Sign Up">
+    <div className='main'> 
+       <div className="card">
+        <Card title="Sign Up">
          <div className="flex flex-wrap">
              <div className="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
              <form onSubmit={handleSubmit}>  
                  <div className="flex flex-wrap justify-content-center align-items-center gap-2">
                      <InputText 
+                       tooltip="Enter your username"
                        onChange={handleChange}
-                       className="w-12rem" 
+                       className="w-12rem full-with" 
                        type='text'
                        placeholder='Username'
                        id='username'
@@ -55,8 +57,9 @@ export default function SignUp() {
                  </div>
                  <div className="flex flex-wrap justify-content-center align-items-center gap-2">
                      <InputText 
+                       tooltip="Enter your email"
                        onChange={handleChange}
-                       className="w-12rem" 
+                       className="w-12rem full-with" 
                        type='email'
                        placeholder='Email'
                        id='email'
@@ -64,9 +67,10 @@ export default function SignUp() {
                  </div>
                  <div className="flex flex-wrap justify-content-center align-items-center gap-2">
                      <InputText 
+                       tooltip="Enter your password"
                        id="password" 
                        type="password" 
-                       className="w-12rem"
+                       className="w-12rem full-with"
                        placeholder='Password'
                        onChange={handleChange}
                         />
@@ -74,7 +78,7 @@ export default function SignUp() {
                  <Button 
                    disabled={loading}
                    label={loading ? 'Loading...' : 'Sign Up'} 
-                   className="mx-auto"
+                   className="mx-auto full-with"
                    severity="info" 
                    size="small"
                    text raised
@@ -82,10 +86,7 @@ export default function SignUp() {
                    {/* <OAuth /> */}
                </form>
              </div>
-             <div className="w-full md:w-2">
-                 {/* <Divider layout="vertical" className="hidden md:flex">
-                     <b>OR</b>
-                 </Divider> */}
+             <div className="w-full md:w-2 divider">
                  <Divider layout="horizontal" className="flex md:hidden" align="center">
                      <b>OR</b>
                  </Divider>
@@ -103,6 +104,7 @@ export default function SignUp() {
              </div>
          </div>
          </Card>
+        </div>
      </div>
   );
 }

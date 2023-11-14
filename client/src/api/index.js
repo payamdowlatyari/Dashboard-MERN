@@ -16,3 +16,4 @@ export const profileUpdate = (id, formData) => axios.post(`${url}/api/client/upd
 // project
 export const fetchProjects = () => axios.get(`${url}/api/project`);
 export const getProjectById = (id) => axios.get(`${url}/api/project/${id}`);
+export const addNewComment = (id, comment) => axios.put(`${url}/api/project/comment/${id}`, comment, { withCredentials: true })
