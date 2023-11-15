@@ -38,20 +38,21 @@ export default function NewComment({projectId}) {
 
     return (
         <div className="card flex">
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column gap-2">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-wrap gap-2 w-auto">
                 <Toast ref={toast} />
                 <Controller
                     name="comment"
                     control={form.control}
                     rules={{ required: 'Comment is required.' }}
                     render={({ field, fieldState }) => (
-                        <p>
-                            <InputTextarea id={field.name} {...field} rows={2} cols={50} className={classNames({ 'p-invalid': fieldState.error })} />
+                        <>
+                            <InputTextarea id={field.name} {...field} rows={2} cols={30} 
+                            className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
-                        </p>
+                        </>
                     )}
                 />
-                <Button label="Submit" type="submit" size="small" severity='success' text raised/>
+                <Button label="Submit" type="submit" size="small" className='min-w-max'/>
                             
             </form>
         </div>

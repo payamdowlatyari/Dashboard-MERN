@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from '../redux/reducers/clientSlice';
-import { Avatar } from 'primereact/avatar';
 
 export default function Header() {
   const { currentClient} = useSelector((state) => state.client);
-  console.log(currentClient)
+
   const dispatch = useDispatch();
 
   const handleSignOut = async () => {
@@ -18,8 +17,8 @@ export default function Header() {
   }
 
   return (
-    <div className='navbar bg-black txt-white'>
-      <div className='flex nav-left'>
+    <div className='navbar bg-black txt-white flex flex-row'>
+      <div className='flex justify-content-start flex-wrap align-items-center nav-left'>
         <Link className='font-bold txt-white' to='/'>
           Home
         </Link>
@@ -27,23 +26,28 @@ export default function Header() {
           Dashboard
         </Link>
         </div>
-          <div className='flex nav-right'>
-           {currentClient? ( 
-          <span onClick={handleSignOut} 
-          className='cursor-pointer'>
-            <i className="fa fa-sign-out"></i>
-          </span>) : (<span></span>)}       
+          <div className='flex justify-content-end flex-wrap nav-right align-items-center'>
+          
             {currentClient ? ( 
-            <Link to='/profile'>
-            <Avatar 
-            image={currentClient.profilePicture} 
-            shape="circle" />
-            </Link>
+             <>
+                <Link to='/project/create'>
+                  <span className="txt-white pi pi-plus p-h-1 medium"></span>
+                </Link>
+                <Link to='/profile'>
+                  <span className="txt-white pi pi-user p-h-1 medium"></span>
+                </Link>
+             </> 
+           
             ) : ( 
-              <Link className='font-bold txt-white' to='/sign-in'>
+              <Link className='font-bold txt-white p-h-1' to='/sign-in'>
                 Login
              </Link>
             )}
+             {currentClient? ( 
+            <span onClick={handleSignOut} 
+            className='cursor-pointer align-items-center p-h-1'>
+            <span className="txt-white pi pi-sign-out p-h-1 medium"></span>
+          </span>) : (<span></span>)}       
         </div>
     </div>
   );

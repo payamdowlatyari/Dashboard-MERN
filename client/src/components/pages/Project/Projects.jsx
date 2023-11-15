@@ -10,102 +10,118 @@ import { Tag } from "primereact/tag";
 import { Link } from "react-router-dom";
 import { Button } from 'primereact/button';
 import { ProgressSpinner } from 'primereact/progressspinner';
-
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 
 export default function Projects () {
 
-const { currentClient, loading} = useSelector((state) => state.client);
+  const { currentClient} = useSelector((state) => state.client);
 
-console.log(currentClient)
+  console.log(currentClient)
 
-const [projectsData, setProjectsData] = useState([]);
+  const [projectsData, setProjectsData] = useState([]);
 
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-      getProjects()
-    }, [])
+      useEffect(() => {
+        getProjects()
+      }, [])
 
-const getProjects = async () => {
-    try {
-      dispatch(getAllProjects());
-      const res = await fetchProjects();
-      console.log(res.data)      
-      if (res.status === 200) {
-        let projects = res.data;
-        dispatch(getAllProjectsSuccess(projects));
+  const getProjects = async () => {
+      try {
+        dispatch(getAllProjects());
+        const res = await fetchProjects();
+        console.log(res.data)      
+        if (res.status === 200) {
+          let projects = res.data;
+          dispatch(getAllProjectsSuccess(projects));
 
-        
-        let data = []
-        if (projects.length) {
-            projects?.map(project => {
-             if (project.ownerId.includes(currentClient._id))  
-                data.push(project) 
-            })
+          
+          let data = []
+          if (projects.length) {
+              projects?.map(project => {
+              if (project.ownerId.includes(currentClient._id))  
+                  data.push(project) 
+              })
+          }
+          setProjectsData(data)  
         }
-        setProjectsData(data)  
+      } catch (error) {
+        dispatch(getAllProjectsFailure());
       }
-    } catch (error) {
-      dispatch(getAllProjectsFailure());
-    }
-}
+  }
 
+  const setStatus = (status) => {
+    switch (status) {
+      case 2:
+          return 'Completed';
+      case 1:
+          return 'In Progress';
+      default:
+          return 'New';
+    }
+  };
+
+
+  const getProjectSeverity = (status) => {
+    switch (status) {
+        case 2:
+            return 'success';
+        case 1:
+            return 'warning';
+        default:
+            return 'info';
+    }
+  };
+
+  const statusBodyTemplate = (rowData) => {
+    return <Tag value={setStatus(rowData.status)} severity={getProjectSeverity(rowData.status)}></Tag>;
+  };
+
+  const linkBodyTemplate = (rowData) => {
+    return <Link to={`/project/${rowData._id}`}>
+              <Button
+                label='Details' 
+                severity="info" 
+                text size="small"
+            />
+          </Link>;
+  };
 
   return (
     <div className="card">
+      {(!projectsData || !projectsData.length) && <ProgressSpinner />}
        {projectsData.length > 0 ?
         <div>
-          <p className='mb-2 py-6'>
+          <p className='mb-2 py-2'>
               List of your projects:
           </p>
 
-        <table>
-          <thead className="bg-black txt-white">
-          <tr>
-            <th>Project Name</th>
-            <th>Description</th>
-            <th>Due Date</th>
-            <th>Status</th>
-          </tr>
-          </thead>
-              {(projectsData?.map(project => (
-                <tbody key={project._id}>
-                  <tr>
-                    <td>
-                    <Link 
-                    to={`/project/${project._id}`}>                     
-                    <Button 
-                    label={project.name} 
-                    severity="info" 
-                    text size="small"
-                    />
-                    </Link>
-                    </td>
-                    <td>
-                    {project.description} 
-                    </td>
-                    <td>
-                    {project.endDate.substring(0, 10)} 
-                    </td>
-                    <td>
-                    {project.status === 2 ? 
-                    <Tag severity="success" value="Completed"></Tag>
-                    : (project.status === 1 ? 
-                        <Tag value="In Progress" severity='warning'></Tag>: 
-                        <Tag severity="secondary" value="New"></Tag>)}
-                    </td>
-                </tr>
-            </tbody>
-                ))
-              )}
-        </table> 
+          <DataTable value={projectsData} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: '50rem' }}>
+                <Column field="description" header="Description"></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="endDate" header="Due Date"></Column>
+                <Column field="status" header="Status" body={statusBodyTemplate}></Column>
+                <Column field="_id" header="Link" body={linkBodyTemplate}></Column>
+            </DataTable>
         </div> 
         : 
-            <p className='mb-2 py-6'>
+            <div>
+            <p className='mb-2 py-2'>
               You have no projects!
             </p>
-      }
-      {!projectsData && <ProgressSpinner />}
+
+            <Link to='/project/create'>
+              <Button 
+              icon='pi pi-plus'
+              label="Create a project"
+              severity="success"
+              text size="small"
+              />
+              </Link> 
+            </div>
+        }
+
     </div>
   );
 }

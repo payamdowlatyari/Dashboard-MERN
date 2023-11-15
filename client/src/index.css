@@ -4,7 +4,7 @@ body {
   background-color: #e7ecef;
 }
 
-table {
+/* table {
   width: 100%;
   background-color: #e7ecef;
 }
@@ -14,7 +14,7 @@ table, thead, tbody, th, tr, td {
   padding: 0.5em;
   text-align: center;
   border-radius: 5px;
-}
+} */
 
 a{
   opacity: 0.9;
@@ -40,7 +40,6 @@ input, button {
 
 .main{
   margin: 2em;
-  min-height: 100vh;
 }
 
 .container {
@@ -69,6 +68,10 @@ input, button {
   min-width: 250px;
 }
 
+.p-card {
+  min-height: 82vh;
+}
+
 .bg-light-gray {
   background-color: #e7ecef;
 }
@@ -94,15 +97,23 @@ input, button {
 }
 
 .small {
-  font-size: 12px;
+  font-size: 0.75em;
 }
 
 .mid-small {
-  font-size: 14px;
+  font-size: 0.9em;
 }
 
 .medium {
-  font-size: 16px;
+  font-size: 1em;
+}
+
+.mid-large{
+  font-size: 1.25em;
+}
+
+.large{
+  font-size: 1.5em;
 }
 
 .box-gray-1{
@@ -132,18 +143,15 @@ input, button {
   padding-bottom: 1em;
 }
 
-.full-with {
-  width: 100%;
-}
-
 .txt-right {
   text-align: end;
 }
 
 .navbar{
-  height: 3em;
-  padding: 0.75em;
+  height: 7vh;
+  padding: 1em;
   position: sticky;
+  display: flex;
   top: 0;
 }
 
@@ -162,17 +170,8 @@ input, button {
   cursor: pointer;
 }
 
-.fa-sign-out{
-  align-items: center;
-}
-
 .p-panel.p-panel-toggleable .p-panel-header { 
   padding: 0.25em 1.25em;
-}
-
-.justify-content-center{
-  display: flex;
-  justify-content: center;
 }
 
 .divider{

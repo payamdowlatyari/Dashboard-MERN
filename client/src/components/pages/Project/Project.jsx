@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import {
     getProject,
     getProjectSuccess,
@@ -53,8 +53,8 @@ const dispatch = useDispatch();
                 : (projectItem.status === 1 ? 
                     <Tag value="In Progress" severity='warning'></Tag>: 
                     <Tag severity="info" value="New"></Tag>)}
-                                  <p className="p-v-1 p-h-1">{projectItem.description} </p>
-
+               
+                    <p className="p-v-1 p-h-1">{projectItem.description} </p>
                   <p className="txt-dark-gray txt-right p-h-1 small">Start Date: 
                   <span className="txt-gray p-h-1">{projectItem.startDate.substring(0, 10)}               
                   </span>Due Date: 
@@ -74,9 +74,15 @@ const dispatch = useDispatch();
                               <Comment/> 
                               : <p className="txt-dark-gray mid-small">No Comments</p>}
                   </Panel>
-                  <p className="txt-gray p-h-1">
+                      <div className="txt-gray p-h-1 p-v-2">
                       <NewComment projectId={id}/>
-                      </p>
+                      </div>
+
+                     <Link to='/dashboard'>
+                     <span className="pi pi-angle-left txt-dark-gray small"></span>
+                    <span className="txt-dark-gray mid-small p-h-1">Projects</span> 
+                                     
+                    </Link>      
               </Card>  
               }
           </div>

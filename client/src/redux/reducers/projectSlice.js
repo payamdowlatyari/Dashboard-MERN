@@ -35,6 +35,18 @@ const projectSlice = createSlice({
       getProjectFailure: (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      },
+      createProjectStart: (state) => {
+        state.loading = true;
+      },
+      createProjectSuccess: (state, action) => {
+        state.loading = false;
+        state.error = false;
+        state.projectItem = action.payload;
+      },
+      createProjectFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       }
     }
 })
@@ -45,7 +57,10 @@ export const {
     getAllProjectsFailure,
     getProject,
     getProjectSuccess,
-    getProjectFailure
+    getProjectFailure,
+    createProjectStart,
+    createProjectSuccess,
+    createProjectFailure
 } = projectSlice.actions;
 
 export default projectSlice.reducer;

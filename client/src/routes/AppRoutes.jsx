@@ -9,6 +9,7 @@ import PrivateRoute from './PrivateRoute';
 import Footer from '../components/Footer';
 import Project from '../components/pages/Project/Project';
 import NotFound from './NotFound';
+import NewProject from '../components/pages/Project/NewProject';
 
 export default function AppRoutes() {
   return (
@@ -21,6 +22,7 @@ export default function AppRoutes() {
         <Route element={<PrivateRoute />}>
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/project/:id' element={<Project />} />
+          <Route path='/project/create' element={<NewProject/>}/>
           <Route path='/profile' element={<Profile />} />
         </Route>
         <Route path="*" element={<NotFound />} />

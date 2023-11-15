@@ -1,65 +1,25 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytesResumable,
-} from 'firebase/storage';
-import { app } from '../../../firebase';
 import {
   updateClientStart,
   updateClientSuccess,
   updateClientFailure,
-  signOut,
 } from '../../../redux/reducers/clientSlice';
-import { profileUpdate, signOutClinet } from '../../../api'; 
+import { profileUpdate } from '../../../api'; 
 import {Button} from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Message } from 'primereact/message';
 import { Card } from 'primereact/card';
-import { Divider } from 'primereact/divider';
-// import { Avatar } from 'primereact/avatar';
+import { Avatar } from 'primereact/avatar';
 
 export default function Profile() {
   const dispatch = useDispatch();
-  const fileRef = useRef(null);
-  const [image, setImage] = useState(undefined);
-  const [imagePercent, setImagePercent] = useState(0);
-  const [imageError, setImageError] = useState(false);
+
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
 
   const { currentClient, loading, error } = useSelector((state) => state.client);
 
-  useEffect(() => {
-    if (image) {
-      handleFileUpload(image);
-    }
-  }, [image]);
-  const handleFileUpload = async (image) => {
-    const storage = getStorage(app);
-    const fileName = new Date().getTime() + image.name;
-    const storageRef = ref(storage, fileName);
-    const uploadTask = uploadBytesResumable(storageRef, image);
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setImagePercent(Math.round(progress));
-      },
-      (error) => {
-        setImageError(true);
-        console.log(error);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
-          setFormData({ ...formData, profilePicture: downloadURL })
-        );
-      }
-    );
-  };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -70,7 +30,7 @@ export default function Profile() {
       dispatch(updateClientStart());
       const res = await profileUpdate(currentClient._id, formData);
       console.log(res)
-      if (res.status !== 201) {
+      if (res.status !== 200) {
         dispatch(updateClientFailure(res.data));
         return;
       }
@@ -81,110 +41,71 @@ export default function Profile() {
     }
   };
 
-  const handleSignOut = async () => {
-    try {
-      await signOutClinet();
-      dispatch(signOut())
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <div className='main'>
       <div className="card">
             <Card title="Profile">
+            <div className="flex flex-column md:flex-row align-content-center">
+            <div className="w-full flex flex-column align-items-center justify-content-center gap-3 py-5">
 
       <form onSubmit={handleSubmit}>
-        <input
-          type='file'
-          ref={fileRef}
-          hidden
-          accept='image/*'
-          onChange={(e) => setImage(e.target.files[0])}
-        />
-        {/* 
-      firebase storage rules:  
-      allow read;
-      allow write: if
-      request.resource.size < 2 * 1024 * 1024 &&
-      request.resource.contentType.matches('image/.*') */}
-      {/* <Avatar 
-      image={formData.profilePicture || currentClient.profilePicture}
-      onClick={() => fileRef.current.click()}
+      <div className="flex flex-wrap justify-content-center align-items-center gap-3 py-3">
+      <Avatar 
       alt='profile'
       className="mr-2" 
       size="xlarge" 
+      icon='pi pi-user'
       shape="circle" 
-      /> */}
-        <p className='p-messages'>
-          {imageError ? (
-          <Message severity="error" text="Error uploading image (file size must be less than 2 MB)!" />
-          ) : imagePercent > 0 && imagePercent < 100 ? (
-            <span className='text-slate-700'>{`Uploading: ${imagePercent} %`}</span>
-          ) : imagePercent === 100 ? (
-          <Message severity="success" text="Image uploaded successfully!" />
-          ) : (
-            ''
-          )}
-        </p>
-        <div className='align-items-center justify-content-center'>
+      /></div>
+
+        <div className="flex flex-wrap justify-content-center align-items-center gap-3 py-1">
         <InputText
           defaultValue={currentClient.username}
           type='text'
           id='username'
           placeholder='Username'
-          className="p-inputtext-sm full-with"
+          className="w-full"
           onChange={handleChange}
         />
         </div>
-        <div className='align-items-center justify-content-center'>
+        <div className="flex flex-wrap justify-content-center align-items-center gap-3 py-1">
         <InputText
           defaultValue={currentClient.email}
           type='email'
           id='email'
           placeholder='Email'
-          className="p-inputtext-sm full-with"
+          className="w-full"
           onChange={handleChange}
         />
         </div>
-        <div className='align-items-center justify-content-center'>
+        <div className="flex flex-wrap justify-content-center align-items-center gap-3 py-1">
         <InputText
           type='password'
           id='password'
           placeholder='Password'
-          className="p-inputtext-sm full-with"
+          className="w-full"
           onChange={handleChange}
         />
         </div>
-        <div className='align-items-center justify-content-center'>
+        <div className="flex flex-wrap justify-content-center align-items-center gap-3 py-1">
         <Button 
           severity='success'
-          className='full-with'
+          className="mx-auto w-full"
           label={loading ? 'Loading...' : 'Update'} 
           size="small"
           text raised
           />
         </div>
+        
       </form>
-      <div className="w-full md:w-2 divider">
-                    <Divider layout="horizontal" className="flex md:hidden" align="center">
-                        <b>OR</b>
-                    </Divider>
-                </div>
-      <div className='align-items-center justify-content-center'>
-        <Button 
-          onClick={handleSignOut} 
-          severity="danger"
-          className='full-with'
-          label={loading ? 'Loading...' : 'Sign Out'} 
-          size="small"
-          text raised
-        />  
-        </div>
+      </div>
+     
         <div className='p-messages'>
         {error && <Message severity="error" text="Something went wrong!" />}
-        {updateSuccess && <Message severity="success" text="User is updated successfully!" />}
+        {updateSuccess && <Message severity="success" text="Profile is updated successfully!" />}
         </div>
+        </div>
+        
         </Card>
         </div>
     </div>
