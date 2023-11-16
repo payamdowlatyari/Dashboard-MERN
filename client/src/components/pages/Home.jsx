@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Card } from 'primereact/card';
 import { Divider } from 'primereact/divider';
 import { Button } from 'primereact/button';
@@ -10,11 +10,13 @@ export default function Home() {
   const { currentClient} = useSelector((state) => state.client);
   console.log(currentClient)
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSignOut = async () => {
     try {
       await fetch('/api/client/auth/signout');
-      dispatch(signOut())
+      dispatch(signOut());
+      navigate('/sign-in');
     } catch (error) {
       console.log(error);
     }
@@ -33,6 +35,7 @@ export default function Home() {
                         severity='info'
                         label="Checkout your projects"
                         text size="small"
+                        icon='pi pi-folder-open'
                         />
                       </Link>
                       </div>
@@ -40,8 +43,9 @@ export default function Home() {
                         <Link to='/project/create'>
                         <Button 
                         severity='info'
-                        label="Create a project"
+                        label="Create a new project"
                         text size="small"
+                        icon='pi pi-pencil'
                         />
                         </Link> 
                       </div>
@@ -59,6 +63,7 @@ export default function Home() {
                       severity='info'
                         label="Manage your profile"
                         text size="small"
+                        icon='pi pi-user-edit'
                         />
                         </Link>
                       </div>
@@ -68,6 +73,7 @@ export default function Home() {
                         severity='danger'
                         label="Logout"
                         text size="small"
+                        icon='pi pi-power-off'
                         />
                       </div>
                   </div>
@@ -78,6 +84,7 @@ export default function Home() {
                       severity='info'
                         label="Please login"
                         text size="small"
+                        icon='pi pi-user'
                         />
                   </Link>
                 </div>}

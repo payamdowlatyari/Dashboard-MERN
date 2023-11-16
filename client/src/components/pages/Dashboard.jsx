@@ -6,7 +6,7 @@ export default function Dashboard() {
   return (
     <div className='main'>
        <div className="card">
-          <Card title="Dashboard">
+          <Card title="Projects">
             <Projects/>
           </Card>
       </div>

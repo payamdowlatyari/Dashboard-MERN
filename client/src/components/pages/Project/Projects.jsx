@@ -16,11 +16,7 @@ import { Column } from 'primereact/column';
 export default function Projects () {
 
   const { currentClient} = useSelector((state) => state.client);
-
-  console.log(currentClient)
-
   const [projectsData, setProjectsData] = useState([]);
-
   const dispatch = useDispatch();
 
       useEffect(() => {
@@ -36,7 +32,6 @@ export default function Projects () {
           let projects = res.data;
           dispatch(getAllProjectsSuccess(projects));
 
-          
           let data = []
           if (projects.length) {
               projects?.map(project => {
@@ -61,7 +56,6 @@ export default function Projects () {
           return 'New';
     }
   };
-
 
   const getProjectSeverity = (status) => {
     switch (status) {
@@ -90,14 +84,23 @@ export default function Projects () {
 
   return (
     <div className="card">
-      {(!projectsData || !projectsData.length) && <ProgressSpinner />}
+      <div className="pb-4">
+      <Link to='/project/create'>
+              <Button 
+              icon='pi pi-plus'
+              label="Start a new project"
+              severity="success"
+              text size="small"
+              />
+              </Link> </div>
        {projectsData.length > 0 ?
         <div>
-          <p className='mb-2 py-2'>
-              List of your projects:
-          </p>
-
-          <DataTable value={projectsData} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: '50rem' }}>
+          <DataTable 
+            className="text-sm"
+            value={projectsData} paginator size="small" 
+            rows={5} rowsPerPageOptions={[5, 10, 25, 50]} 
+            tableStyle={{ minWidth: '50rem' }}
+            >
                 <Column field="description" header="Description"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="endDate" header="Due Date"></Column>
@@ -105,23 +108,13 @@ export default function Projects () {
                 <Column field="_id" header="Link" body={linkBodyTemplate}></Column>
             </DataTable>
         </div> 
-        : 
-            <div>
+        :  
+          <div className="transition-delay-1000">
             <p className='mb-2 py-2'>
               You have no projects!
             </p>
-
-            <Link to='/project/create'>
-              <Button 
-              icon='pi pi-plus'
-              label="Create a project"
-              severity="success"
-              text size="small"
-              />
-              </Link> 
             </div>
         }
-
     </div>
   );
 }

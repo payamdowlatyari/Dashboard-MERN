@@ -40,47 +40,51 @@ export default function SignUp() {
     <div className='main'> 
        <div className="card">
         <Card title="Sign Up">
-        <div className="flex flex-column md:flex-row align-content-center">
+        <div className="flex flex-column md:flex-row align-content-center py-5">
              <div className="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
              <form onSubmit={handleSubmit}>  
-                 <div className="flex flex-wrap justify-content-center align-items-center gap-3">
+                 <div className="flex flex-wrap justify-content-center align-items-center gap-3 pb-4">
+                 <span className="p-float-label">
                      <InputText 
-                       tooltip="Enter your username"
                        onChange={handleChange}
-                       className="w-full" 
+                       className="w-15rem" 
                        type='text'
-                       placeholder='Username'
                        id='username'
                        />
+                      <label htmlFor="username">Username</label>
+                 </span>
                  </div>
-                 <div className="flex flex-wrap justify-content-center align-items-center gap-3">
+                 <div className="flex flex-wrap justify-content-center align-items-center gap-3 pb-4">
+                 <span className="p-float-label">
                      <InputText 
-                       tooltip="Enter your email"
                        onChange={handleChange}
-                       className="w-full" 
+                       className="w-15rem" 
                        type='email'
-                       placeholder='Email'
                        id='email'
                        />
+                      <label htmlFor="email">Email</label>
+                  </span>
                  </div>
-                 <div className="flex flex-wrap justify-content-center align-items-center gap-3">
+                 <div className="flex flex-wrap justify-content-center align-items-center gap-3 pb-4">
+                 <span className="p-float-label">
                      <InputText 
-                       tooltip="Enter your password"
                        id="password" 
                        type="password" 
-                       className="w-full"
-                       placeholder='Password'
+                       className="w-15rem" 
                        onChange={handleChange}
                         />
+                      <label htmlFor="password">Password</label>
+                 </span>
                  </div>
-                 <div className="flex flex-wrap justify-content-center align-items-center gap-3">
+                 <div className="flex flex-wrap justify-content-center align-items-center gap-3 pb-4">
                  <Button 
                    disabled={loading}
                    label={loading ? 'Loading...' : 'Sign Up'} 
-                   className="mx-auto w-full"
+                   className="w-15rem" 
+                   icon="pi pi-user-plus"
                    severity="info" 
                    size="small"
-                   text raised
+                    text raised
                    ></Button>
                    </div>
                    {/* <OAuth /> */}
@@ -100,7 +104,8 @@ export default function SignUp() {
               to='/sign-in'>
                 <Button 
                   label='Sign In'
-                  severity="secondary" 
+                  severity="danger" 
+                  icon="pi pi-user"
                   text 
                   size="small"
                   />

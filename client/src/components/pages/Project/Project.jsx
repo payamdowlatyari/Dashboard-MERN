@@ -13,6 +13,8 @@ import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { Panel } from 'primereact/panel';
 import { Badge } from 'primereact/badge';
+import { Divider } from 'primereact/divider';
+import { Steps } from 'primereact/steps';
 
 import Comment from "./Comment";
 import NewComment from "./NewComment";
@@ -42,24 +44,28 @@ const dispatch = useDispatch();
           dispatch(getProjectFailure(error));
       }
   }
- 
+    const items = [
+        { label: 'New' },
+        { label: 'In Progress' },
+        { label: 'Completed' }
+    ];
+
     return (
         <div className='main'>
           <div className='card'>
               {projectItem && 
               <Card title={projectItem.name}>
-                       {projectItem.status === 2 ? 
-                <Tag severity="success" value="Completed"></Tag>
-                : (projectItem.status === 1 ? 
-                    <Tag value="In Progress" severity='warning'></Tag>: 
-                    <Tag severity="info" value="New"></Tag>)}
-               
-                    <p className="p-v-1 p-h-1">{projectItem.description} </p>
-                  <p className="txt-dark-gray txt-right p-h-1 small">Start Date: 
-                  <span className="txt-gray p-h-1">{projectItem.startDate.substring(0, 10)}               
-                  </span>Due Date: 
+            
+              <p className="txt-dark-gray small"> Due Date: 
                   <span className="txt-gray p-h-1">{projectItem.endDate.substring(0, 10)}               
                   </span></p> 
+
+                
+                <Steps model={items} activeIndex={projectItem.status} 
+                className="max-w-30rem m-auto text-sm"
+                 />
+                  <p className="p-v-1 p-h-1">{projectItem.description} </p>
+
                   <Panel ref={ref} 
                     header={projectItem.comments ? 
                         (

@@ -46,7 +46,6 @@ export default function NewProject() {
           }
     };
 
-
     return (
         <div className='main'>
         <div className="card">
@@ -54,7 +53,7 @@ export default function NewProject() {
             <div className="flex flex-initial sm:flex-row align-content-center">
             <form onSubmit={handleSubmit} className="gap-2 w-auto">     
             
-                        <label htmlFor="name" className="block mb-2">Choose a name for the project</label>
+                        <label htmlFor="name" className="block mb-2">Choose a name for the project.</label>
                         <div className="flex flex-initial align-items-center gap-3 py-3">
 
                             <InputText 
@@ -80,10 +79,12 @@ export default function NewProject() {
                     <Button 
                     disabled={loading}
                     label={loading ? 'Loading...' : 'Submit'} 
+                    severity='success'
                     type="submit" 
                     size="small" 
                     className='w-full'
-                    />      
+                    icon="pi pi-check"
+                    />    
                     </div> 
             </form>
             {error ? <Message severity="error" text={error.message}/> || 

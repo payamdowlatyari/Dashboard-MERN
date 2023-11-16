@@ -1,11 +1,19 @@
 
 import React, { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { addNewComment } from '../../../api';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { classNames } from 'primereact/utils';
 import { InputTextarea } from "primereact/inputtextarea";
+import { Message } from 'primereact/message';
+import {
+    addCommentStart,
+    addCommentSuccess,
+    addCommentFailure
+} from '../../../redux/reducers/projectSlice';
 
 export default function NewComment({projectId}) {
 
@@ -13,6 +21,10 @@ export default function NewComment({projectId}) {
     const defaultValues = { comment: '' };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
+
+    const { loading, error } = useSelector((state) => state.projects);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const show = () => {
         toast.current.show({ severity: 'success', summary: 'Comment Submitted', detail: form.getValues('comment') });
@@ -22,12 +34,14 @@ export default function NewComment({projectId}) {
         data.comment && show();
 
         try {
+            dispatch(addCommentStart())
             const res = await addNewComment(projectId, data);
-            if (res.status !== 200) {
+            if (res.status === 200) {
+              dispatch(addCommentSuccess())  
               return;
             }
           } catch (error) {
-    
+            dispatch(addCommentFailure(error))
           }
         form.reset();
     };
@@ -52,9 +66,19 @@ export default function NewComment({projectId}) {
                         </>
                     )}
                 />
-                <Button label="Submit" type="submit" size="small" className='min-w-max'/>
+                    <Button 
+                    disabled={loading}
+                    label={loading ? 'Loading...' : 'Submit'} 
+                    severity='success'
+                    type="submit" 
+                    size="small" 
+                    className='min-w-max'
+                    icon="pi pi-check"
+                    />
                             
             </form>
+            {error ? <Message severity="error" text={error.message}/> || 
+                <Message severity="error" text="Something went wrong!"/> : ''}
         </div>
     )
 }
