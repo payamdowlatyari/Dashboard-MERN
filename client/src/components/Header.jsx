@@ -25,11 +25,15 @@ export default function Header() {
         </Link>
         <Link className='p-h-2 txt-white' to='/dashboard'>
           Dashboard
-        </Link>
+        </Link> 
         </div>
           <div className='flex justify-content-end flex-wrap nav-right align-items-center'>
             {currentClient ? ( 
              <>
+              {currentClient.isAdmin &&
+                <Link to='/admin'>
+                  <span className="txt-white pi pi-cog p-h-1 medium"></span>
+                  </Link> }
                 <Link to='/project/create'>
                   <span className="txt-white pi pi-plus p-h-1 medium"></span>
                 </Link>

@@ -1,6 +1,6 @@
-import userReducer from "./userSlice";
+import adminSlice from "./adminSlice";
 import clientReducer from "./clientSlice";
-import { combineReducers } from "@reduxjs/toolkit";
 import projectSlice from "./projectSlice";
+import { combineReducers } from "@reduxjs/toolkit";
 
-export default combineReducers({ user: userReducer, client: clientReducer, projects: projectSlice});
+export default combineReducers({ client: clientReducer, projects: projectSlice, admin: adminSlice});

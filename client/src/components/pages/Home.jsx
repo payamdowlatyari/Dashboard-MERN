@@ -56,7 +56,7 @@ export default function Home() {
                       <Divider layout="horizontal" className="flex md:hidden" align="center">
                       </Divider>
                     </div>
-                    <div className="w-full md:w-5 flex flex-column align-items-center gap-3 py-5">                    
+                    <div className="w-full md:w-5 flex flex-column align-items-center gap-3 py-5">              
                     <div className="text-900 gap-3 py2">
                       <Link to='/profile'>
                       <Button 

@@ -47,6 +47,18 @@ const projectSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       },
+      updateProjectStart: (state) => {
+        state.loading = true;
+      },
+      updateProjectSuccess: (state, action) => {
+        state.loading = false;
+        state.error = false;
+        state.projectItem = action.payload;
+      },
+      updateProjectFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      },
       addCommentStart: (state) => {
         state.loading = true;
       },
@@ -71,6 +83,9 @@ export const {
     createProjectStart,
     createProjectSuccess,
     createProjectFailure,
+    updateProjectStart,
+    updateProjectSuccess,
+    updateProjectFailure,
     addCommentStart,
     addCommentSuccess,
     addCommentFailure

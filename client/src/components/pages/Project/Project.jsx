@@ -8,14 +8,11 @@ import {
     getProjectFailure
 } from '../../../redux/reducers/projectSlice';
 import { getProjectById } from "../../../api";
-import { Tag } from 'primereact/tag';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { Panel } from 'primereact/panel';
 import { Badge } from 'primereact/badge';
-import { Divider } from 'primereact/divider';
 import { Steps } from 'primereact/steps';
-
 import Comment from "./Comment";
 import NewComment from "./NewComment";
 
@@ -24,7 +21,6 @@ export default function Project() {
 const { id } = useParams();
 const ref = useRef(null);
 const { projectItem} = useSelector((state) => state.projects);
-
 const dispatch = useDispatch();
 
     useEffect(() => {
@@ -35,7 +31,6 @@ const dispatch = useDispatch();
       try {
           dispatch(getProject());
           const res = await getProjectById(id);
-
         if (res.status === 200) {
           dispatch(getProjectSuccess(res.data));
         }
@@ -55,17 +50,17 @@ const dispatch = useDispatch();
           <div className='card'>
               {projectItem && 
               <Card title={projectItem.name}>
-            
-              <p className="txt-dark-gray small"> Due Date: 
-                  <span className="txt-gray p-h-1">{projectItem.endDate.substring(0, 10)}               
-                  </span></p> 
-
-                
+                 
                 <Steps model={items} activeIndex={projectItem.status} 
                 className="max-w-30rem m-auto text-sm"
                  />
+                
                   <p className="p-v-1 p-h-1">{projectItem.description} </p>
-
+              <p className="txt-gray small txt-right p-h-2">             
+                  <i className="pi pi-clock mr-2"></i> 
+                    {new Date(projectItem.endDate).toString().substring(0, 25)}               
+                  </p> 
+                 
                   <Panel ref={ref} 
                     header={projectItem.comments ? 
                         (
@@ -82,8 +77,14 @@ const dispatch = useDispatch();
                   </Panel>
                       <div className="txt-gray p-h-1 p-v-2">
                       <NewComment projectId={id}/>
+                      <p className="txt-gray small txt-right"> 
+                      <Link to={`/admin/project/update/${projectItem._id}`}>
+                          <Button icon='pi pi-pencil' label="Edit" size="small" rounded text severity="success" />
+                        </Link>
+                      </p> 
+                     
                       </div>
-
+                     
                      <Link to='/dashboard'>
                      <span className="pi pi-angle-left txt-dark-gray small"></span>
                     <span className="txt-dark-gray mid-small p-h-1">Projects</span> 

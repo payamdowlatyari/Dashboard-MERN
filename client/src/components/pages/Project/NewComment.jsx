@@ -1,7 +1,6 @@
 
 import React, { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewComment } from '../../../api';
 import { Button } from 'primereact/button';
@@ -23,7 +22,6 @@ export default function NewComment({projectId}) {
     const errors = form.formState.errors;
 
     const { loading, error } = useSelector((state) => state.projects);
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const show = () => {

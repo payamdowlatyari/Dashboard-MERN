@@ -9,7 +9,6 @@ import { fetchProjects } from "../../../api";
 import { Tag } from "primereact/tag";
 import { Link } from "react-router-dom";
 import { Button } from 'primereact/button';
-import { ProgressSpinner } from 'primereact/progressspinner';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
@@ -32,14 +31,19 @@ export default function Projects () {
           let projects = res.data;
           dispatch(getAllProjectsSuccess(projects));
 
+          if (currentClient.isAdmin) {
+            setProjectsData(projects)
+          } else {
+
           let data = []
-          if (projects.length) {
+            if (projects.length) {
               projects?.map(project => {
               if (project.ownerId.includes(currentClient._id))  
                   data.push(project) 
               })
+            }
+            setProjectsData(data)  
           }
-          setProjectsData(data)  
         }
       } catch (error) {
         dispatch(getAllProjectsFailure());
@@ -75,45 +79,48 @@ export default function Projects () {
   const linkBodyTemplate = (rowData) => {
     return <Link to={`/project/${rowData._id}`}>
               <Button
-                label='Details' 
+                icon='pi pi-file-edit'
                 severity="info" 
                 text size="small"
             />
           </Link>;
   };
 
+  const parseDate = (date) => {
+    return new Date(date.endDate).toString().substring(0, 10)
+  }
+
   return (
     <div className="card">
       <div className="pb-4">
-      <Link to='/project/create'>
-              <Button 
+          <Link to='/project/create'>
+            <Button 
               icon='pi pi-plus'
               label="Start a new project"
               severity="success"
-              text size="small"
+              text size="small"              
               />
-              </Link> </div>
+          </Link> 
+      </div>
        {projectsData.length > 0 ?
         <div>
           <DataTable 
             className="text-sm"
             value={projectsData} paginator size="small" 
             rows={5} rowsPerPageOptions={[5, 10, 25, 50]} 
-            tableStyle={{ minWidth: '50rem' }}
-            >
-                <Column field="description" header="Description"></Column>
+            tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name"></Column>
-                <Column field="endDate" header="Due Date"></Column>
+                <Column field="description" header="Description"></Column>
+                <Column field="endDate" header="Due Date" body={parseDate}></Column>
                 <Column field="status" header="Status" body={statusBodyTemplate}></Column>
-                <Column field="_id" header="Link" body={linkBodyTemplate}></Column>
+                <Column field="_id" header="Details" body={linkBodyTemplate}></Column>
             </DataTable>
         </div> 
-        :  
-          <div className="transition-delay-1000">
-            <p className='mb-2 py-2'>
+        : <div className="transition-delay-1000">
+            <p className='mb-2 py-2 px-4'>
               You have no projects!
             </p>
-            </div>
+          </div>
         }
     </div>
   );

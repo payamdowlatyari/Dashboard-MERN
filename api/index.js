@@ -1,14 +1,11 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import userRoutes from './routes/user.route.js';
-import authRoutes from './routes/auth.route.js';
 import clientRoutes from './routes/client.route.js';
 import projectRoutes from './routes/project.route.js'
-import clientAuthRoutes from './routes/clientAuth.route.js';
+import authRoutes from './routes/auth.route.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-// import path from 'path';
 dotenv.config();
 
 const port = process.env.PORT || 8000
@@ -29,17 +26,6 @@ app.use(cors({
     methods: ["POST", "GET", "PUT","DELETE"]
 }));
 
-// const __dirname = path.resolve();
-
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static('client/build'));
-// }
-// app.use(express.static(path.join(__dirname, '/client/dist')));
-
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-// });
-
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
@@ -50,11 +36,9 @@ app.get('/', (req, res) => {
   });
 })
 
-app.use('/api/user', userRoutes);
 app.use('/api/client', clientRoutes);
 app.use('/api/project', projectRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/client/auth', clientAuthRoutes);
+app.use('/api/client/auth', authRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

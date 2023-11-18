@@ -1,5 +1,6 @@
 import Client from '../models/client.model.js';
 import { errorHandler } from '../utils/error.js';
+import mongoose from 'mongoose';
 import bcryptjs from 'bcryptjs';
 
 // get client
@@ -18,11 +19,12 @@ export const getClient = async (req, res) => {
 
 // get clients
 export const getClients = async (req, res) => {
-
     try {
         const clients = await Client.find().sort({ _id: -1 })
 
-        res.json({ data: clients});
+       console.log(clients)
+
+        res.status(200).json(clients);
     } catch (error) {    
         res.status(404).json({ message: error.message });
     }
@@ -42,6 +44,23 @@ export const createClient = async (req, res) => {
     }
 }
 
+// update project
+export const updateClientByAdmin = async (req, res) => {
+
+  const { id: _id } = req.params
+  const client = req.body
+
+  if(!mongoose.Types.ObjectId.isValid(_id)) 
+          return res.status(404).send('No client with that id exists!')
+  try {
+          const updatedClient = await Client.findByIdAndUpdate(_id, {...client, _id}, { new: true})
+          res.status(200).json(updatedClient)
+    
+      } catch (error) {
+          res.status(409).json(error.message);
+      }
+}
+
 // update client
 export const updateClient = async (req, res, next) => {
 
@@ -57,7 +76,7 @@ export const updateClient = async (req, res, next) => {
           username: req.body.username,
           email: req.body.email,
           password: req.body.password,
-          profilePicture: req.body.profilePicture,
+          isAdmin: req.body.isAdmin,
         },
       },
       { new: true }
@@ -75,16 +94,26 @@ export const deleteClient = async (req, res, next) => {
   const { client } = req.body;
   const { id } = req.params;
 
-  console.log(client);
-  console.log(id)
-
   if (client._id !== id) {
     return next(errorHandler(401, 'You can delete only your account!'));
   }
   try {
-    await Client.findByIdAndDelete(id);
-    res.status(200).json('User has been deleted...');
+    await Client.findByIdAndDelete(_id);
+    res.status(200).json('Client has been deleted...');
   } catch (error) {
     next(error);
+  }
+}
+
+// update project
+export const deleteClientByAdmin = async (req, res) => {
+
+  const { id: _id } = req.params
+
+  try {
+    await Client.findByIdAndDelete(_id);
+    res.status(200).json('Client has been deleted...');
+  } catch (error) {
+    res.status(403).json("Action forbidden");
   }
 }
