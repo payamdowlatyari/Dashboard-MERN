@@ -22,31 +22,31 @@ export default function UpdateProject() {
 
     const { projectItem, loading, error } = useSelector((state) => state.projects);
 
-    console.log(projectItem)
-
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({});
 
-    const [selectedStatus, setSelectedStatus] = useState(null)
+    const [selectedStatus, setSelectedStatus] = useState('')
     const navigate = useNavigate();
     const { id } = useParams();
 
+    useEffect(() => {
+      getProjectDetails()
+
+      if (projectItem && selectedStatus === '') 
+      setSelectedStatus(setStatus(projectItem.status))
+      else if (selectedStatus)
+        setSelectedStatus(selectedStatus)
+
+    }, [selectedStatus])
+
     const handleStatusChange = (e) => {
-
-        setSelectedStatus(getStatus(e.target.value));
-
-        console.log(selectedStatus)
-        console.log(formData)
-        setFormData({ ...formData, [e.target.id]: e.target.value});
+        setSelectedStatus(e.target.value);
+        setFormData({ ...formData, status: getStatus(e.target.value)});
       } 
 
     const handleChange = (e) => {
       setFormData({ ...formData, [e.target.id]: e.target.value });
     };
-  
-    useEffect(() => {
-        getProjectDetails()
-    }, [])
 
     const getProjectDetails = async () => {
       try {
@@ -104,10 +104,12 @@ export default function UpdateProject() {
              <Card title="Update Project">
             <div className="flex flex-initial sm:flex-row align-content-center">
             <form onSubmit={handleSubmit} className="gap-2 w-auto">     
-            
-                        <label htmlFor="name" className="block mb-2">Name</label>
-                        <div className="flex flex-initial align-items-center gap-3 py-3">
-
+                        <Divider align="left" type="dotted">
+                          <div className="inline-flex align-items-center">
+                              <b>Name</b>
+                          </div>
+                        </Divider>
+                        <div className="flex flex-initial align-items-center gap-3 py-1">
                             <InputText 
                             defaultValue={projectItem.name}
                             onChange={handleChange}
@@ -116,24 +118,31 @@ export default function UpdateProject() {
                             id='name'
                             />
                         </div>
-                        <Divider/>
-                        <label htmlFor="description" className="block mb-2">Description</label>
-                        <div className="flex flex-wrap align-items-center gap-3 py-3">
+                        <Divider align="left" type="dotted">
+                          <div className="inline-flex align-items-center">
+                              <b>Description</b>                              
+                          </div>
+                        </Divider>
+                        <div className="flex flex-wrap align-items-center gap-3 py-1">
                         <InputTextarea 
                         defaultValue={projectItem.description}
                         id="description" 
                         onChange={handleChange}
-                        rows={5} cols={50} />
+                        rows={4} cols={40} />
                         </div>
-
-                        <div className="flex flex-wrap align-items-center gap-3 py-3">
+                        <Divider align="left" type="dotted">
+                          <div className="inline-flex align-items-center">
+                              <b>Status</b>
+                          </div>
+                        </Divider>
+                        <div className="flex flex-wrap align-items-center gap-3 py-1">
                         <Dropdown 
-                        value={setStatus(projectItem.status)} 
+                        value={selectedStatus} 
                         onChange={handleStatusChange} 
                         options={statusCode} id="status" 
                         className="w-full md:w-14rem" />
                         </div>
-                        <div className="flex flex-wrap align-items-center">
+                    <div className="flex flex-wrap align-items-center gap-3 py-3">
                     <Button 
                     disabled={loading}
                     label={loading ? 'Loading...' : 'Submit'} 

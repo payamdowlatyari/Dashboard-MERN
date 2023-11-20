@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import clientRoutes from './routes/client.route.js';
 import projectRoutes from './routes/project.route.js'
 import authRoutes from './routes/auth.route.js';
+import adminRoutes from './routes/admin.route.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 dotenv.config();
@@ -38,7 +39,8 @@ app.get('/', (req, res) => {
 
 app.use('/api/client', clientRoutes);
 app.use('/api/project', projectRoutes);
-app.use('/api/client/auth', authRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

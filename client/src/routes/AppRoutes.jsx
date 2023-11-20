@@ -19,8 +19,6 @@ export default function AppRoutes() {
 
   const {currentClient} = useSelector(state => state.client)
 
-  console.log(currentClient)
-
   return (
     <BrowserRouter>
       <Header />

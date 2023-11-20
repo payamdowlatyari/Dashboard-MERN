@@ -4,7 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Card } from 'primereact/card';
 import { Divider } from 'primereact/divider';
 import { Button } from 'primereact/button';
-import { signOut } from '../../redux/reducers/clientSlice';
+import { signedOut } from '../../redux/reducers/clientSlice';
+import { signOut } from '../../api';
 
 export default function Home() {
   const { currentClient} = useSelector((state) => state.client);
@@ -14,8 +15,8 @@ export default function Home() {
 
   const handleSignOut = async () => {
     try {
-      await fetch('/api/client/auth/signout');
-      dispatch(signOut());
+      await signOut();
+      dispatch(signedOut());
       navigate('/sign-in');
     } catch (error) {
       console.log(error);

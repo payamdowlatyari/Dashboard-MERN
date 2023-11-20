@@ -3,63 +3,7 @@ import { errorHandler } from '../utils/error.js';
 import mongoose from 'mongoose';
 import bcryptjs from 'bcryptjs';
 
-// get client
-export const getClient = async (req, res) => { 
-
-    const { id } = req.params;
-
-    try {
-        const client = await Client.findById(id);
-        
-        res.status(200).json(client);
-    } catch (error) {
-        res.status(404).json({ message: error.message });
-    }
-}
-
-// get clients
-export const getClients = async (req, res) => {
-    try {
-        const clients = await Client.find().sort({ _id: -1 })
-
-       console.log(clients)
-
-        res.status(200).json(clients);
-    } catch (error) {    
-        res.status(404).json({ message: error.message });
-    }
-}
-
-// create client
-export const createClient = async (req, res) => {
-
-    const client = req.body
-    const newClient = new Client({...client })
-
-    try {
-        await newClient.save()
-        res.status(201).json(newClient)
-    } catch (error) {
-        res.status(409).json(error.message)
-    }
-}
-
-// update project
-export const updateClientByAdmin = async (req, res) => {
-
-  const { id: _id } = req.params
-  const client = req.body
-
-  if(!mongoose.Types.ObjectId.isValid(_id)) 
-          return res.status(404).send('No client with that id exists!')
-  try {
-          const updatedClient = await Client.findByIdAndUpdate(_id, {...client, _id}, { new: true})
-          res.status(200).json(updatedClient)
-    
-      } catch (error) {
-          res.status(409).json(error.message);
-      }
-}
+// api/client
 
 // update client
 export const updateClient = async (req, res, next) => {
@@ -106,14 +50,14 @@ export const deleteClient = async (req, res, next) => {
 }
 
 // update project
-export const deleteClientByAdmin = async (req, res) => {
+// export const deleteClientByAdmin = async (req, res) => {
 
-  const { id: _id } = req.params
+//   const { id: _id } = req.params
 
-  try {
-    await Client.findByIdAndDelete(_id);
-    res.status(200).json('Client has been deleted...');
-  } catch (error) {
-    res.status(403).json("Action forbidden");
-  }
-}
+//   try {
+//     await Client.findByIdAndDelete(_id);
+//     res.status(200).json('Client has been deleted...');
+//   } catch (error) {
+//     res.status(403).json("Action forbidden");
+//   }
+// }

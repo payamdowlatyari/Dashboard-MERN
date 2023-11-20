@@ -50,10 +50,9 @@ const projectSlice = createSlice({
       updateProjectStart: (state) => {
         state.loading = true;
       },
-      updateProjectSuccess: (state, action) => {
+      updateProjectSuccess: (state) => {
         state.loading = false;
         state.error = false;
-        state.projectItem = action.payload;
       },
       updateProjectFailure: (state, action) => {
         state.loading = false;
@@ -63,11 +62,11 @@ const projectSlice = createSlice({
         state.loading = true;
       },
       addCommentSuccess: (state) => {
-        state.loading = true;
+        state.loading = false;
         state.error = false;
       },
       addCommentFailure: (state, action) => {
-        state.loading = true;
+        state.loading = false;
         state.error = action.payload;
       }
     }

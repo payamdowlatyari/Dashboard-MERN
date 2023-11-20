@@ -20,8 +20,8 @@ export default function NewComment({projectId}) {
     const defaultValues = { comment: '' };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
-
     const { loading, error } = useSelector((state) => state.projects);
+
     const dispatch = useDispatch();
 
     const show = () => {
@@ -29,6 +29,7 @@ export default function NewComment({projectId}) {
     };
 
     const onSubmit = async (data) => {
+        
         data.comment && show();
 
         try {
@@ -36,7 +37,6 @@ export default function NewComment({projectId}) {
             const res = await addNewComment(projectId, data);
             if (res.status === 200) {
               dispatch(addCommentSuccess())  
-              return;
             }
           } catch (error) {
             dispatch(addCommentFailure(error))

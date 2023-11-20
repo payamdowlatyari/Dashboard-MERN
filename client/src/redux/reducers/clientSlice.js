@@ -34,7 +34,7 @@ const clientSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    signOut: (state) => {
+    signedOut: (state) => {
       state.currentClient = null;
       state.loading = false;
       state.error = false;
@@ -49,7 +49,7 @@ export const {
   updateClientFailure,
   updateClientStart,
   updateClientSuccess,
-  signOut,
+  signedOut,
 } = clientSlice.actions;
 
 export default clientSlice.reducer;
