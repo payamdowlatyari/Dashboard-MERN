@@ -26,3 +26,4 @@ export const deleteClientById = (id) => axios.delete(`${url}/api/admin/client/de
 
 // api/admin/project
 export const updateProject = (id, formData) => axios.post(`${url}/api/admin/project/update/${id}`, formData, {withCredentials: true})
+export const deleteProjectById = (id) => axios.delete(`${url}/api/admin/project/delete/${id}`, { withCredentials: true })

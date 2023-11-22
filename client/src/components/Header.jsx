@@ -23,7 +23,7 @@ export default function Header() {
     <div className='navbar bg-black txt-white flex flex-row'>
       <div className='flex justify-content-start flex-wrap align-items-center nav-left'>
         <Link className='font-bold txt-white' to='/'>
-          Home
+          <span className="txt-white pi pi-home p-h-1 medium"></span>
         </Link>
         <Link className='p-h-2 txt-white' to='/dashboard'>
           Projects
@@ -48,11 +48,10 @@ export default function Header() {
                 Login
              </Link>
             )}
-             {currentClient? ( 
-            <span onClick={handleSignOut} 
-            className='cursor-pointer align-items-center p-h-1'>
+             {currentClient && (<span onClick={handleSignOut} 
+                  className='cursor-pointer align-items-center p-h-1'>
             <span className="txt-white pi pi-sign-out p-h-1 medium"></span>
-          </span>) : (<span></span>)}       
+          </span>)}       
         </div>
     </div>
   );

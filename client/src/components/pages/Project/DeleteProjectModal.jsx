@@ -3,23 +3,23 @@ import React, { useRef } from 'react';
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
-import { deleteClientById } from '../../../api';
+import { deleteProjectById } from '../../../api';
 import { useNavigate } from 'react-router-dom';
 
-export default function DeleteClientModal({id}) {
+export default function DeleteProjectModal({id}) {
 
     const toast = useRef(null);
     const navigate = useNavigate();
 
     const accept = async () => {
         try { 
-            const res = await deleteClientById(id);
+            const res = await deleteProjectById(id);
             if (res.status === 200) {
-                toast.current.show({ severity: 'info', detail: 'Client deleted', life: 3000 });
+                toast.current.show({ severity: 'info', detail: 'Project deleted', life: 3000 });
             }
-            navigate('/admin');
-        } catch (error) {     
-                toast.current.show({ severity: 'danger', detail: error.message, life: 3000 });       
+            navigate('/dashboard');
+        } catch (error) {   
+            toast.current.show({ severity: 'danger', detail: error.message, life: 3000 });
         }         
     };
 
@@ -30,7 +30,7 @@ export default function DeleteClientModal({id}) {
     const confirmDelete = (event) => {
         confirmPopup({
             target: event.currentTarget,
-            message: 'Do you want to delete this record?',
+            message: 'Are you sure you want to delete this project?',
             icon: 'pi pi-info-circle',
             acceptClassName: 'p-button-danger',
             accept,
@@ -44,9 +44,7 @@ export default function DeleteClientModal({id}) {
         <ConfirmPopup />
             <Button 
                 onClick={confirmDelete}
-                tooltip="Delete item"
-                tooltipOptions={{ showDelay: 1000, hideDelay: 300, position: 'top' }}
-                icon="pi pi-trash" className="text-xs" rounded text severity="danger"/>
+                icon="pi pi-trash" label='Delete' className="text-xs" text severity="danger"/>
         </>
     )
 }

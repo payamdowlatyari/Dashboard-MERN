@@ -13,7 +13,7 @@ export default function Clients () {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [clientList, setClientList] = useState([]);
-  const [clientItem, setclientItem] = useState({});
+  // const [clientItem, setclientItem] = useState({});
 
       useEffect(() => {
         getClients()
@@ -44,15 +44,11 @@ export default function Clients () {
   }
 
   const displayAdminActions = (rowData) => {
-
-    // setclientItem(rowData)
     return (
             <>  
             <DeleteClientModal id={rowData._id}/>
-            <Link  
-                to={`/admin/client/edit/${rowData._id}`}>
-                    <Button 
-                    tooltip="Edit item"
+            <Link to={`/admin/client/edit/${rowData._id}`}>
+                <Button tooltip="Edit"
                     tooltipOptions={{ showDelay: 1000, hideDelay: 300, position: 'top' }}
                     icon="pi pi-user-edit" className="text-xs" rounded text severity="success"/>
             </Link>
@@ -66,16 +62,6 @@ export default function Clients () {
 
   return (
     <div className="card">
-      {/* <div className="pb-4">
-          <Link to='/Client/create'>
-            <Button 
-              icon='pi pi-plus'
-              label="Start a new Client"
-              severity="success"
-              text size="small"
-              />
-          </Link> 
-      </div> */}
        {(!loading && clientList.length > 0) ?
         <div>
           <DataTable 
@@ -89,15 +75,14 @@ export default function Clients () {
                 <Column field="isAdmin" header="Admin" body={showAdminStatus}></Column>
                 <Column field="_id" header="Actions" body={displayAdminActions}></Column>
             </DataTable>
-        </div> 
-        : <div className="transition-delay-1000">
+        </div> : <div className="transition-delay-1000">
             <p className='mb-2 py-2'>
               No Clients!
             </p>
           </div>
         }
-            {error ? <Message severity="error" text={error.message}/> || 
-             <Message severity="error" text="Something went wrong!"/> : null}
+        {error && (<Message severity="error" text={error.message}/> || 
+          <Message severity="error" text="Something went wrong!"/> )}
     </div>
   );
 }

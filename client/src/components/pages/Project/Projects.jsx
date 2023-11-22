@@ -1,15 +1,6 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
-import {
-    getAllProjects,
-    getAllProjectsSuccess,
-    getAllProjectsFailure,
-    updateProjectStart,
-    updateProjectSuccess,
-    updateProjectFailure
-} from '../../../redux/reducers/projectSlice';
 import { fetchProjects, updateProject } from "../../../api";
 import { Tag } from "primereact/tag";
 import { Link } from "react-router-dom";
@@ -24,15 +15,13 @@ import { Message } from "primereact/message";
 export default function Projects () {
 
   const {currentClient} = useSelector((state) => state.client);
-  // const { projectItem } = useSelector((state) => state.projects);
-
   const [projectList, setProjectList] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [updating, setUpdating] = useState(false);
   const [updatedProject, setUpdatedProject] = useState(null)
   const [statuses] = useState(['New', 'In Progress', 'Completed']);
-  // const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
       useEffect(() => {
@@ -50,7 +39,6 @@ export default function Projects () {
           if (currentClient.isAdmin) {
             setProjectList(projects)
           } else {
-
           let data = []
             if (projects.length) {
               projects?.map(project => {
@@ -72,7 +60,6 @@ export default function Projects () {
   useEffect(()=> {
     if (updating && updatedProject) 
         updateProjectData();
-
       getProjects() 
   }, [updating])
 
@@ -88,7 +75,6 @@ export default function Projects () {
       console.log(error)
       setUpdating(false) 
     }
-
   }
 
   const setStatus = (status) => {
@@ -135,7 +121,8 @@ export default function Projects () {
                 tooltip="Show more"
                 icon='pi pi-link'
                 severity="info" 
-                text size="small"
+                text rounded 
+                size="small"
             />
           </Link>;
   };
@@ -144,41 +131,35 @@ export default function Projects () {
     return new Date(rowData.endDate).toString().substring(0, 10)
   }
 
+  const onRowEditComplete = async (e) => {
+      let { newData } = e;
+      setUpdatedProject(newData)  
+      setUpdating(true)
+  };
 
-const onRowEditComplete = async (e) => {
+  const textEditor = (options) => {
+      return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
+  };
 
-    let { newData } = e;
+  const datePicker = (options) => {
+    console.log(options) 
+      return  <Calendar value={(options.value.toString())} onChange={(e) => 
+        options.editorCallback((e.target.value.toISOString())
+      )}/>;
+  }
 
-    setUpdatedProject(newData)  
-    setUpdating(true)
-};
-
-const textEditor = (options) => {
-    return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
-};
-
-const datePicker = (options) => {
-  console.log(options) 
-    return  <Calendar value={options.value} onChange={(e) => 
-      options.editorCallback((e.target.value.toISOString())
-    )}/>;
-}
-
-const statusEditor = (options) => {
-
-  console.log(options)
-    return (
-        <Dropdown
-            value={options.value}
-            options={statuses}
-            onChange={(e) => options.editorCallback((getStatus(e.value)))}
-
-            itemTemplate={(option) => {
-                return <Tag value={option} severity={getProjectSeverity(getStatus(option))}></Tag>;
-            }}
-        />
-    );
-};
+  const statusEditor = (options) => {
+      return (
+          <Dropdown
+              value={setStatus(options.value)}
+              options={statuses}
+              onChange={(e) => options.editorCallback((getStatus(e.value)))}
+              itemTemplate={(option) => {
+                  return <Tag value={option} severity={getProjectSeverity(getStatus(option))}></Tag>;
+              }}
+          />
+      );
+  };
 
   return (
     <div className="card">
@@ -198,15 +179,13 @@ const statusEditor = (options) => {
             <DataTable value={projectList} size="small" editMode="row" dataKey="id" 
             paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} 
             onRowEditComplete={onRowEditComplete} tableStyle={{ minWidth: '25rem' }}>
-
-                <Column field="name" header="Name" editor={(options) => textEditor(options)}></Column>
+                <Column field="name" header="Name" sortable editor={(options) => textEditor(options)}></Column>
                 <Column field="description" header="Description" editor={(options) => textEditor(options)}></Column>
-                <Column field="endDate" header="Due Date" body={parseDate} editor={(options) => datePicker(options)}></Column>
-                <Column field="status" header="Status" body={statusBodyTemplate} editor={(options) => statusEditor(options)}></Column>
+                <Column field="endDate" header="Due Date" body={parseDate} sortable editor={(options) => datePicker(options)}></Column>
+                <Column field="status" header="Status" body={statusBodyTemplate} sortable editor={(options) => statusEditor(options)}></Column>
                 <Column field="_id" header="Details" body={linkBodyTemplate}></Column>
                 {(currentClient && currentClient.isAdmin) &&
-                <Column rowEditor header="Edit"></Column>}
-
+                <Column rowEditor header="Edit" severity='success'></Column>}
             </DataTable>
         </div> 
         : <div className="transition-delay-1000">

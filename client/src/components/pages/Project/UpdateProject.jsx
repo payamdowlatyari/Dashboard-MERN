@@ -15,16 +15,15 @@ import { Message } from 'primereact/message';
 import { InputTextarea } from "primereact/inputtextarea";
 import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
-import { Divider } from 'primereact/divider';
 import { Dropdown } from 'primereact/dropdown';
-
+import { Calendar } from 'primereact/calendar';
 export default function UpdateProject() {
 
     const { projectItem, loading, error } = useSelector((state) => state.projects);
 
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({});
-
+    const [date, setDate] = useState(null);
     const [selectedStatus, setSelectedStatus] = useState('')
     const navigate = useNavigate();
     const { id } = useParams();
@@ -32,17 +31,28 @@ export default function UpdateProject() {
     useEffect(() => {
       getProjectDetails()
 
+      console.log(date)
+
       if (projectItem && selectedStatus === '') 
-      setSelectedStatus(setStatus(projectItem.status))
+        setSelectedStatus(setStatus(projectItem.status))
       else if (selectedStatus)
         setSelectedStatus(selectedStatus)
 
-    }, [selectedStatus])
+        if (projectItem && date === null)
+        setDate(projectItem.endDate)
+      else if (date !== null) setDate(date)
+
+    }, [selectedStatus, date])
 
     const handleStatusChange = (e) => {
         setSelectedStatus(e.target.value);
         setFormData({ ...formData, status: getStatus(e.target.value)});
       } 
+    
+    const handleDateChange = (e) => {      
+        setDate(parseDate(e.target.value));
+        setFormData({ ...formData, endDate: parseDate(e.target.value) });
+      }
 
     const handleChange = (e) => {
       setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -59,6 +69,14 @@ export default function UpdateProject() {
       } catch (error) {
           dispatch(getProjectFailure(error));
       }
+  }
+
+  const parseDate = (endDate) => {
+    return new Date(endDate).toISOString()
+  }
+
+  const showDate = (endDate) => {
+    return new Date(endDate).toString()
   }
 
     const statusCode = ['Completed', 'In Progress', 'New']
@@ -86,13 +104,15 @@ export default function UpdateProject() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        console.log(formData)
+
         try {
             dispatch(updateProjectStart())
             const res = await updateProject(id, formData);
             if (res.status === 200) {
                 dispatch(updateProjectSuccess(res.data))
             }
-            navigate('/dashboard')
+            navigate(`/project/${id}`)
           } catch (error) {
             dispatch(updateProjectFailure(error))
           }
@@ -102,61 +122,69 @@ export default function UpdateProject() {
         <div className='main'>
         <div className="card">
              <Card title="Update Project">
-            <div className="flex flex-initial sm:flex-row align-content-center">
-            <form onSubmit={handleSubmit} className="gap-2 w-auto">     
-                        <Divider align="left" type="dotted">
-                          <div className="inline-flex align-items-center">
-                              <b>Name</b>
-                          </div>
-                        </Divider>
-                        <div className="flex flex-initial align-items-center gap-3 py-1">
+                <div className="flex md:align-content-start flex-wrap">
+                    <form onSubmit={handleSubmit} className="gap-2 w-auto">     
+                        <div className="flex flex-row align-items-start gap-3 py-1">
+                          <div className="flex flex-column align-items-start gap-3 py-1">
+                            <div className="inline-flex">
+                                <b>Name</b>
+                            </div>
                             <InputText 
-                            defaultValue={projectItem.name}
+                                defaultValue={projectItem.name}
+                                onChange={handleChange}
+                                className="md:min-w-max" 
+                                type='text'
+                                id='name'
+                                />
+                            </div>
+                            </div>
+                            <div className="flex flex-row align-items-start gap-3 py-1">
+                            <div className="flex flex-column align-items-start gap-3 py-1">
+                            <div className="inline-flex">
+                                  <b>Description</b>                              
+                              </div>  
+                            <InputTextarea 
+                            defaultValue={projectItem.description}
+                            id="description" 
                             onChange={handleChange}
-                            className="md:min-w-max" 
-                            type='text'
-                            id='name'
-                            />
-                        </div>
-                        <Divider align="left" type="dotted">
-                          <div className="inline-flex align-items-center">
-                              <b>Description</b>                              
+                            autoResize
+                            rows={3} cols={30} />
+                            </div>
+                            </div>
+                            <div className="flex flex-row align-items-start gap-3 py-1">
+                            <div className="flex flex-column align-items-start gap-3 py-1">
+                            <div className="inline-flex">
+                                  <b>Status</b>
+                              </div>
+                            <Dropdown 
+                            value={selectedStatus} 
+                            onChange={handleStatusChange} 
+                            options={statusCode} id="status" 
+                            className="w-full md:w-14rem" />
+                            </div>          
+                            <div className="flex flex-column align-items-start gap-3 py-1">
+                            <div className="inline-flex">
+                              <b>Due Date</b>
+                            </div>
+                            <Calendar value={date} id='endDate'
+                            onChange={handleDateChange} />
                           </div>
-                        </Divider>
-                        <div className="flex flex-wrap align-items-center gap-3 py-1">
-                        <InputTextarea 
-                        defaultValue={projectItem.description}
-                        id="description" 
-                        onChange={handleChange}
-                        rows={4} cols={40} />
                         </div>
-                        <Divider align="left" type="dotted">
-                          <div className="inline-flex align-items-center">
-                              <b>Status</b>
-                          </div>
-                        </Divider>
-                        <div className="flex flex-wrap align-items-center gap-3 py-1">
-                        <Dropdown 
-                        value={selectedStatus} 
-                        onChange={handleStatusChange} 
-                        options={statusCode} id="status" 
-                        className="w-full md:w-14rem" />
+                        <div className="flex flex-row align-items-start gap-3 py-1">
+                          <Button 
+                            disabled={loading}
+                            label={loading ? 'Loading...' : 'Submit'} 
+                            severity='success'
+                            type="submit" 
+                            size="small" 
+                            className='w-full'
+                            icon="pi pi-check"
+                          />    
                         </div>
-                    <div className="flex flex-wrap align-items-center gap-3 py-3">
-                    <Button 
-                    disabled={loading}
-                    label={loading ? 'Loading...' : 'Submit'} 
-                    severity='success'
-                    type="submit" 
-                    size="small" 
-                    className='w-full'
-                    icon="pi pi-check"
-                    />    
-                    </div> 
-            </form>
-            {error ? <Message severity="error" text={error.message}/> || 
-             <Message severity="error" text="Something went wrong!"/> : null}
-            </div>
+                  </form>
+                {error ? <Message severity="error" text={error.message}/> || 
+                <Message severity="error" text="Something went wrong!"/> : null}
+              </div>
             </Card>
         </div>
         </div>

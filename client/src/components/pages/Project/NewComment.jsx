@@ -29,9 +29,7 @@ export default function NewComment({projectId}) {
     };
 
     const onSubmit = async (data) => {
-        
         data.comment && show();
-
         try {
             dispatch(addCommentStart())
             const res = await addNewComment(projectId, data);
@@ -65,15 +63,14 @@ export default function NewComment({projectId}) {
                     )}
                 />
                     <Button 
-                    disabled={loading}
-                    label={loading ? 'Loading...' : 'Submit'} 
-                    severity='success'
-                    type="submit" 
-                    size="small" 
-                    className='min-w-max'
-                    icon="pi pi-check"
-                    />
-                            
+                        disabled={loading}
+                        label={loading ? 'Loading...' : 'Submit'} 
+                        severity='success'
+                        type="submit" 
+                        size="small" 
+                        className='min-w-max'
+                        icon="pi pi-check"
+                    />       
             </form>
             {error ? <Message severity="error" text={error.message}/> || 
                 <Message severity="error" text="Something went wrong!"/> : ''}

@@ -11,7 +11,7 @@ const adminSlice = createSlice({
   name: 'admin',
   initialState,
   reducers: {
-    getAllClients: (state) => {
+      getAllClients: (state) => {
         state.loading = true;
       },
       getAllClientsSuccess: (state, action) => {
@@ -46,6 +46,17 @@ const adminSlice = createSlice({
       editClientFailure: (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      },
+      deleteClientStart: (state) => {
+        state.loading = true;
+      },
+      deleteClientSuccess: (state) => {
+        state.loading = false;
+        state.error = false;
+      },
+      deleteClientFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       }
   },
 });
@@ -59,7 +70,10 @@ getAllClientsSuccess,
 getAllClientsFailure,
 editClientStart,
 editClientSuccess,
-editClientFailure
+editClientFailure,
+deleteClientStart,
+deleteClientSuccess,
+deleteClientFailure,
 } = adminSlice.actions;
 
 export default adminSlice.reducer;

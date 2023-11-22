@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
-  getClientStart,
-  getClientSuccess,
-  getClientFailure,
   editClientStart,
   editClientSuccess,
   editClientFailure,
@@ -25,7 +22,7 @@ export default function EditClient() {
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [clientItem, setclientItem] = useState({});
 
-  const {error } = useSelector((state) => state.admin);
+  const {error, loading } = useSelector((state) => state.admin);
   const [checked, setChecked] = useState(null);
 
     useEffect(() => {   
@@ -45,16 +42,14 @@ export default function EditClient() {
   const getClient = async () => {
    
     try {
-        dispatch(getClientStart());
         const res = await getClientById(id);
-        console.log(res)
         if (res.status === 200) {
            setclientItem(res.data)
         }
         setChecked(res.data.isAdmin)
         
       } catch (error) {
-        dispatch(getClientFailure(error));
+        console.log(error)
       }
   }
 
@@ -129,18 +124,16 @@ export default function EditClient() {
         <Button 
           severity='success'
           className="mx-auto w-full"
-          label='Update' 
+          label={loading ? 'Loading' : 'Update'} 
           size="small"
           />
         </div>
       </form>
+      {error && <Message severity="error" text="Something went wrong!" />}
+        {updateSuccess && <Message severity="success" text="Profile is updated successfully!" />}
       </div>
         </div>
         </Card>
-        <div className='p-messages'>
-        {error && <Message severity="error" text="Something went wrong!" />}
-        {updateSuccess && <Message severity="success" text="Profile is updated successfully!" />}
-        </div>
         </div>
     </div>
   );
