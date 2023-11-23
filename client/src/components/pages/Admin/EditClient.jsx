@@ -114,6 +114,7 @@ export default function EditClient() {
           placeholder='Password'
           className="w-full"
           onChange={handleChange}
+          disabled
         />
         </div>
         <div className="flex flex-wrap justify-content-center align-items-center gap-3 py-1">

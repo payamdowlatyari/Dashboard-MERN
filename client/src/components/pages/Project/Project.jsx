@@ -13,7 +13,7 @@ import { Button } from 'primereact/button';
 import { Panel } from 'primereact/panel';
 import { Badge } from 'primereact/badge';
 import { Steps } from 'primereact/steps';
-import Comment from "./Comment";
+import Comments from "./Comments";
 import NewComment from "./NewComment";
 import DeleteProjectModal from "./DeleteProjectModal";
 
@@ -22,6 +22,7 @@ export default function Project() {
 const { id } = useParams();
 const ref = useRef(null);
 const { projectItem } = useSelector((state) => state.projects);
+const {currentClient} = useSelector((state) => state.client);
 const [ projectOwner, setProjectOwner ] = useState({}) 
 const dispatch = useDispatch();
 
@@ -31,7 +32,6 @@ const dispatch = useDispatch();
     }, [])
 
     const getProjectOwner = async () => {
-
       try {
         const res = await getClientById(projectItem.ownerId[0]);
           setProjectOwner(res.data)
@@ -63,12 +63,13 @@ const dispatch = useDispatch();
       return ( 
         <>
         <Link to='/dashboard'>
-              <Button label="Projects" icon="pi pi-angle-left" size="small" severity="secondary" text/>  
+              <Button label="Projects" icon="pi pi-angle-left" size="small" text/>  
         </Link>  
+        {currentClient.isAdmin && <>
         <Link to={`/admin/project/update/${projectItem._id}`}>
               <Button icon='pi pi-pencil' label="Edit" size="small" text severity="success"/>
         </Link>
-        <DeleteProjectModal id={projectItem._id}/>
+        <DeleteProjectModal id={projectItem._id}/></>}
         </>
       );
     }
@@ -88,20 +89,20 @@ const dispatch = useDispatch();
               {projectItem && 
               <Card title={projectItem.name} subTitle={subtitle} footer={footer}>
 
-                 <div class="grid text-center">
-                    <div class="md:col-4 sm:col-12">
+                 <div className="grid text-center">
+                    <div className="md:col-4 sm:col-12">
                       <span className="p-h-1 txt-gray small">
                       <span className="p-h-1">Started</span> 
                       <i className="pi pi-clock mr-2 vertical-align-bottom"></i>
                         {new Date(projectItem.startDate).toString().substring(0, 15)} 
                       </span>
                     </div>
-                    <div class="md:col-4 sm:col-12">
+                    <div className="md:col-4 sm:col-12">
                       <Steps model={items} activeIndex={projectItem.status} 
                         className="max-w-25rem m-auto text-xs"
                         />   
                     </div>
-                    <div class="md:col-4 sm:col-12">
+                    <div className="md:col-4 sm:col-12">
                       <span className="p-h-1 txt-gray small">
                       <span className="p-h-1">Due</span> 
                       <i className="pi pi-clock mr-2 vertical-align-bottom"></i>
@@ -113,20 +114,21 @@ const dispatch = useDispatch();
                     <p className="p-h-1 txt-gray small">
                     <span className="p-h-1">Updated</span> 
                     <i className="pi pi-clock mr-2 vertical-align-bottom"></i>
-                    {new Date(projectItem.updatedAt).toString().substring(0, 25)} 
+                    {new Date(projectItem.updatedAt).toString().substring(0, 21)} 
                     </p>
                     <Panel ref={ref} 
-                      header={projectItem.comments ? 
+                      header={projectItem.comments &&
                           (
-                            <Button type="button" severity="info" 
+                            <Button type="button" 
+                              label="Comments" severity="secondary"
                               size="small" text icon="pi pi-comment"
                               onClick={() => ref.current.toggle()}>
-                              <Badge value={projectItem.comments.length}/>
+                              <Badge value={projectItem.comments.length} severity="secondary"/>
                             </Button>   
-                          ) : ''} toggleable>
+                          )} toggleable>
                       
                             {projectItem.comments && projectItem.comments.length > 0 ?
-                                <Comment/> 
+                               <Comments/>
                                 : <p className="txt-dark-gray mid-small">No Comments</p>}
                     </Panel>
                       <div className="txt-gray p-h-1 p-v-2">

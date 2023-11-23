@@ -35,6 +35,7 @@ export default function Home() {
 
       {currentClient? ( 
       <div className="grid surface-0 text-center">
+         {currentClient.isAdmin && 
          <div className="col-12 md:col-4 mb-4 mt-4 px-5">
             <span className="p-3 shadow-2 mb-3 inline-block" style={{ borderRadius: '10px' }}>
                 <i className="pi pi-users text-4xl text-blue-500"></i>
@@ -48,7 +49,7 @@ export default function Home() {
                         />
                       </Link>
                       </div>
-            </div>
+            </div>}
         <div className="col-12 md:col-4 mb-4 mt-4 px-5">
             <span className="p-3 shadow-2 mb-3 inline-block" style={{ borderRadius: '10px' }}>
                 <i className="pi pi-folder-open text-4xl text-blue-500"></i>

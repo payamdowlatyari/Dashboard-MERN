@@ -1,4 +1,3 @@
-
 import React, { useRef } from 'react';
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Toast } from 'primereact/toast';
@@ -23,18 +22,13 @@ export default function DeleteClientModal({id}) {
         }         
     };
 
-    const reject = () => {
-        toast.current.show({ severity: 'warn', detail: 'Rejected', life: 3000 });
-    };
-    
     const confirmDelete = (event) => {
         confirmPopup({
             target: event.currentTarget,
-            message: 'Do you want to delete this record?',
+            message: 'Do you want to delete this profile?',
             icon: 'pi pi-info-circle',
             acceptClassName: 'p-button-danger',
-            accept,
-            reject
+            accept
         });
     };
 
@@ -44,7 +38,7 @@ export default function DeleteClientModal({id}) {
         <ConfirmPopup />
             <Button 
                 onClick={confirmDelete}
-                tooltip="Delete item"
+                tooltip="Delete"
                 tooltipOptions={{ showDelay: 1000, hideDelay: 300, position: 'top' }}
                 icon="pi pi-trash" className="text-xs" rounded text severity="danger"/>
         </>

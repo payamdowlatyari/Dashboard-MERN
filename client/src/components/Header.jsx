@@ -25,17 +25,17 @@ export default function Header() {
         <Link className='font-bold txt-white' to='/'>
           <span className="txt-white pi pi-home p-h-1 medium"></span>
         </Link>
-        <Link className='p-h-2 txt-white' to='/dashboard'>
+            {currentClient && currentClient.isAdmin &&
+          <Link className='p-h-1 txt-white' to='/admin'>
+          <span className="pi pi-users mid-large"></span>
+          </Link>}
+          <Link className='txt-white' to='/dashboard'>
           Projects
         </Link> 
         </div>
           <div className='flex justify-content-end flex-wrap nav-right align-items-center'>
             {currentClient ? ( 
              <>
-              {currentClient.isAdmin &&
-                <Link to='/admin'>
-                  <span className="txt-white pi pi-cog p-h-1 medium"></span>
-                  </Link> }
                 <Link to='/project/create'>
                   <span className="txt-white pi pi-plus p-h-1 medium"></span>
                 </Link>

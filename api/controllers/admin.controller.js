@@ -1,6 +1,5 @@
 import Client from '../models/client.model.js';
 import Project from '../models/project.model.js';
-import { errorHandler } from '../utils/error.js';
 import mongoose from 'mongoose';
 import bcryptjs from 'bcryptjs';
 
@@ -94,13 +93,37 @@ export const updateProject = async (req, res) => {
 // delete project
 export const deleteProject = async (req, res, next) => {
 
-  if (req.project.id !== req.params.id) 
-    return next(errorHandler(401, 'You can delete only your Project!'));
-  
+  const { id: _id } = req.params
+
   try {
-    await Project.findByIdAndDelete(req.params.id);
+    await Project.findByIdAndDelete(_id);
     res.status(200).json('Project has been deleted...');
   } catch (error) {
-    next(error);
+    res.status(403).json(error.message);
   }
 }
+
+// update project
+// export const updateComment = async (req, res) => {
+
+//   const { id: _id } = req.params
+//   const comments = req.body
+
+//   if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No project with that id exists!')
+
+  // const project = await Project.findById(_id);
+
+//   try {
+    
+//     project.comments.unshift(req.body)
+//     await project.save()
+//     res.status(200).json(project);
+    
+// } catch (error) {
+//     res.status(409).json(error.message);
+// }
+
+//   const updatedProject = await Project.findByIdAndUpdate(_id, {...project, _id}, { new: true})
+
+//   res.json(updatedProject)
+// }

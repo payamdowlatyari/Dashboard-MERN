@@ -50,33 +50,6 @@ export const getProjectById = async (req, res) => {
     }
 }
 
-// // update project
-// export const updateProject = async (req, res) => {
-
-//     const { id: _id } = req.params
-//     const project = req.body
-
-//     if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No project with that id exists!')
-
-//     const updatedProject = await Project.findByIdAndUpdate(_id, {...project, _id}, { new: true})
-
-//     res.json(updatedProject)
-// }
-
-// // delete project
-// export const deleteProject = async (req, res, next) => {
-
-//   if (req.project.id !== req.params.id) 
-//     return next(errorHandler(401, 'You can delete only your Project!'));
-  
-//   try {
-//     await Project.findByIdAndDelete(req.params.id);
-//     res.status(200).json('Project has been deleted...');
-//   } catch (error) {
-//     next(error);
-//   }
-// }
-
 // add comment
 export const addComment = async (req, res) => {
     const { id: _id } = req.params
@@ -86,7 +59,7 @@ export const addComment = async (req, res) => {
     const project = await Project.findById(_id);
 
     try {
-        project.comments.unshift(req.body.comment)
+        project.comments.unshift(req.body)
         await project.save()
         res.status(200).json(project);
         

@@ -26,7 +26,22 @@ const projectSchema = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: 'Client'
     }],
-    comments: [String]
+    comments: [
+      {
+        by: {
+          type: Schema.Types.ObjectId,
+          ref: "Client",
+        },
+        text: {
+          type: String,
+          required: true,
+        },
+        date: {
+          type: Date,
+          default: new Date()
+        },
+      },
+    ],
   },
   { timestamps: true }
 );

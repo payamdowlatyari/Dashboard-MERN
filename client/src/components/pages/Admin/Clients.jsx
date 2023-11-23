@@ -62,6 +62,8 @@ export default function Clients () {
 
   return (
     <div className="card">
+      {loading && <div className="text-center text-blue-500">
+        <i className="pi pi-spin pi-spinner text-8xl"></i></div>}
        {(!loading && clientList.length > 0) ?
         <div>
           <DataTable 
@@ -75,7 +77,8 @@ export default function Clients () {
                 <Column field="isAdmin" header="Admin" body={showAdminStatus}></Column>
                 <Column field="_id" header="Actions" body={displayAdminActions}></Column>
             </DataTable>
-        </div> : <div className="transition-delay-1000">
+        </div> : 
+        <div className="transition-delay-1000">
             <p className='mb-2 py-2'>
               No Clients!
             </p>

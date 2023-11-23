@@ -6,7 +6,7 @@ export default function Admin () {
     return (
         <div className='main'>
             <div className="card">
-                <Card title="Admin">
+                <Card title="Clients">
                     <Clients/>
                 </Card>
             </div>

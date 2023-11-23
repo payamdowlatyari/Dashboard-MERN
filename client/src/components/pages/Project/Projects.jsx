@@ -9,7 +9,6 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from "primereact/inputtext";
-import { Calendar } from "primereact/calendar";
 import { Message } from "primereact/message";
 
 export default function Projects () {
@@ -21,6 +20,8 @@ export default function Projects () {
   const [updating, setUpdating] = useState(false);
   const [updatedProject, setUpdatedProject] = useState(null)
   const [statuses] = useState(['New', 'In Progress', 'Completed']);
+  const [globalFilter, setGlobalFilter] = useState(null);
+
 
   const navigate = useNavigate();
 
@@ -118,9 +119,8 @@ export default function Projects () {
   const linkBodyTemplate = (rowData) => {
     return <Link to={`/project/${rowData._id}`}>
               <Button
-                tooltip="Show more"
-                icon='pi pi-link'
-                severity="info" 
+                icon='pi pi-comment'
+                label={rowData.comments.length > 0 ? rowData.comments.length : '0'}
                 text rounded 
                 size="small"
             />
@@ -128,7 +128,11 @@ export default function Projects () {
   };
 
   const parseDate = (rowData) => {
-    return new Date(rowData.endDate).toString().substring(0, 10)
+    return new Date(rowData.endDate).toISOString().substring(0, 10)
+  }
+
+  const descriptionBodyTemplate = (rowData) => {
+    return <span className="mid-small">{(rowData.description).substring(0, 20)}...</span>;
   }
 
   const onRowEditComplete = async (e) => {
@@ -140,13 +144,6 @@ export default function Projects () {
   const textEditor = (options) => {
       return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
   };
-
-  const datePicker = (options) => {
-    console.log(options) 
-      return  <Calendar value={(options.value.toString())} onChange={(e) => 
-        options.editorCallback((e.target.value.toISOString())
-      )}/>;
-  }
 
   const statusEditor = (options) => {
       return (
@@ -161,9 +158,9 @@ export default function Projects () {
       );
   };
 
-  return (
-    <div className="card">
-      <div className="pb-4">
+  const header = (
+    <div className="flex flex-wrap align-items-center justify-content-between">
+       <span className="flex flex-wrap">
           <Link to='/project/create'>
             <Button 
               icon='pi pi-plus'
@@ -172,18 +169,33 @@ export default function Projects () {
               text size="small"              
               />
           </Link> 
-      </div>
-      {loading && <p>Loading...</p>}
+        </span>
+        <span className="p-input-icon-left">
+            <i className="pi pi-search" />
+            <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} 
+            className="p-inputtext-sm" placeholder="Search..." />
+        </span>
+       
+    </div>
+  );
+
+  return (
+    <div className="card">
+      {/* <div className="pb-4">
+         
+      </div> */}
+      {loading && <div className="text-center text-blue-500">
+        <i className="pi pi-spin pi-spinner text-8xl"></i></div>}
        {!loading && projectList.length > 0 ?
         <div>
-            <DataTable value={projectList} size="small" editMode="row" dataKey="id" 
-            paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} 
+            <DataTable value={projectList} size="small" editMode="row" dataKey="_id" 
+            paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} globalFilter={globalFilter} header={header}
             onRowEditComplete={onRowEditComplete} tableStyle={{ minWidth: '25rem' }}>
                 <Column field="name" header="Name" sortable editor={(options) => textEditor(options)}></Column>
-                <Column field="description" header="Description" editor={(options) => textEditor(options)}></Column>
-                <Column field="endDate" header="Due Date" body={parseDate} sortable editor={(options) => datePicker(options)}></Column>
+                <Column field="description" header="Description" body={descriptionBodyTemplate} editor={(options) => textEditor(options)}></Column>
+                <Column field="endDate" header="Due Date" body={parseDate} sortable></Column>
                 <Column field="status" header="Status" body={statusBodyTemplate} sortable editor={(options) => statusEditor(options)}></Column>
-                <Column field="_id" header="Details" body={linkBodyTemplate}></Column>
+                <Column field="_id" header="Comments" body={linkBodyTemplate}></Column>
                 {(currentClient && currentClient.isAdmin) &&
                 <Column rowEditor header="Edit" severity='success'></Column>}
             </DataTable>

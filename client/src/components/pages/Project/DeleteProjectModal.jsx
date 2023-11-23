@@ -1,4 +1,3 @@
-
 import React, { useRef } from 'react';
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Toast } from 'primereact/toast';
@@ -22,10 +21,6 @@ export default function DeleteProjectModal({id}) {
             toast.current.show({ severity: 'danger', detail: error.message, life: 3000 });
         }         
     };
-
-    const reject = () => {
-        toast.current.show({ severity: 'warn', detail: 'Rejected', life: 3000 });
-    };
     
     const confirmDelete = (event) => {
         confirmPopup({
@@ -33,8 +28,7 @@ export default function DeleteProjectModal({id}) {
             message: 'Are you sure you want to delete this project?',
             icon: 'pi pi-info-circle',
             acceptClassName: 'p-button-danger',
-            accept,
-            reject
+            accept
         });
     };
 

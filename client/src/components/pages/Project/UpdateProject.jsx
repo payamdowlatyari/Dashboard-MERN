@@ -31,17 +31,16 @@ export default function UpdateProject() {
     useEffect(() => {
       getProjectDetails()
 
-      console.log(date)
-
       if (projectItem && selectedStatus === '') 
         setSelectedStatus(setStatus(projectItem.status))
       else if (selectedStatus)
         setSelectedStatus(selectedStatus)
 
-        if (projectItem && date === null)
-        setDate(projectItem.endDate)
-      else if (date !== null) setDate(date)
-
+        if (projectItem && date === null) {
+          const currentDate = new Date(projectItem.endDate)
+          setDate(currentDate)
+        }
+       
     }, [selectedStatus, date])
 
     const handleStatusChange = (e) => {
@@ -50,7 +49,7 @@ export default function UpdateProject() {
       } 
     
     const handleDateChange = (e) => {      
-        setDate(parseDate(e.target.value));
+        setDate((e.target.value));
         setFormData({ ...formData, endDate: parseDate(e.target.value) });
       }
 

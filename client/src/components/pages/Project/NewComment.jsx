@@ -21,6 +21,12 @@ export default function NewComment({projectId}) {
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
     const { loading, error } = useSelector((state) => state.projects);
+    const {currentClient} = useSelector((state) => state.client);
+
+    const newComment = {
+        text: "",
+        by: currentClient._id
+    };
 
     const dispatch = useDispatch();
 
@@ -30,9 +36,12 @@ export default function NewComment({projectId}) {
 
     const onSubmit = async (data) => {
         data.comment && show();
+        newComment.text = data.comment;
+
+        console.log(newComment)
         try {
             dispatch(addCommentStart())
-            const res = await addNewComment(projectId, data);
+            const res = await addNewComment(projectId, newComment);
             if (res.status === 200) {
               dispatch(addCommentSuccess())  
             }
