@@ -29,7 +29,6 @@ export default function EditClient() {
        getClient();  
     }, [])
  
-
   const handleAdminSwitch = (e) => {
     setChecked(e.target.value);
     setFormData({ ...formData, [e.target.id]: e.target.value});
@@ -79,13 +78,13 @@ export default function EditClient() {
 
       <form onSubmit={handleSubmit}>
       <div className="flex flex-wrap justify-content-center align-items-center gap-3 py-3">
-      <Avatar 
-      alt='profile'
-      className="mr-2" 
-      size="xlarge" 
-      icon='pi pi-user'
-      shape="circle" 
-      /></div>
+        <Avatar 
+        alt='profile'
+        className="mr-2" 
+        size="xlarge" 
+        icon='pi pi-user'
+        shape="circle" 
+        /></div>
 
         <div className="flex flex-wrap justify-content-center align-items-center gap-3 py-1">
         <InputText

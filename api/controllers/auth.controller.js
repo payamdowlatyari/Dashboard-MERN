@@ -1,43 +1,53 @@
 import Client from '../models/client.model.js';
 import bcryptjs from 'bcryptjs';
-import { errorHandler } from '../utils/error.js';
 import jwt from 'jsonwebtoken';
 
 export const signup = async (req, res, next) => {
 
   const { username, email, password } = req.body;
-  const hashedPassword = bcryptjs.hashSync(password, 10);
-  const newClinet = new Client({ username, email, password: hashedPassword });
+
+  const userName = await Client.findOne({ username: username });
+  if (userName)
+    return res.status(400).json({ message: "This username already exists." });
+
+  const userEmail = await Client.findOne({ email });
+    if (userEmail)
+      return res.status(400).json({ message: "This email already exists." });
 
   try {
+    const hashedPassword = bcryptjs.hashSync(password, 10);
+    const newClinet = new Client({ username, email, password: hashedPassword });
+
     await newClinet.save();
     res.status(201).json({ message: 'User created successfully' });
 
   } catch (error) {
-    next(error);
+    response.status(500).json({ message: error.message });
   }
 };
 
 export const signin = async (req, res, next) => {
 
-  console.log(req.body)
   const { email, password } = req.body;
 
   try {
     const validClient = await Client.findOne({ email });
-
-    if (!validClient) return next(errorHandler(404, 'User not found'));
+    if (!validClient) 
+        return res.status(404).json({ message: "User not found!" });
 
     const validPassword = bcryptjs.compareSync(password, validClient.password);
-
-    if (!validPassword) return next(errorHandler(401, 'wrong credentials'));
+    if (!validPassword) 
+        return res.status(401).json({ message: "Wrong credentials!" });
 
     const token = jwt.sign({ id: validClient._id }, process.env.JWT_SECRET);
 
     const { password: hashedPassword, ...rest } = validClient._doc;
     const expiryDate = new Date(Date.now() + 3600000 * 24); // 24 hours
     
-    res.cookie('access_token', token, { httpOnly: true, expires: expiryDate })
+    res.cookie('access_token', token, { 
+          httpOnly: true, 
+          expires: expiryDate 
+      })
       .status(200)
       .json(rest);
 
@@ -49,7 +59,6 @@ export const signin = async (req, res, next) => {
 export const google = async (req, res, next) => {
 
   try {
-
     const user = await Client.findOne({ email: req.body.email });
     
     if (user) {
@@ -75,8 +84,7 @@ export const google = async (req, res, next) => {
           req.body.name.split(' ').join('').toLowerCase() +
           Math.random().toString(36).slice(-8),
         email: req.body.email,
-        password: hashedPassword,
-        profilePicture: req.body.photo,
+        password: hashedPassword
       });
 
       await newClinet.save();

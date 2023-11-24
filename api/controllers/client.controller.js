@@ -1,5 +1,4 @@
 import Client from '../models/client.model.js';
-import { errorHandler } from '../utils/error.js';
 import mongoose from 'mongoose';
 import bcryptjs from 'bcryptjs';
 
@@ -7,6 +6,9 @@ import bcryptjs from 'bcryptjs';
 
 // update client
 export const updateClient = async (req, res, next) => {
+
+  if(!mongoose.Types.ObjectId.isValid(req.params.id)) 
+      return res.status(404).send('No client with that id exists!')
 
   try {
     if (req.body.password) {
@@ -28,7 +30,7 @@ export const updateClient = async (req, res, next) => {
     const { password, ...rest } = updatedClient._doc;
     res.status(200).json(rest);
   } catch (error) {
-    next(error);
+    res.status(409).json(error.message);
   }
 };
 
@@ -39,25 +41,12 @@ export const deleteClient = async (req, res, next) => {
   const { id } = req.params;
 
   if (client._id !== id) {
-    return next(errorHandler(401, 'You can delete only your account!'));
+    res.status(401).json('You are not allowed to delete this account!')
   }
   try {
     await Client.findByIdAndDelete(_id);
-    res.status(200).json('Client has been deleted...');
+    res.status(200).json('Client has been deleted successfuly!');
   } catch (error) {
-    next(error);
+    res.status(403).json(error.message);
   }
 }
-
-// update project
-// export const deleteClientByAdmin = async (req, res) => {
-
-//   const { id: _id } = req.params
-
-//   try {
-//     await Client.findByIdAndDelete(_id);
-//     res.status(200).json('Client has been deleted...');
-//   } catch (error) {
-//     res.status(403).json("Action forbidden");
-//   }
-// }

@@ -22,13 +22,13 @@ export default function NewComment({projectId}) {
     const errors = form.formState.errors;
     const { loading, error } = useSelector((state) => state.projects);
     const {currentClient} = useSelector((state) => state.client);
+    const dispatch = useDispatch();
 
     const newComment = {
         text: "",
-        by: currentClient._id
+        by: currentClient._id,
+        date: new Date().toISOString()
     };
-
-    const dispatch = useDispatch();
 
     const show = () => {
         toast.current.show({ severity: 'success', summary: 'Comment Submitted', detail: form.getValues('comment') });
@@ -43,7 +43,7 @@ export default function NewComment({projectId}) {
             dispatch(addCommentStart())
             const res = await addNewComment(projectId, newComment);
             if (res.status === 200) {
-              dispatch(addCommentSuccess())  
+              dispatch(addCommentSuccess(res.data))  
             }
           } catch (error) {
             dispatch(addCommentFailure(error))

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { createNewProject } from '../../../api';
@@ -7,7 +7,6 @@ import { Message } from 'primereact/message';
 import { InputTextarea } from "primereact/inputtextarea";
 import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
-import { Divider } from 'primereact/divider';
 import { Calendar } from 'primereact/calendar';
 
 export default function NewProject() {
@@ -16,6 +15,7 @@ export default function NewProject() {
     const [loading, setLoading] = useState(false);
     const { currentClient } = useSelector((state) => state.client);
     const [date, setDate] = useState(new Date());
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         name: "",
@@ -24,10 +24,6 @@ export default function NewProject() {
         ownerId: [currentClient._id]
     });
 
-    useEffect(() => {
-
-     
-    }, [])
 
     const handleChange = (e) => {
       setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -38,7 +34,6 @@ export default function NewProject() {
       setFormData({ ...formData, endDate: (e.target.value) });
     }
   
-    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
 

@@ -1,22 +1,28 @@
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Comment from './Comment';
 
 export default function Comments(){
 
-    const { projectItem} = useSelector((state) => state.projects);
+    const {projectItem, loading} = useSelector((state) => state.projects);
+    const [comments, setComments] = useState([]) 
 
-    const commentDetails = (comment) => {
+    useEffect(() => {
 
-        if (comment) {
-            return  <Comment commentDetails={comment}/>;
-        } 
-    }
+        if (projectItem) setComments(projectItem.comments)
+        if (comments.length > 0) reverseComments()
+    }, [loading])
+
+    const reverseComments = () => {
+        const reversedComments = [...comments].reverse();
+        setComments(reversedComments);
+      };
 
     return (
         <>
-            {projectItem.comments.length > 0 &&
-                projectItem.comments?.map((comment) => {
-                   return commentDetails(comment)
+            {comments.length > 0 &&
+                comments?.map((comment) => {
+                   return <Comment key={comment._id} commentDetails={comment}/>;
             })}
         </>
     );

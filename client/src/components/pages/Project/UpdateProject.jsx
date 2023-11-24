@@ -78,7 +78,7 @@ export default function UpdateProject() {
     return new Date(endDate).toString()
   }
 
-    const statusCode = ['Completed', 'In Progress', 'New']
+    const statusCode = ['Completed', 'In Progress', 'Requested']
     const getStatus = (status) => {
         switch (status) {
           case 'Completed':
@@ -97,7 +97,7 @@ export default function UpdateProject() {
           case 1:
               return 'In Progress';
           default:
-              return 'New';
+              return 'Requested';
         }
       };
     const handleSubmit = async (e) => {

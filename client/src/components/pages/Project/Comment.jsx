@@ -6,6 +6,7 @@ export default function Comment({commentDetails}){
     const [commentBy, setCommentBy] = useState({});
 
     useEffect(() => {
+        if (commentDetails)
         getClient()
     }, [])
 
@@ -26,18 +27,20 @@ export default function Comment({commentDetails}){
 
     return ( 
             <div className='box-gray-1'>
+                {commentBy && <>
                 <p className='txt-dark-gray mid-small'>
                 <span className='font-bold px-2'> 
-                    {commentBy.isAdmin ? 'Admin' : commentBy.username}:
+                {commentBy.username}
+                {commentBy.isAdmin && <i className="pi pi-verified ml-1 text-blue-500"></i>}
+
                 </span>
                     {commentDetails.text}</p> 
                 <p className='txt-gray small'>
-               
                 <span className='txt-gray px-2'> 
-                <i className="pi pi-clock mr-2"></i>
+                <i className="pi pi-clock mr-2 vertical-align-bottom"></i>
                 {new Date(commentDetails.date).toString().substring(0, 21)} 
                 </span>
-                </p> 
+                </p> </>}
             </div>   
     );
 }

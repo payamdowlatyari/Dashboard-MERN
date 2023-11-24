@@ -49,15 +49,6 @@ export default function Profile() {
             <div className="w-full flex flex-column align-items-center justify-content-center gap-3 py-5">
 
       <form onSubmit={handleSubmit}>
-      <div className="flex flex-wrap justify-content-center align-items-center gap-3 py-3">
-      <Avatar 
-      alt='profile'
-      className="mr-2" 
-      size="xlarge" 
-      icon='pi pi-user'
-      shape="circle" 
-      /></div>
-
         <div className="flex flex-wrap justify-content-center align-items-center gap-3 py-1">
         <InputText
           defaultValue={currentClient.username}

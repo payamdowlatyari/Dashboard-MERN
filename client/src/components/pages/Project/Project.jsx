@@ -35,7 +35,6 @@ const dispatch = useDispatch();
       try {
         const res = await getClientById(projectItem.ownerId[0]);
           setProjectOwner(res.data)
-          console.log(projectOwner)
       } catch (error) {
           console.log(error);
       }
@@ -52,9 +51,10 @@ const dispatch = useDispatch();
       } catch (error) {
           dispatch(getProjectFailure(error));
       }
-  }
+    }
+    
     const items = [
-        { label: 'New' },
+        { label: 'Requested' },
         { label: 'In Progress' },
         { label: 'Completed' }
     ];
@@ -78,7 +78,7 @@ const dispatch = useDispatch();
       return ( 
         <span className="p-h-1 txt-gray small">
           <i className="pi pi-user mr-2"></i>   
-          {projectOwner ? projectOwner.username : 'client'}   
+          {projectOwner ? projectOwner.username : 'client'}
         </span>
       )
     }

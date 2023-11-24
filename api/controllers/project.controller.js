@@ -1,5 +1,4 @@
 import Project from '../models/project.model.js';
-import { errorHandler } from '../utils/error.js';
 import mongoose from 'mongoose';
 
 // get project by owner
@@ -44,9 +43,9 @@ export const getProjectById = async (req, res) => {
     const { id } = req.params;
     try {
         const project = await Project.findById(id);     
-        res.status(200).json(project);
+            res.status(200).json(project);
     } catch (error) {
-        res.status(409).json({ message: error.message });
+            res.status(409).json({ message: error.message });
     }
 }
 
@@ -54,13 +53,14 @@ export const getProjectById = async (req, res) => {
 export const addComment = async (req, res) => {
     const { id: _id } = req.params
     
-    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send(`No project with id: ${_id}`);
+    if (!mongoose.Types.ObjectId.isValid(_id)) 
+            return res.status(404).send(`No project with id: ${_id}`);
     
-    const project = await Project.findById(_id);
-
     try {
+        const project = await Project.findById(_id);
         project.comments.unshift(req.body)
         await project.save()
+        
         res.status(200).json(project);
         
     } catch (error) {

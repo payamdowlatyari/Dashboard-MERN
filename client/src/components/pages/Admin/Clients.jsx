@@ -1,5 +1,4 @@
-import { useEffect, useState, useRef } from "react";
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
 import { fetchClients } from "../../../api";
 import { Button } from 'primereact/button';
 import { DataTable } from 'primereact/datatable';
@@ -9,11 +8,9 @@ import { Link } from "react-router-dom";
 import DeleteClientModal from "./DeleteClientModal";
 export default function Clients () {
 
-//   const { currentClient} = useSelector((state) => state.client);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [clientList, setClientList] = useState([]);
-  // const [clientItem, setclientItem] = useState({});
 
       useEffect(() => {
         getClients()
@@ -38,9 +35,9 @@ export default function Clients () {
 
   const showAdminStatus = (rowData) => {
     if (rowData.isAdmin) {
-        return <span className="pi pi-check-circle" style={{ color: 'var(--primary-color)' }}></span>
+        return <span className="pi pi-verified text-blue-500"></span>
     }
-    return <span className="pi pi-times-circle txt-gray"></span>
+    return <span></span>
   }
 
   const displayAdminActions = (rowData) => {

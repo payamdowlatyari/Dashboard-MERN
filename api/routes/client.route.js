@@ -8,7 +8,7 @@ import { verifyToken } from '../utils/verify.js';
 const router = express.Router();
 
 // api/client
-router.post('/update/:id', updateClient);
+router.post('/update/:id', verifyToken, updateClient);
 router.delete('/delete/:id', verifyToken, deleteClient);
 
 export default router;

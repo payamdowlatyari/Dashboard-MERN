@@ -19,7 +19,7 @@ export default function Projects () {
   const [loading, setLoading] = useState(false);
   const [updating, setUpdating] = useState(false);
   const [updatedProject, setUpdatedProject] = useState(null)
-  const [statuses] = useState(['New', 'In Progress', 'Completed']);
+  const [statuses] = useState(['Requested', 'In Progress', 'Completed']);
   const [globalFilter, setGlobalFilter] = useState(null);
 
 
@@ -85,7 +85,7 @@ export default function Projects () {
       case 1:
           return 'In Progress';
       default:
-          return 'New';
+          return 'Requested';
     }
   };
 
@@ -181,9 +181,6 @@ export default function Projects () {
 
   return (
     <div className="card">
-      {/* <div className="pb-4">
-         
-      </div> */}
       {loading && <div className="text-center text-blue-500">
         <i className="pi pi-spin pi-spinner text-8xl"></i></div>}
        {!loading && projectList.length > 0 ?
@@ -200,10 +197,20 @@ export default function Projects () {
                 <Column rowEditor header="Edit" severity='success'></Column>}
             </DataTable>
         </div> 
-        : <div className="transition-delay-1000">
-            <p className='mb-2 py-2 px-4'>
-              You have no projects!
-            </p>
+        : <div className="transition-delay-3000">
+                  <div className="pb-4">
+                    <Link to='/project/create'>
+                        <Button 
+                          icon='pi pi-plus'
+                          label="Start a new project"
+                          severity="success"
+                          text size="small"              
+                          />
+                      </Link> 
+                  </div>
+                  <p className='mb-2 py-2 px-4 text-center'>
+                  You have no projects!
+                </p>
           </div>
         }
          {error ? <Message severity="error" text={error.message}/> || 

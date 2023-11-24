@@ -61,9 +61,10 @@ const projectSlice = createSlice({
       addCommentStart: (state) => {
         state.loading = true;
       },
-      addCommentSuccess: (state) => {
+      addCommentSuccess: (state, action) => {
         state.loading = false;
         state.error = false;
+        state.projectItem = action.payload;
       },
       addCommentFailure: (state, action) => {
         state.loading = false;
