@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { getClientById } from '../../../api';
 
 export default function Comment({commentDetails}){
 
+    const {projectOwner} = useSelector((state) => state.projects);
     const [commentBy, setCommentBy] = useState({});
 
     useEffect(() => {
-        if (commentDetails)
-        getClient()
+        if (commentDetails && commentDetails.by === projectOwner._id) 
+            setCommentBy(projectOwner)
+        else getClient()
     }, [])
 
     const getClient = async () => {
 
         console.log(commentDetails)
+        console.log(projectOwner)
    
         try {
             const res = await getClientById(commentDetails.by);

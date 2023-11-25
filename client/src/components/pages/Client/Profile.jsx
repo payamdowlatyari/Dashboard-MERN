@@ -6,11 +6,10 @@ import {
   updateClientFailure,
 } from '../../../redux/reducers/clientSlice';
 import { profileUpdate } from '../../../api'; 
-import {Button} from 'primereact/button';
+import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Message } from 'primereact/message';
 import { Card } from 'primereact/card';
-import { Avatar } from 'primereact/avatar';
 
 export default function Profile() {
   const dispatch = useDispatch();

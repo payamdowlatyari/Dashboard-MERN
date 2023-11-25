@@ -3,9 +3,12 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from "react-router-dom";
 import {
-    getProject,
+    getProjectStart,
     getProjectSuccess,
-    getProjectFailure
+    getProjectFailure,
+    getProjectOwnerStart,
+    getProjectOwnerSuccess,
+    getProjectOwnerFailure,
 } from '../../../redux/reducers/projectSlice';
 import { getProjectById, getClientById } from "../../../api";
 import { Card } from 'primereact/card';
@@ -21,28 +24,34 @@ export default function Project() {
     
 const { id } = useParams();
 const ref = useRef(null);
-const { projectItem } = useSelector((state) => state.projects);
-const {currentClient} = useSelector((state) => state.client);
-const [ projectOwner, setProjectOwner ] = useState({}) 
+const { projectItem, projectOwner, loading } = useSelector((state) => state.projects);
+const { currentClient } = useSelector((state) => state.client);
+const [ ownerChecked, setOwnerChecked ] = useState(false)
 const dispatch = useDispatch();
 
-    useEffect(() => {
-        getProjectDetails()
-        if (projectItem) getProjectOwner()
-    }, [])
+    useEffect(() => {      
+        getProjectDetails().then(() => {
+          checkOwner();
+              getProjectOwner()
+        });
+        
+    }, [ownerChecked])
 
     const getProjectOwner = async () => {
-      try {
+
+      try {       
+        dispatch(getProjectOwnerStart())
         const res = await getClientById(projectItem.ownerId[0]);
-          setProjectOwner(res.data)
+        dispatch(getProjectOwnerSuccess(res.data))
       } catch (error) {
-          console.log(error);
+         dispatch(getProjectOwnerFailure(error))
       }
     }
 
     const getProjectDetails = async () => {
+      console.log(projectItem.ownerId[0])
       try {
-          dispatch(getProject());
+          dispatch(getProjectStart());
           const res = await getProjectById(id);
         if (res.status === 200) {
           dispatch(getProjectSuccess(res.data));
@@ -51,6 +60,11 @@ const dispatch = useDispatch();
       } catch (error) {
           dispatch(getProjectFailure(error));
       }
+    }
+
+    const checkOwner = () => {
+      if (projectItem && projectOwner && projectItem.ownerId[0] === projectOwner._id) 
+        setOwnerChecked(true)
     }
     
     const items = [
@@ -86,7 +100,7 @@ const dispatch = useDispatch();
     return (
         <div className='main'>
           <div className='card'>
-              {projectItem && 
+              {(!loading && projectItem) && 
               <Card title={projectItem.name} subTitle={subtitle} footer={footer}>
 
                  <div className="grid text-center">

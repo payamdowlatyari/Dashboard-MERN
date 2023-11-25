@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getProjectById, updateProject } from '../../../api';
 import {
-    getProject,
+    getProjectStart,
     getProjectSuccess,
     getProjectFailure,
     updateProjectStart,
@@ -17,10 +17,10 @@ import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { Calendar } from 'primereact/calendar';
+
 export default function UpdateProject() {
 
     const { projectItem, loading, error } = useSelector((state) => state.projects);
-
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({});
     const [date, setDate] = useState(null);
@@ -59,7 +59,7 @@ export default function UpdateProject() {
 
     const getProjectDetails = async () => {
       try {
-          dispatch(getProject());
+          dispatch(getProjectStart());
           const res = await getProjectById(id);
         if (res.status === 200) {
           dispatch(getProjectSuccess(res.data));
@@ -72,10 +72,6 @@ export default function UpdateProject() {
 
   const parseDate = (endDate) => {
     return new Date(endDate).toISOString()
-  }
-
-  const showDate = (endDate) => {
-    return new Date(endDate).toString()
   }
 
     const statusCode = ['Completed', 'In Progress', 'Requested']

@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     projectList: null,
     projectItem: null,
+    projectOwner: null,
     loading: false,
     error: false,
   };
@@ -23,7 +24,7 @@ const projectSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       },
-      getProject: (state) => {
+      getProjectStart: (state) => {
         state.loading = true;
       },
       getProjectSuccess: (state, action) => {
@@ -32,6 +33,18 @@ const projectSlice = createSlice({
         state.projectItem = action.payload;
       },
       getProjectFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      },
+      getProjectOwnerStart: (state) => {
+        state.loading = true;
+      },
+      getProjectOwnerSuccess: (state, action) => {
+        state.loading = false;
+        state.error = false;
+        state.projectOwner = action.payload;
+      },
+      getProjectOwnerFailure: (state, action) => {
         state.loading = false;
         state.error = action.payload;
       },
@@ -77,9 +90,12 @@ export const {
     getAllProjects,
     getAllProjectsSuccess,
     getAllProjectsFailure,
-    getProject,
+    getProjectStart,
     getProjectSuccess,
     getProjectFailure,
+    getProjectOwnerStart,
+    getProjectOwnerSuccess,
+    getProjectOwnerFailure,
     createProjectStart,
     createProjectSuccess,
     createProjectFailure,

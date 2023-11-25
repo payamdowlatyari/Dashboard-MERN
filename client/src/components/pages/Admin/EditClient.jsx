@@ -7,11 +7,10 @@ import {
   editClientFailure,
 } from '../../../redux/reducers/adminSlice';
 import { getClientById, updateClient } from '../../../api'; 
-import {Button} from 'primereact/button';
+import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Message } from 'primereact/message';
 import { Card } from 'primereact/card';
-import { Avatar } from 'primereact/avatar';
 import { InputSwitch } from 'primereact/inputswitch'
 
 export default function EditClient() {
@@ -77,15 +76,6 @@ export default function EditClient() {
             <div className="w-full flex flex-column align-items-center justify-content-center gap-3 py-5">
 
       <form onSubmit={handleSubmit}>
-      <div className="flex flex-wrap justify-content-center align-items-center gap-3 py-3">
-        <Avatar 
-        alt='profile'
-        className="mr-2" 
-        size="xlarge" 
-        icon='pi pi-user'
-        shape="circle" 
-        /></div>
-
         <div className="flex flex-wrap justify-content-center align-items-center gap-3 py-1">
         <InputText
           defaultValue={clientItem.username}
