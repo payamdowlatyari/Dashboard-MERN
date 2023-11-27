@@ -6,8 +6,14 @@ import reportWebVitals from './reportWebVitals';
 import { persistor, store } from './redux/store.js';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import "primereact/resources/themes/lara-light-indigo/theme.css";
-
+import 'primereact/resources/themes/soho-dark/theme.css'
+// import ('primereact/resources/themes/soho-light/theme.css'); 
+// export function Theme({ dark }) {
+//   console.log(dark)
+//   if (dark) 
+//     return import ('primereact/resources/themes/soho-dark/theme.css'); 
+//   return import ('primereact/resources/themes/soho-light/theme.css'); 
+// }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

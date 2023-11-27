@@ -77,7 +77,6 @@ export default function SignIn() {
                       className="w-15rem"
                       severity="info" 
                       icon="pi pi-user"
-                      text raised
                       size="small"
                       ></Button>
                       </div>
@@ -101,7 +100,6 @@ export default function SignIn() {
                   <Button 
                   label='Sign Up'
                   severity="danger" 
-                  text 
                   size="small"
                   icon="pi pi-user-plus"
                   />

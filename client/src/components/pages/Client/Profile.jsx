@@ -83,19 +83,15 @@ export default function Profile() {
           className="mx-auto w-full"
           label={loading ? 'Loading...' : 'Update'} 
           size="small"
-          text raised
           />
         </div>
-        
       </form>
       </div>
-     
         <div className='p-messages'>
         {error && <Message severity="error" text="Something went wrong!" />}
         {updateSuccess && <Message severity="success" text="Profile is updated successfully!" />}
         </div>
         </div>
-        
         </Card>
         </div>
     </div>

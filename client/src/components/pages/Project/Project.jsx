@@ -81,7 +81,7 @@ const dispatch = useDispatch();
         </Link>  
         {currentClient.isAdmin && <>
         <Link to={`/admin/project/update/${projectItem._id}`}>
-              <Button icon='pi pi-pencil' label="Edit" size="small" text severity="success"/>
+              <Button icon='pi pi-pencil' label="Edit" text size="small" severity="success"/>
         </Link>
         <DeleteProjectModal id={projectItem._id}/></>}
         </>
@@ -90,7 +90,7 @@ const dispatch = useDispatch();
 
     const subtitle = () => {
       return ( 
-        <span className="p-h-1 txt-gray small">
+        <span className="p-h-1 text-mini small">
           <i className="pi pi-user mr-2"></i>   
           {projectOwner ? projectOwner.username : 'client'}
         </span>
@@ -105,7 +105,7 @@ const dispatch = useDispatch();
 
                  <div className="grid text-center">
                     <div className="md:col-4 sm:col-12">
-                      <span className="p-h-1 txt-gray small">
+                      <span className="p-h-1 text-mini small">
                       <span className="p-h-1">Started</span> 
                       <i className="pi pi-clock mr-2 vertical-align-bottom"></i>
                         {new Date(projectItem.startDate).toString().substring(0, 15)} 
@@ -117,7 +117,7 @@ const dispatch = useDispatch();
                         />   
                     </div>
                     <div className="md:col-4 sm:col-12">
-                      <span className="p-h-1 txt-gray small">
+                      <span className="p-h-1 text-mini small">
                       <span className="p-h-1">Due</span> 
                       <i className="pi pi-clock mr-2 vertical-align-bottom"></i>
                       {new Date(projectItem.endDate).toString().substring(0, 15)}     
@@ -125,7 +125,7 @@ const dispatch = useDispatch();
                     </div>
                 </div>   
                   <p className="p-h-1">{projectItem.description} </p>
-                    <p className="p-h-1 txt-gray small">
+                    <p className="p-h-1 text-mini small">
                     <span className="p-h-1">Updated</span> 
                     <i className="pi pi-clock mr-2 vertical-align-bottom"></i>
                     {new Date(projectItem.updatedAt).toString().substring(0, 21)} 
@@ -134,18 +134,18 @@ const dispatch = useDispatch();
                       header={projectItem.comments &&
                           (
                             <Button type="button" 
-                              label="Comments" severity="secondary"
+                              label="Comments" severity='danger'
                               size="small" text icon="pi pi-comment"
                               onClick={() => ref.current.toggle()}>
-                              <Badge value={projectItem.comments.length} severity="secondary"/>
+                              <Badge value={projectItem.comments.length} severity='danger'/>
                             </Button>   
                           )} toggleable>
                       
                             {projectItem.comments && projectItem.comments.length > 0 ?
                                <Comments/>
-                                : <p className="txt-dark-gray mid-small">No Comments</p>}
+                                : <p className="mid-small">No Comments</p>}
                     </Panel>
-                      <div className="txt-gray p-h-1 p-v-2">
+                      <div className="text-mini p-h-1 p-v-2">
                       <NewComment projectId={id}/>
                       </div>  
               </Card>  

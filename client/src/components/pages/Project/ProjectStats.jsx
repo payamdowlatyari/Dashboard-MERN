@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
 import { fetchProjects } from "../../../api";
-import { Link } from 'react-router-dom';
 import { Message } from "primereact/message";
 import { Badge } from 'primereact/badge';
+import { Link } from "react-router-dom";
 
-export default function Projects () {
+export default function ProjectStats () {
 
   const {currentClient} = useSelector((state) => state.client);
   const [projectList, setProjectList] = useState([]);
@@ -73,8 +73,9 @@ export default function Projects () {
             <div className="col-12 md:col-6 lg:col-3">
                 <div className="surface-0 shadow-1 p-3 border-1 border-50 border-round">
                     <div className="flex justify-content-between mb-3">
-                        <div className="text-900 font-medium text-xl">   
-                                Projects
+                        <div className="text-900 font-medium text-xl">  
+                        <Link to='/dashboard'>Projects
+                        </Link>   
                         </div>
                         <div className="flex align-items-center justify-content-center border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
                         <i className="pi pi-briefcase p-overlay-badge" style={{ fontSize: '2rem' }}>
@@ -87,7 +88,10 @@ export default function Projects () {
             <div className="col-12 md:col-6 lg:col-3">
                 <div className="surface-0 shadow-1 p-3 border-1 border-50 border-round">
                     <div className="flex justify-content-between mb-3">
-                    <div className="text-900 font-medium text-xl">Requested </div>
+                    <div className="text-900 font-medium text-xl"> 
+                    <Link to='/dashboard'>Requested
+                        </Link> 
+                      </div>
                         <div className="flex align-items-center justify-content-center border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
                             <i className="pi pi-file p-overlay-badge" style={{ fontSize: '2rem' }}>
                             <Badge value={getStatusCount('Requested')} severity="info"></Badge>
@@ -100,7 +104,10 @@ export default function Projects () {
             <div className="col-12 md:col-6 lg:col-3">
                 <div className="surface-0 shadow-1 p-3 border-1 border-50 border-round">
                     <div className="flex justify-content-between mb-3">
-                    <div className="text-900 font-medium text-xl">In Progress </div>
+                    <div className="text-900 font-medium text-xl">
+                    <Link to='/dashboard'>In Progress
+                        </Link> 
+                      </div>
                     <div className="flex align-items-center justify-content-center border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
                         <i className="pi pi-file-edit p-overlay-badge" style={{ fontSize: '2rem' }}>
                             <Badge value={getStatusCount('In Progress')} severity="warning"></Badge>
@@ -113,7 +120,10 @@ export default function Projects () {
             <div className="col-12 md:col-6 lg:col-3">
                 <div className="surface-0 shadow-1 p-3 border-1 border-50 border-round">
                     <div className="flex justify-content-between mb-3">
-                    <div className="text-900 font-medium text-xl">Completed </div>
+                    <div className="text-900 font-medium text-xl">
+                    <Link to='/dashboard'>Completed 
+                        </Link>                     
+                      </div>
                     <div className="flex align-items-center justify-content-center border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
                         <i className="pi pi-check-square p-overlay-badge" style={{ fontSize: '2rem' }}>
                             <Badge value={getStatusCount('Completed')} severity="success"></Badge>

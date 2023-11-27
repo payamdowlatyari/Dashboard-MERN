@@ -84,7 +84,6 @@ export default function SignUp() {
                    icon="pi pi-user-plus"
                    severity="info" 
                    size="small"
-                    text raised
                    ></Button>
                    </div>
                    {/* <OAuth /> */}
@@ -106,7 +105,6 @@ export default function SignUp() {
                   label='Sign In'
                   severity="danger" 
                   icon="pi pi-user"
-                  text 
                   size="small"
                   />
              </Link>

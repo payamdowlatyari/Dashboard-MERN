@@ -1,15 +1,24 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signedOut } from '../redux/reducers/clientSlice';
+import { toggleTheme } from '../redux/reducers/themeSlice';
 import { signOut } from '../api';
 import { Avatar } from 'primereact/avatar';
 
 export default function Header() {
+
   const { currentClient} = useSelector((state) => state.client);
-  const menu = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { dark } = useSelector((state) => state.theme);
+
+  const changeMyTheme = () => {
+    const newTheme = dark === true ? false : true;
+    dispatch(toggleTheme(newTheme))
+        
+  };
 
   const handleSignOut = async () => {
     try {
@@ -22,16 +31,16 @@ export default function Header() {
   }
 
   return (
-    <div className='navbar bg-black txt-white flex flex-row'>
+    <div className='navbar surface-0 flex flex-row'>
       <div className='flex justify-content-start flex-wrap align-items-center nav-left'>
-        <Link className='font-bold txt-white' to='/'>
-          <span className="txt-white pi pi-home p-h-1 medium"></span>
+        <Link className='font-bold text-link' to='/'>
+          <span className="text-link pi pi-home p-h-1 medium"></span>
         </Link>
             {currentClient && currentClient.isAdmin &&
-          <Link className='p-h-1 txt-white' to='/admin'>
+          <Link className='p-h-1 text-link' to='/admin'>
           <span className="pi pi-users mid-large"></span>
           </Link>}
-          <Link className='txt-white' to='/dashboard'>
+          <Link className='text-link' to='/dashboard'>
           Projects
         </Link> 
         </div>
@@ -39,20 +48,28 @@ export default function Header() {
             {currentClient ? ( 
              <>
                 <Link to='/project/create'>
-                  <span className="txt-white pi pi-plus p-h-1 medium"></span>
+                  <span className="text-link pi pi-plus p-h-1 medium"></span>
                 </Link>
                 <Link to='/profile'>
                   <Avatar label={(currentClient.username).at(0)} shape="circle" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }}/>
                 </Link>
+                <span className={`p-3 text-link rounded cursor-pointer 
+                ${dark ? 'pi pi-sun' : 'pi pi-moon'}`}
+                onClick={() => changeMyTheme()} size='small'></span>
                   {currentClient && (<span onClick={handleSignOut} 
                       className='cursor-pointer align-items-center p-h-1'>
-                  <span className="txt-white pi pi-sign-out p-h-1 medium"></span>
+                  <span className="text-link pi pi-sign-out p-h-1 medium"></span>
                 </span>)}       
              </> 
             ) : ( 
-              <Link className='font-bold txt-white p-h-1' to='/sign-in'>
+              <>
+                <span className={`p-3 text-link rounded cursor-pointer 
+                ${dark ? 'pi pi-sun' : 'pi pi-moon'}`}
+                onClick={() => changeMyTheme()} size='small'></span>
+                <Link className='font-bold text-link p-h-1' to='/sign-in'>
                 Login
-             </Link>
+                </Link>
+              </>
             )}
             
         </div>

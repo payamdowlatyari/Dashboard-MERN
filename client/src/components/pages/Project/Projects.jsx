@@ -166,7 +166,7 @@ export default function Projects () {
               icon='pi pi-plus'
               label="Start a new project"
               severity="success"
-              text size="small"              
+               size="small"              
               />
           </Link> 
         </span>
@@ -184,7 +184,6 @@ export default function Projects () {
       {loading && <div className="text-center text-blue-500">
         <i className="pi pi-spin pi-spinner text-8xl"></i></div>}
        {!loading && projectList.length > 0 ?
-        <div>
             <DataTable value={projectList} size="small" editMode="row" dataKey="_id" 
             paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} globalFilter={globalFilter} header={header}
             onRowEditComplete={onRowEditComplete} tableStyle={{ minWidth: '25rem' }}>
@@ -196,7 +195,6 @@ export default function Projects () {
                 {(currentClient && currentClient.isAdmin) &&
                 <Column rowEditor header="Edit" severity='success'></Column>}
             </DataTable>
-        </div> 
         : <div className="transition-delay-3000">
                   <div className="pb-4">
                     <Link to='/project/create'>

@@ -99,8 +99,6 @@ export default function UpdateProject() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(formData)
-
         try {
             dispatch(updateProjectStart())
             const res = await updateProject(id, formData);

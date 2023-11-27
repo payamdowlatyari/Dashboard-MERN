@@ -30,21 +30,22 @@ export default function Comment({commentDetails}){
       }
 
     return ( 
-            <div className='box-gray-1'>
+            <div className='box-gray-1 shadow-1'>
                 {commentBy && <>
-                <p className='txt-dark-gray mid-small'>
+                <p className='mid-small'>
                 <span className='font-bold px-2'> 
                 {commentBy.username}
                 {commentBy.isAdmin && <i className="pi pi-verified ml-1 text-blue-500"></i>}
 
                 </span>
                     {commentDetails.text}</p> 
-                <p className='txt-gray small'>
-                <span className='txt-gray px-2'> 
-                <i className="pi pi-clock mr-2 vertical-align-bottom"></i>
+                <p className='small text-gray-400'>
+                <span className='px-2'> 
+                <i className="pi pi-clock mr-2 vertical-align-bottom text-gray-400"></i>
                 {new Date(commentDetails.date).toString().substring(0, 21)} 
                 </span>
                 </p> </>}
-            </div>   
+            </div>  
+             
     );
 }

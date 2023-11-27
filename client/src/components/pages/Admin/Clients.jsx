@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchClients } from "../../../api";
 import { Button } from 'primereact/button';
 import { DataTable } from 'primereact/datatable';
@@ -6,30 +7,34 @@ import { Column } from 'primereact/column';
 import { Message } from "primereact/message";
 import { Link } from "react-router-dom";
 import DeleteClientModal from "./DeleteClientModal";
+import { 
+  getAllClients,
+  getAllClientsSuccess,
+  getAllClientsFailure 
+} from "../../../redux/reducers/adminSlice";
 export default function Clients () {
 
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [clientList, setClientList] = useState([]);
+  // const [error, setError] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  // const [clientList, setClientList] = useState([]);
 
+  const { clientList, loading, error } = useSelector((state) => state.admin) 
+
+  const dispatch = useDispatch()
       useEffect(() => {
         getClients()
       }, [])
 
   const getClients = async () => {
       try {
-        setLoading(true);
-        setError(false);
+        dispatch(getAllClients())
         const res = await fetchClients();
-        setLoading(false)
         console.log(res.data)      
         if (res.status === 200) {
-          setClientList(res.data)
-          setError(false)
+          dispatch(getAllClientsSuccess(res.data))
         }
       } catch (error) {
-        setLoading(false);
-        setError(true);
+        dispatch(getAllClientsFailure(error))
       }
   }
 
