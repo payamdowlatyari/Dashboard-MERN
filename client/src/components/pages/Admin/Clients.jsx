@@ -66,7 +66,7 @@ export default function Clients () {
     <div className="card">
       {loading && <div className="text-center text-blue-500">
         <i className="pi pi-spin pi-spinner text-8xl"></i></div>}
-       {(!loading && clientList.length > 0) ?
+       {(!loading && clientList && clientList.length > 0) ?
         <div>
           <DataTable 
             className="text-sm" 

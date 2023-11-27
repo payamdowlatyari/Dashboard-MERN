@@ -75,16 +75,20 @@ const dispatch = useDispatch();
 
     const footer = () =>{
       return ( 
-        <>
+        <div className="grid"> 
+        <div className="col-12 md:col-8 lg:col-9">
         <Link to='/dashboard'>
-              <Button label="Projects" icon="pi pi-angle-left" size="small" text/>  
+              <Button label="Projects" icon="pi pi-angle-left" size="small"/>  
         </Link>  
+        </div>
+        <div className="col-12 md:col-4 lg:col-3">
         {currentClient.isAdmin && <>
         <Link to={`/admin/project/update/${projectItem._id}`}>
-              <Button icon='pi pi-pencil' label="Edit" text size="small" severity="success"/>
+              <Button icon='pi pi-pencil' label="Edit" size="small" severity="secondary"/>
         </Link>
         <DeleteProjectModal id={projectItem._id}/></>}
-        </>
+        </div>
+        </div>
       );
     }
 
@@ -124,9 +128,9 @@ const dispatch = useDispatch();
                       </span>
                     </div>
                 </div>   
+                <div className="box-gray-description shadow-1">
                   <p className="p-h-1">{projectItem.description} </p>
                     <p className="p-h-1 text-mini small">
-                    <span className="p-h-1">Updated</span> 
                     <i className="pi pi-clock mr-2 vertical-align-bottom"></i>
                     {new Date(projectItem.updatedAt).toString().substring(0, 21)} 
                     </p>
@@ -144,7 +148,7 @@ const dispatch = useDispatch();
                             {projectItem.comments && projectItem.comments.length > 0 ?
                                <Comments/>
                                 : <p className="mid-small">No Comments</p>}
-                    </Panel>
+                    </Panel></div>
                       <div className="text-mini p-h-1 p-v-2">
                       <NewComment projectId={id}/>
                       </div>  

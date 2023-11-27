@@ -142,7 +142,7 @@ export default function Projects () {
   };
 
   const textEditor = (options) => {
-      return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
+      return <InputText type="text" className="p-inputtext-sm" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
   };
 
   const statusEditor = (options) => {
@@ -193,7 +193,7 @@ export default function Projects () {
                 <Column field="status" header="Status" body={statusBodyTemplate} sortable editor={(options) => statusEditor(options)}></Column>
                 <Column field="_id" header="Comments" body={linkBodyTemplate}></Column>
                 {(currentClient && currentClient.isAdmin) &&
-                <Column rowEditor header="Edit" severity='success'></Column>}
+                <Column rowEditor header="Edit" className="text-link"></Column>}
             </DataTable>
         : <div className="transition-delay-3000">
                   <div className="pb-4">

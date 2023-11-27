@@ -25,12 +25,12 @@ export default function Home() {
   }
 
   const subtitle = () => {
-    return <span className='small px-2'>{currentClient && `${currentClient.email}!`}</span>;
+    return <p className='small px-2'>{currentClient && `${currentClient.email}!`}{currentClient.isAdmin && ' (admin)'}</p>;
   }
 
   return (
     <div className='main'>
-      <div className="card surface-0">
+      <div className="card">
           <Card title={currentClient? `Welcome ${currentClient.username}!`: 'Welocme friend!'} 
             subTitle={subtitle}> 
            {currentClient &&  <ProjectStats/>}
@@ -42,7 +42,7 @@ export default function Home() {
                       <div className="text-900 gap-3 py-2">
                         <Link to='/project/create'>
                           <Button 
-                            severity='info'
+                            severity='success'
                             label="New project"
                             size="small"
                             icon='pi pi-plus'

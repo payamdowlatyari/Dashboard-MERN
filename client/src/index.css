@@ -1,3 +1,4 @@
+/* Dark mode default */
 :root {
   --surface-a:#282936;
   --surface-b:#1d1e27;
@@ -44,8 +45,10 @@
   --highlight-bg: rgba(177, 157, 247, 0.16);
   --highlight-text-color: #b19df7;
   color-scheme: dark;
+  transition: 1s;
 }
 
+/* light mode */
 [data-theme='light'] {
   --surface-a:#ffffff;
   --surface-b:#eff3f8;
@@ -92,27 +95,38 @@
   --highlight-bg: #e2dcfc;
   --highlight-text-color: #7254f3;
   color-scheme: light;
+  transition: 1s;
 }
 
+ /* global  */
 body {
-  background-color: var(--surface-0);
-  color: var(--primary-color-text);
   margin: 0;
 }
 
-a{
+.main{
+  margin: 2em;
+  background-color: var(--highlight-bg);
   color: var(--text-color);
-  opacity: 0.9;
+}
+
+.container {
+  margin: 0 auto;
+  background-color: var(--surface-0);
+  color: var(--text-color);
+}
+
+p, i, svg {
+  color: var(--text-color);
+}
+
+a, .text-link{
+  color: var(--text-color);
   text-decoration: none;
-  margin: 5px;
+  margin: 3px;
 }
 
-p, i {
-  color: var(--text-color);
-}
-
-a:hover, i:hover{
-  opacity: 1;
+a:hover, .text-link:hover{
+  color: var(--text-color-secondary);
   transition: 0.3s;
 }
 
@@ -128,24 +142,13 @@ input, textarea, select, option, label {
   background-color: var(--surface-0);
 }
 
-table, thead, tbody, tr, td, th, svg, ul, li {
+table, thead, tbody, tr, td, th, ul, li {
   background-color: var(--surface-0);
   color: var(--text-color);
 }
 
-.main{
-  margin: 2em;
-  background-color: var(--highlight-bg);
-  color: var(--text-color);
-}
-
-.container {
-  margin: 0 auto;
-  background-color: var(--surface-0);
-  color: var(--text-color);
-}
-
-.card, .flex, .grid, .row, .col, .p-steps-item, .p-card-content .card, .p-panel-content, .p-panel-header, 
+ /* main classes  */
+.flex, .grid, .row, .col, .p-steps-item, .p-card-content .card, .p-panel-content, .p-panel-header, 
 .p-float-label, .p-divider-content, .p-inputtext, .p-inputtext-sm, .p-toggleable-content .p-toggleable-content-enter-done,
 .p-panel, .p-card, .main-table, .p-steps-number, .p-steps-title, .p-menuitem-link, .p-steps .p-component .p-readonly,
 .p-datatable .p-datatable-header, .p-datatable .p-paginator-bottom, .data-table-thead, .p-sortable-column, .p-inputtext .p-component, 
@@ -157,15 +160,41 @@ table, thead, tbody, tr, td, th, svg, ul, li {
   background-color: var(--surface-0);
 }
 
-.p-steps-number{
-  background-color: var(--gray-100);
-  color: var(--gray-700);
+ /* page  */
+.p-card {
+  min-height: 78vh;
 }
 
-.text-mini {
-  color: var(--gray-500);
+/* nav  */
+.navbar{
+  background-color: var(--surface-d);
+  height: 10vh;
+  padding: 1em;
+  position: sticky;
+  z-index: 100;
+  display: flex;
+  top: 0;
 }
 
+.nav-left {
+  display: inline-block;
+  background-color: var(--surface-d);
+}
+
+.nav-right{
+  display: inline-block;
+  background-color: var(--surface-d);
+  position: absolute;
+  right: 0;
+  padding-right: 20px;
+}
+
+.avatar-round {
+  background-color: #9c27b0;
+  color: #fff;
+}
+
+/* fotter  */
 .footer{
   color: var(--text-color-secondary);
   bottom: 0;
@@ -181,14 +210,7 @@ table, thead, tbody, tr, td, th, svg, ul, li {
   margin: 0.5em 0.25em 0.5em 0.25em;
 }
 
-.text-link{
-  color: var(--text-color);
-}
-
-.p-card {
-  min-height: 82vh;
-}
-
+/* text sizes */
 .small {
   font-size: 0.75em;
 }
@@ -209,6 +231,7 @@ table, thead, tbody, tr, td, th, svg, ul, li {
   font-size: 1.5em;
 }
 
+/* padding  */
 .p-h-1 {
   padding-left: 0.5em;
   padding-right: 0.5em;
@@ -229,45 +252,54 @@ table, thead, tbody, tr, td, th, svg, ul, li {
   padding-bottom: 1em;
 }
 
-.txt-right {
-  text-align: end;
-}
-
-.navbar{
-  height: 7vh;
-  padding: 1em;
-  position: sticky;
-  z-index: 100;
-  display: flex;
-  top: 0;
-}
-
-.nav-left {
-  display: inline-block;
-}
-
-.nav-right{
-  display: inline-block;
-  position: absolute;
-  right: 0;
-  padding-right: 20px;
-}
-
-.cursor-pointer{
-  cursor: pointer;
-}
-
-.box-gray-1{
-  background-color: var(--surface-50);
+/* description */
+.box-gray-description{
+  background-color: var(--surface-c);
   border-radius: 5px;
   padding: 0.25em 1em 0.25em 1em;
   margin: 0.5em;
 }
 
+/* comments */
+.box-gray-comment{
+  background-color: var(--surface-c);
+  border-radius: 5px;
+  padding: 0.25em;
+  margin: 0.25em;
+}
+
 .p-panel.p-panel-toggleable .p-panel-header, .p-link, .p-panel-content{ 
-  padding: 0.25em 1.25em;
-  background-color: transparent;
+  background-color: var(--surface-c);
   border: transparent;
+}
+
+.p-panel .p-panel-content {
+  padding: 0.25em;
+}
+
+.p-panel-header{
+  padding: 0.25em 0em 0.25em 0em;
+}
+
+.p-steps-number{
+  background-color: var(--gray-100);
+  color: var(--gray-700);
+}
+
+.text-mini {
+  color: var(--gray-500);
+}
+
+.home-page-icon{
+  font-size: 2em;
+}
+
+.txt-right {
+  text-align: end;
+}
+
+.cursor-pointer{
+  cursor: pointer;
 }
 
 .divider{

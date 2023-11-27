@@ -77,8 +77,8 @@ export default function ProjectStats () {
                         <Link to='/dashboard'>Projects
                         </Link>   
                         </div>
-                        <div className="flex align-items-center justify-content-center border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                        <i className="pi pi-briefcase p-overlay-badge" style={{ fontSize: '2rem' }}>
+                        <div className="flex align-items-center justify-content-center border-round">
+                        <i className="pi pi-briefcase p-overlay-badge home-page-icon">
                             <Badge value={projectList.length} severity='danger'></Badge>
                         </i>
                         </div>
@@ -92,8 +92,8 @@ export default function ProjectStats () {
                     <Link to='/dashboard'>Requested
                         </Link> 
                       </div>
-                        <div className="flex align-items-center justify-content-center border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                            <i className="pi pi-file p-overlay-badge" style={{ fontSize: '2rem' }}>
+                        <div className="flex align-items-center justify-content-center border-round">
+                            <i className="pi pi-file p-overlay-badge home-page-icon">
                             <Badge value={getStatusCount('Requested')} severity="info"></Badge>
                             </i>
                         </div>
@@ -108,8 +108,8 @@ export default function ProjectStats () {
                     <Link to='/dashboard'>In Progress
                         </Link> 
                       </div>
-                    <div className="flex align-items-center justify-content-center border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                        <i className="pi pi-file-edit p-overlay-badge" style={{ fontSize: '2rem' }}>
+                    <div className="flex align-items-center justify-content-center border-round">
+                        <i className="pi pi-file-edit p-overlay-badge home-page-icon">
                             <Badge value={getStatusCount('In Progress')} severity="warning"></Badge>
                         </i>
                         </div>
@@ -124,8 +124,8 @@ export default function ProjectStats () {
                     <Link to='/dashboard'>Completed 
                         </Link>                     
                       </div>
-                    <div className="flex align-items-center justify-content-center border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                        <i className="pi pi-check-square p-overlay-badge" style={{ fontSize: '2rem' }}>
+                    <div className="flex align-items-center justify-content-center border-round">
+                        <i className="pi pi-check-square p-overlay-badge home-page-icon">
                             <Badge value={getStatusCount('Completed')} severity="success"></Badge>
 
                         </i>

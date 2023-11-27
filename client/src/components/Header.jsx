@@ -31,7 +31,7 @@ export default function Header() {
   }
 
   return (
-    <div className='navbar surface-0 flex flex-row'>
+    <div className='navbar flex flex-row'>
       <div className='flex justify-content-start flex-wrap align-items-center nav-left'>
         <Link className='font-bold text-link' to='/'>
           <span className="text-link pi pi-home p-h-1 medium"></span>
@@ -51,14 +51,14 @@ export default function Header() {
                   <span className="text-link pi pi-plus p-h-1 medium"></span>
                 </Link>
                 <Link to='/profile'>
-                  <Avatar label={(currentClient.username).at(0)} shape="circle" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }}/>
+                  <Avatar label={(currentClient.username).at(0)} shape="circle" className='avatar-round'/>
                 </Link>
                 <span className={`p-3 text-link rounded cursor-pointer 
                 ${dark ? 'pi pi-sun' : 'pi pi-moon'}`}
                 onClick={() => changeMyTheme()} size='small'></span>
                   {currentClient && (<span onClick={handleSignOut} 
-                      className='cursor-pointer align-items-center p-h-1'>
-                  <span className="text-link pi pi-sign-out p-h-1 medium"></span>
+                      className='cursor-pointer align-items-center'>
+                  <span className="text-link pi pi-sign-out medium"></span>
                 </span>)}       
              </> 
             ) : ( 

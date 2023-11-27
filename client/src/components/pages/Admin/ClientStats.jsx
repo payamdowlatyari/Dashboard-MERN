@@ -46,8 +46,8 @@ export default function ClientStats () {
                         <Link to='/admin'> Clients</Link>   
                                
                         </div>
-                        <div className="flex align-items-center justify-content-center border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                        <i className="pi pi-users p-overlay-badge" style={{ fontSize: '2rem' }}>
+                        <div className="flex align-items-center justify-content-center border-round">
+                        <i className="pi pi-users p-overlay-badge home-page-icon">
                             <Badge value={clientList.length} severity='danger'></Badge>
                         </i>
                         </div>
