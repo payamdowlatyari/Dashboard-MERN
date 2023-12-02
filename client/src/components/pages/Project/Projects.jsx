@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { fetchProjects, updateProject } from "../../../api";
+import { 
+  fetchProjects, 
+  getProjectsByOwner, 
+  updateProject 
+} from "../../../api";
 import { Tag } from "primereact/tag";
 import { Link } from "react-router-dom";
 import { Button } from 'primereact/button';
@@ -29,34 +33,48 @@ export default function Projects () {
         getProjects()
       }, [])
 
-  const getProjects = async () => {
+  const getProjects = () => {
+    if (currentClient.isAdmin)
+        getProjectsAdmin()
+    else 
+      getProjectsOwner();
+  }
+
+  const getProjectsAdmin = async () => {
       try {
         setLoading(true);
         setError(false);
-        const res = await fetchProjects();
-        console.log(res.data)      
-        if (res.status === 200) {
-          let projects = res.data;
-          if (currentClient.isAdmin) {
-            setProjectList(projects)
-          } else {
-          let data = []
-            if (projects.length) {
-              projects?.map(project => {
-              if (project.ownerId.includes(currentClient._id))  
-                  data.push(project) 
-              })
-            }
-            setProjectList(data)
+          const res = await fetchProjects();
+          console.log(res.data)      
+          if (res.status === 200) {
+             setProjectList(res.data)
+
           }
           setError(false)
           setLoading(false)  
-        }
       } catch (error) {
-        setError(true)
-        setLoading(false)
+          setError(true)
+          setLoading(false)
       }
   }
+
+  const getProjectsOwner = async () => {
+    try {
+      setLoading(true);
+      setError(false);
+    
+        const res = await getProjectsByOwner(currentClient._id);
+        console.log(res.data)      
+        if (res.status === 200) {
+           setProjectList(res.data)
+        } 
+        setError(false)
+        setLoading(false)  
+    } catch (error) {
+        setError(true)
+        setLoading(false)
+    }
+}
 
   useEffect(()=> {
     if (updating && updatedProject) 
@@ -123,6 +141,7 @@ export default function Projects () {
                 label={rowData.comments.length > 0 ? rowData.comments.length : '0'}
                 text rounded 
                 size="small"
+                severity="info"
             />
           </Link>;
   };
@@ -166,7 +185,8 @@ export default function Projects () {
               icon='pi pi-plus'
               label="Start a new project"
               severity="success"
-               size="small"              
+               size="small"   
+               text           
               />
           </Link> 
         </span>

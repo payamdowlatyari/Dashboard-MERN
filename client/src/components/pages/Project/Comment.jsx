@@ -30,7 +30,7 @@ export default function Comment({commentDetails}){
       }
 
     return ( 
-            <div className='box-gray-comment shadow-1'>
+            <div className='box-gray-comment'>
                 {commentBy && <>
                 <p className='mid-small'>
                 <span className='font-bold px-2'> 

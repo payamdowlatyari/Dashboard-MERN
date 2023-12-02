@@ -71,7 +71,7 @@ export default function ProjectStats () {
        {!loading && projectList.length > 0 ?
         <div className="grid">
             <div className="col-12 md:col-6 lg:col-3">
-                <div className="surface-0 shadow-1 p-3 border-1 border-50 border-round">
+                <div className="shadow-1 p-3 border-50 border-round">
                     <div className="flex justify-content-between mb-3">
                         <div className="text-900 font-medium text-xl">  
                         <Link to='/dashboard'>Projects
@@ -86,7 +86,7 @@ export default function ProjectStats () {
                 </div>
             </div>
             <div className="col-12 md:col-6 lg:col-3">
-                <div className="surface-0 shadow-1 p-3 border-1 border-50 border-round">
+                <div className="shadow-1 p-3 border-50 border-round">
                     <div className="flex justify-content-between mb-3">
                     <div className="text-900 font-medium text-xl"> 
                     <Link to='/dashboard'>Requested
@@ -102,7 +102,7 @@ export default function ProjectStats () {
                 </div>
             </div>
             <div className="col-12 md:col-6 lg:col-3">
-                <div className="surface-0 shadow-1 p-3 border-1 border-50 border-round">
+                <div className="shadow-1 p-3 border-50 border-round">
                     <div className="flex justify-content-between mb-3">
                     <div className="text-900 font-medium text-xl">
                     <Link to='/dashboard'>In Progress
@@ -118,7 +118,7 @@ export default function ProjectStats () {
                 </div>
             </div>
             <div className="col-12 md:col-6 lg:col-3">
-                <div className="surface-0 shadow-1 p-3 border-1 border-50 border-round">
+                <div className="shadow-1 p-3 border-50 border-round">
                     <div className="flex justify-content-between mb-3">
                     <div className="text-900 font-medium text-xl">
                     <Link to='/dashboard'>Completed 

@@ -1,14 +1,14 @@
 import Project from '../models/project.model.js';
 import mongoose from 'mongoose';
 
-// get project by owner
+// get projects by owner
 export const getProjectByOwner = async (req, res) => {
 
     try {
         const projects = await Project.find({ ownerId: req.params.id });
-        res.status(200).json({ data: projects });
+        res.status(200).json(projects);
     } catch (error) {    
-        res.status(404).json({ message: error.message });
+        res.status(404).json(error.message);
     }
 }
 

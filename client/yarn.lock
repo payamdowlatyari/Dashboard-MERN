@@ -8675,10 +8675,10 @@
   "resolved" "https://registry.npmjs.org/primeicons/-/primeicons-6.0.1.tgz"
   "version" "6.0.1"
 
-"primereact@^10.0.9":
-  "integrity" "sha512-5hjCY0gVJkAhmxRkME8GCZPl0TpUMsjtrwYwxkRJlchu5oH8XaRQKbKmnehmNmiP59cmphaXVkL8vei19O9+PQ=="
-  "resolved" "https://registry.npmjs.org/primereact/-/primereact-10.0.9.tgz"
-  "version" "10.0.9"
+"primereact@^10.2.1":
+  "integrity" "sha512-F25053E1z+fod6V7AJ1Ix/DwSPkFQotk2+Idm0XkFsN+gQEywH7DgtbvNKpUA+LEq48h2+/WVK3D0V8IAm1Npg=="
+  "resolved" "https://registry.npmjs.org/primereact/-/primereact-10.2.1.tgz"
+  "version" "10.2.1"
   dependencies:
     "@types/react-transition-group" "^4.4.1"
     "react-transition-group" "^4.4.1"

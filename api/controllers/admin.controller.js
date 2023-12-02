@@ -91,7 +91,7 @@ export const createClient = async (req, res) => {
     }
 }
 
-// update project
+// update client
 export const updateClientByAdmin = async (req, res) => {
 
   const { id: _id } = req.params
@@ -108,7 +108,7 @@ export const updateClientByAdmin = async (req, res) => {
       }
 }
 
-// delete project
+// delete client
 export const deleteClientByAdmin = async (req, res) => {
 
   const { id: _id } = req.params
@@ -118,6 +118,17 @@ export const deleteClientByAdmin = async (req, res) => {
     res.status(200).json('Client has been deleted...');
   } catch (error) {
     res.status(403).json("Action forbidden");
+  }
+}
+
+// get all projects
+export const getProjects = async (req, res) => {
+
+  try {
+      const allProjects = await Project.find({}).sort({_id:-1}) 
+      res.status(200).json(allProjects)
+  } catch (error) {
+      res.status(409).json(error.message) 
   }
 }
 

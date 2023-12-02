@@ -49,7 +49,6 @@ const dispatch = useDispatch();
     }
 
     const getProjectDetails = async () => {
-      console.log(projectItem.ownerId[0])
       try {
           dispatch(getProjectStart());
           const res = await getProjectById(id);
@@ -78,13 +77,13 @@ const dispatch = useDispatch();
         <div className="grid"> 
         <div className="col-12 md:col-8 lg:col-9">
         <Link to='/dashboard'>
-              <Button label="Projects" icon="pi pi-angle-left" size="small"/>  
+              <Button label="Projects" icon="pi pi-angle-left" size="small" severity="info" text/>  
         </Link>  
         </div>
         <div className="col-12 md:col-4 lg:col-3">
         {currentClient.isAdmin && <>
         <Link to={`/admin/project/update/${projectItem._id}`}>
-              <Button icon='pi pi-pencil' label="Edit" size="small" severity="secondary"/>
+              <Button icon='pi pi-pencil' label="Edit" size="small" severity="success" text/>
         </Link>
         <DeleteProjectModal id={projectItem._id}/></>}
         </div>
@@ -128,7 +127,7 @@ const dispatch = useDispatch();
                       </span>
                     </div>
                 </div>   
-                <div className="box-gray-description shadow-1">
+                <div className="box-gray-description">
                   <p className="p-h-1">{projectItem.description} </p>
                     <p className="p-h-1 text-mini small">
                     <i className="pi pi-clock mr-2 vertical-align-bottom"></i>
@@ -138,10 +137,10 @@ const dispatch = useDispatch();
                       header={projectItem.comments &&
                           (
                             <Button type="button" 
-                              label="Comments" severity='danger'
+                              label="Comments" severity='info'
                               size="small" text icon="pi pi-comment"
                               onClick={() => ref.current.toggle()}>
-                              <Badge value={projectItem.comments.length} severity='danger'/>
+                              <Badge value={projectItem.comments.length} severity='info'/>
                             </Button>   
                           )} toggleable>
                       

@@ -25,7 +25,8 @@ export default function Home() {
   }
 
   const subtitle = () => {
-    return <p className='small px-2'>{currentClient && `${currentClient.email}!`}{currentClient.isAdmin && ' (admin)'}</p>;
+    return <p className='small px-2'>{currentClient && `${currentClient.email}!`}
+            {(currentClient && currentClient.isAdmin) && ' (admin)'}</p>;
   }
 
   return (
@@ -38,21 +39,22 @@ export default function Home() {
             <div className="grid text-center py-2">
               {currentClient.isAdmin && <ClientStats/>}               
                 <div className="col-12 md:col-6 lg:col-3">
-                  <div className="surface-0 shadow-1 p-3 border-1 border-50 border-round">
-                      <div className="text-900 gap-3 py-2">
+                  <div className="shadow-1 p-3 border-50 border-round">
+                      <div className="text-900 gap-2 py-2">
                         <Link to='/project/create'>
                           <Button 
                             severity='success'
                             label="New project"
                             size="small"
                             icon='pi pi-plus'
+                            text
                             />
                           </Link> 
                       </div>
                   </div>
                 </div>
                 <div className="col-12 md:col-6 lg:col-3">
-                  <div className="surface-0 shadow-1 p-3 border-1 border-50 border-round">
+                  <div className="shadow-1 p-3 border-50 border-round">
                 <div className="text-900 gap-3 py-2">
                         <Link to='/profile'>
                           <Button 
@@ -60,13 +62,14 @@ export default function Home() {
                             label="Profile"
                             size="small"
                             icon='pi pi-user'
+                            text
                             />
                         </Link>
                       </div>
                     </div>
                 </div>
                 <div className="col-12 md:col-6 lg:col-3">
-                  <div className="surface-0 shadow-1 p-3 border-1 border-50 border-round">
+                  <div className="shadow-1 p-3 border-50 border-round">
                         <div className="text-900 gap-3 py-2">
                           <Button 
                             onClick={handleSignOut}
@@ -74,23 +77,28 @@ export default function Home() {
                             label="Logout"
                             size="small"
                             icon='pi pi-power-off'
+                            text
                             />
                           </div>
                         </div>
                     </div>
                     </div>
-                  ) :  <div className="grid surface-0 text-center">
-                      <div className="col-12 md:col-6 lg:col-3">
-                            <div className="text-900 gap-3 py-2">
+                  ) :   
+                  <div className="grid text-center py-2">
+                  <div className="col-12 md:col-6 lg:col-3">
+                  <div className="shadow-1 p-3 border-50 border-round">
+                        <div className="text-900 gap-3 py-2">
                                 <Link to='/sign-in'>
                                   <Button 
-                                  severity='info'
+                                    severity='info'
                                     label="Login"
-                                    text size="small"
+                                    size="small"
+                                    text
                                     />
                                 </Link>
                               </div>
                           </div>
+                      </div>
                       </div>
                     }
         </Card>

@@ -38,7 +38,7 @@ export default function DeleteProjectModal({id}) {
         <ConfirmPopup />
             <Button 
                 onClick={confirmDelete}
-                icon="pi pi-trash" label='Delete' size='small' severity="danger"/>
+                icon="pi pi-trash" label='Delete' size='small' severity="danger" text/>
         </>
     )
 }

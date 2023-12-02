@@ -31,7 +31,7 @@ export default function Header() {
   }
 
   return (
-    <div className='navbar flex flex-row'>
+    <div className='navbar flex flex-row shadow-4'>
       <div className='flex justify-content-start flex-wrap align-items-center nav-left'>
         <Link className='font-bold text-link' to='/'>
           <span className="text-link pi pi-home p-h-1 medium"></span>

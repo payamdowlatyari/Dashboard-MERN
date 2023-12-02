@@ -15,6 +15,7 @@ export const profileUpdate = (id, formData) => axios.post(`${url}/api/client/upd
 // api/project
 export const fetchProjects = () => axios.get(`${url}/api/project`);
 export const getProjectById = (id) => axios.get(`${url}/api/project/${id}`);
+export const getProjectsByOwner = (ownerId) => axios.get(`${url}/api/project/owner/${ownerId}`);
 export const createNewProject = (formData) => axios.post(`${url}/api/project/create`, formData, { withCredentials: true })
 export const addNewComment = (id, comment) => axios.put(`${url}/api/project/comment/${id}`, comment, { withCredentials: true })
 

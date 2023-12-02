@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchClients } from "../../../api";
 import { Button } from 'primereact/button';
@@ -13,10 +13,6 @@ import {
   getAllClientsFailure 
 } from "../../../redux/reducers/adminSlice";
 export default function Clients () {
-
-  // const [error, setError] = useState(false);
-  // const [loading, setLoading] = useState(false);
-  // const [clientList, setClientList] = useState([]);
 
   const { clientList, loading, error } = useSelector((state) => state.admin) 
 
@@ -59,7 +55,7 @@ export default function Clients () {
   };
 
   const parseDate = (date) => {
-    return new Date(date.createdAt).toString().substring(0, 10)
+    return new Date(date.createdAt).toISOString().substring(0, 10)
   }
 
   return (
