@@ -40,13 +40,13 @@ export default function ClientStats () {
        {!loading && clientList.length > 0 &&
         <>
             <div className="col-12 md:col-6 lg:col-3">
-              <div className="shadow-1 p-3 border-50 border-round">
-                <div className="flex justify-content-between mb-3">
+              <div className="shadow-1 p-3 border-50 border-round surface-card">
+                <div className="flex justify-content-between mb-3 surface-card">
                   <div className="text-900 font-medium text-xl">
                       <Link to='/admin'> Clients</Link>        
                         </div>
                         <div className="flex align-items-center justify-content-center border-round">
-                        <i className="pi pi-users p-overlay-badge home-page-icon">
+                        <i className="pi pi-users p-overlay-badge home-page-icon surface-card">
                             <Badge value={clientList.length} severity='danger'></Badge>
                         </i>
                         </div>

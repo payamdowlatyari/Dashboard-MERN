@@ -109,7 +109,7 @@ body {
 
 .container {
   margin: 0 auto;
-  background-color: var(--surface-a);
+  background-color: var(--surface-0);
   color: var(--text-color);
 }
 
@@ -134,17 +134,18 @@ form{
   margin: 5px;
 }
 
-input, textarea, select, option, label {
+input, select, option, label {
   max-width: 300px;
-  background-color: var(--surface-a);
+  background-color: var(--surface-0);
   color: var(--text-color);
 }
 
 
 table, thead, tbody, tr, td, th, ul, li {
-  background-color: var(--surface-a);
+  background-color: var(--surface-0);
   color: var(--text-color);
 }
+
 
  /* main classes  */
 .flex, .grid, .row, .col, .p-steps-item, .p-card-content .card, .p-panel-content, .p-panel-header, 
@@ -156,13 +157,13 @@ table, thead, tbody, tr, td, th, ul, li {
 .p-dropdown-panel .p-component .p-ripple-disabled .p-connected-overlay-enter-done, .p-dropdown-items-wrapper, .p-dropdown-items,
 .p-dropdown .p-component .p-inputwrapper .p-inputwrapper-filled, .p-hidden-accessible .p-dropdown-hidden-select {
   color: var(--text-color);
-  background-color: var(--surface-a);
+  background-color: var(--surface-0);
 }
 
  /* page  */
 .p-card {
   min-height: 78vh;
-  background-color: var(--surface-a);
+  background-color: var(--surface-0);
 }
 
 .p-card-component {
@@ -257,7 +258,7 @@ table, thead, tbody, tr, td, th, ul, li {
 
 /* description */
 .box-gray-description{
-  background-color: var(--surface-a);
+  background-color: var(--surface-0);
   border-radius: 5px;
   padding: 1em;
   margin: 0.5em;
@@ -265,14 +266,14 @@ table, thead, tbody, tr, td, th, ul, li {
 
 /* comments */
 .box-gray-comment{
-  background-color: var(--surface-a);
+  background-color: var(--surface-0);
   border-radius: 5px;
   padding: 0.5em;
   margin: 0.25em;
 }
 
 .p-panel.p-panel-toggleable .p-panel-header, .p-link, .p-panel-content{ 
-  background-color: var(--surface-a);
+  background-color: var(--surface-0);
 }
 
 .p-panel .p-panel-content {

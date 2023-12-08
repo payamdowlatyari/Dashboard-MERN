@@ -69,13 +69,14 @@ export default function Profile() {
         />
         </div>
         <div className="flex flex-wrap justify-content-center align-items-center gap-3 py-1">
+          <span className='p-float-label w-full'>
         <InputText
           type='password'
           id='password'
-          placeholder='Password'
           className="w-full"
           onChange={handleChange}
-        />
+        /> <label htmlFor="password">Password</label>
+        </span>
         </div>
         <div className="flex flex-wrap justify-content-center align-items-center gap-3 py-1">
         <Button 
