@@ -42,11 +42,11 @@ export const signin = async (req, res, next) => {
     const token = jwt.sign({ id: validClient._id }, process.env.JWT_SECRET);
 
     const { password: hashedPassword, ...rest } = validClient._doc;
-    const expiryDate = new Date(Date.now() + 3600000 * 24); // 24 hours
+    // const expiryDate = new Date(Date.now() + 3600000 * 24); // 24 hours
     
     res.cookie('access_token', token, { 
           httpOnly: true, 
-          expires: expiryDate 
+          expires: null 
       })
       .status(200)
       .json(rest);

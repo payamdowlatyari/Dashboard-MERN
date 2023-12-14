@@ -14,9 +14,6 @@ export default function Comment({commentDetails}){
     }, [])
 
     const getClient = async () => {
-
-        console.log(commentDetails)
-        console.log(projectOwner)
    
         try {
             const res = await getClientById(commentDetails.by);

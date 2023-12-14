@@ -1,4 +1,3 @@
-
 import React, { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -38,13 +37,10 @@ export default function NewComment({projectId}) {
         data.comment && show();
         newComment.text = data.comment;
 
-        console.log(newComment)
         try {
             dispatch(addCommentStart())
             const res = await addNewComment(projectId, newComment);
-            if (res.status === 200) {
-              dispatch(addCommentSuccess(res.data))  
-            }
+            dispatch(addCommentSuccess(res.data))  
           } catch (error) {
             dispatch(addCommentFailure(error))
           }
