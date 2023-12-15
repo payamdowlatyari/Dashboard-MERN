@@ -1,5 +1,5 @@
 /* Dark mode default */
-:root {
+/* :root {
   --surface-a:#2a323d;
   --surface-b:#20262e;
   --surface-c:rgba(255, 255, 255, 0.04);
@@ -46,10 +46,10 @@
   --highlight-text-color: #151515;
   color-scheme: dark;
   transition: 1s;
-}
+} */
 
 /* light mode */
-[data-theme='light'] {
+/* [data-theme='light'] {
   --surface-a:#ffffff;
   --surface-b:#efefef;
   --surface-c:#e9ecef;
@@ -96,7 +96,7 @@
   --highlight-text-color: #ffffff;
   color-scheme: light;
   transition: 1s;
-}
+} */
 
  /* global  */
 body {
@@ -109,7 +109,7 @@ body {
 
 .container {
   margin: 0 auto;
-  background-color: var(--surface-0);
+  /* background-color: var(--surface-50); */
   color: var(--text-color);
 }
 
@@ -136,34 +136,34 @@ form{
 
 input, select, option, label {
   max-width: 300px;
-  background-color: var(--surface-0);
+  /* background-color: var(--surface-50); */
   color: var(--text-color);
 }
 
 
 table, thead, tbody, tr, td, th, ul, li {
-  background-color: var(--surface-0);
+  /* background-color: var(--surface-50); */
   color: var(--text-color);
 }
 
 
  /* main classes  */
-.flex, .grid, .row, .col, .p-steps-item, .p-card-content .card, .p-panel-content, .p-panel-header, 
+/* .flex, .grid, .row, .col, .p-steps-item, .p-card-content .card, .p-panel-content, .p-panel-header, .p-calendar, 
 .p-float-label, .p-divider-content, .p-inputtext, .p-inputtext-sm, .p-toggleable-content .p-toggleable-content-enter-done,
 .p-panel, .p-card, .main-table, .p-steps-number, .p-steps-title, .p-menuitem-link, .p-steps .p-component .p-readonly,
-.p-datatable .p-datatable-header, .p-datatable .p-paginator-bottom, .data-table-thead, .p-sortable-column, 
+.p-datatable .p-datatable-header, .p-datatable .p-paginator-bottom, .data-table-thead, .p-sortable-column, .p-inputtext .p-component, 
 .p-hidden-accessible .p-dropdown-hidden-select, .p-dropdown-label .p-inputtext, .p-dropdown, .p-dropdown .p-hidden-accessible, 
 .p-hidden-accessible input, .p-hidden-accessible select, .p-hidden-accessible option, .p-dropdown-label .p-inputtext, .p-dropdown-item, 
 .p-dropdown-panel .p-component .p-ripple-disabled .p-connected-overlay-enter-done, .p-dropdown-items-wrapper, .p-dropdown-items,
 .p-dropdown .p-component .p-inputwrapper .p-inputwrapper-filled, .p-hidden-accessible .p-dropdown-hidden-select {
   color: var(--text-color);
   background-color: var(--surface-0);
-}
+} */
 
  /* page  */
 .p-card {
   min-height: 78vh;
-  background-color: var(--surface-0);
+  /* background-color: var(--surface-50); */
 }
 
 .p-card-component {
@@ -172,6 +172,7 @@ table, thead, tbody, tr, td, th, ul, li {
 
 /* nav  */
 .navbar{
+  background-color: var(--surface-50);
   height: 10vh;
   padding: 1em;
   position: sticky;
@@ -194,13 +195,13 @@ table, thead, tbody, tr, td, th, ul, li {
 }
 
 .avatar-round {
-  background-color: #9c27b0;
+  background-color: #2196F3;
   color: #fff;
 }
 
 /* fotter  */
 .footer{
-  color: var(--text-color-secondary);
+  /* color: var(--text-color-secondary); */
   bottom: 0;
   margin: 0 auto;
   padding: 0.25em 0.25em 0.25em 0.25em;
@@ -258,7 +259,7 @@ table, thead, tbody, tr, td, th, ul, li {
 
 /* description */
 .box-gray-description{
-  background-color: var(--surface-0);
+  /* background-color: var(--surface-0); */
   border-radius: 5px;
   padding: 1em;
   margin: 0.5em;
@@ -266,14 +267,14 @@ table, thead, tbody, tr, td, th, ul, li {
 
 /* comments */
 .box-gray-comment{
-  background-color: var(--surface-0);
+  /* background-color: var(--surface-0); */
   border-radius: 5px;
   padding: 0.5em;
   margin: 0.25em;
 }
 
 .p-panel.p-panel-toggleable .p-panel-header, .p-link, .p-panel-content{ 
-  background-color: var(--surface-0);
+  /* background-color: var(--surface-0); */
 }
 
 .p-panel .p-panel-content {
@@ -286,8 +287,8 @@ table, thead, tbody, tr, td, th, ul, li {
 }
 
 .p-steps-number{
-  background-color: var(--gray-200);
-  color: var(--gray-800);
+  /* background-color: var(--gray-200);
+  color: var(--gray-800); */
 }
 .p-steps .p-steps-item.p-disabled {
   opacity: 0.5;

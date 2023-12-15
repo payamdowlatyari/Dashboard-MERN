@@ -40,7 +40,7 @@ export default function Home() {
               {currentClient.isAdmin && <ClientStats/>}               
                 <div className="col-12 md:col-6 lg:col-3">
                   <div className="shadow-1 p-3 border-50 border-round surface-card">
-                      <div className="text-900 gap-2 py-2">
+                      <div className="text-900 gap-2 py-1">
                         <Link to='/project/create'>
                           <Button 
                             severity='success'
@@ -55,7 +55,7 @@ export default function Home() {
                 </div>
                 <div className="col-12 md:col-6 lg:col-3">
                   <div className="shadow-1 p-3 border-50 border-round surface-card">
-                <div className="text-900 gap-3 py-2">
+                <div className="text-900 gap-3 py-1">
                         <Link to='/profile'>
                           <Button 
                             severity='info'
@@ -70,7 +70,7 @@ export default function Home() {
                 </div>
                 <div className="col-12 md:col-6 lg:col-3">
                   <div className="shadow-1 p-3 border-50 surface-card border-round">
-                        <div className="text-900 gap-3 py-2">
+                        <div className="text-900 gap-3 py-1">
                           <Button 
                             onClick={handleSignOut}
                             severity='danger'
@@ -87,7 +87,7 @@ export default function Home() {
                   <div className="grid text-center py-2">
                   <div className="col-12 md:col-6 lg:col-3">
                   <div className="shadow-1 p-3 border-50 border-round">
-                        <div className="text-900 gap-3 py-2">
+                        <div className="text-900 gap-3 py-1">
                                 <Link to='/sign-in'>
                                   <Button 
                                     severity='info'

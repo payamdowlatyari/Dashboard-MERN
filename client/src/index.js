@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { persistor, store } from './redux/store.js';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import "primereact/resources/themes/mdc-light-indigo/theme.css"
+import "primereact/resources/themes/tailwind-light/theme.css"
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

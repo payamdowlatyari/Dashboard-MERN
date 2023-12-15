@@ -31,42 +31,42 @@ export default function Header() {
   }
 
   return (
-    <div className='navbar flex flex-row shadow-4'>
-      <div className='flex justify-content-start flex-wrap align-items-center nav-left'>
+    <div className='navbar flex flex-row shadow-2'>
+      <div className='flex justify-content-start flex-wrap align-items-center nav-left py-1'>
         <Link className='font-bold text-link' to='/'>
-          <span className="text-link pi pi-home p-h-1 medium"></span>
+          <span className="text-link pi pi-home px-1 mx-1 medium"></span>
         </Link>
             {currentClient && currentClient.isAdmin &&
-          <Link className='p-h-1 text-link' to='/admin'>
-          <span className="pi pi-users mid-large"></span>
+          <Link className='px-1 text-link' to='/admin'>
+          <span className="pi pi-users medium mx-1"></span>
           </Link>}
           <Link className='text-link' to='/dashboard'>
           Projects
         </Link> 
         </div>
-          <div className='flex justify-content-end flex-wrap nav-right align-items-center'>
+          <div className='flex justify-content-end flex-wrap nav-right align-items-center py-1'>
             {currentClient ? ( 
              <>
                 <Link to='/project/create'>
-                  <span className="text-link pi pi-plus p-h-1 medium"></span>
+                  <span className="text-link pi pi-plus px-1 mx-1 medium"></span>
                 </Link>
                 <Link to='/profile'>
                   <Avatar label={(currentClient.username).at(0)} shape="circle" className='avatar-round'/>
                 </Link>
-                <span className={`p-3 text-link rounded cursor-pointer 
+                {/* <span className={`p-3 text-link rounded cursor-pointer 
                 ${dark ? 'pi pi-sun' : 'pi pi-moon'}`}
-                onClick={() => changeMyTheme()} size='small'></span>
+                onClick={() => changeMyTheme()} size='small'></span> */}
                   {currentClient && (<span onClick={handleSignOut} 
-                      className='cursor-pointer align-items-center'>
-                  <span className="text-link pi pi-sign-out medium"></span>
+                      className='cursor-pointer align-items-center px-1 mx-1'>
+                  <span className="text-link pi pi-sign-out medium px-1 mx-1"></span>
                 </span>)}       
              </> 
             ) : ( 
               <>
-                <span className={`p-3 text-link rounded cursor-pointer 
+                {/* <span className={`p-3 text-link rounded cursor-pointer 
                 ${dark ? 'pi pi-sun' : 'pi pi-moon'}`}
-                onClick={() => changeMyTheme()} size='small'></span>
-                <Link className='font-bold text-link p-h-1' to='/sign-in'>
+                onClick={() => changeMyTheme()} size='small'></span> */}
+                <Link className='text-link px-1 mx-1 py-1' to='/sign-in'>
                 Login
                 </Link>
               </>
