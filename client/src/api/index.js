@@ -1,8 +1,7 @@
 import axios from 'axios'
+import { getBaseUrl } from './util';
 
-let url = process.env.REACT_APP_API;
-if (process.env.NODE_ENV === "development") 
-    url = 'http://localhost:8000';
+const url = getBaseUrl();
 
 // api/auth
 export const signIn =(formData)=> axios.post(`${url}/api/auth/signin`, formData, { withCredentials: true })
