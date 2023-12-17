@@ -53,7 +53,7 @@ export default function NewComment({projectId}) {
 
     return (
         <div className="card flex">
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-wrap gap-2 w-auto">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-wrap gap-2">
                 <Toast ref={toast} />
                 <Controller
                     name="comment"
@@ -61,7 +61,7 @@ export default function NewComment({projectId}) {
                     rules={{ required: 'Comment is required.' }}
                     render={({ field, fieldState }) => (
                         <>
-                            <InputTextarea id={field.name} {...field} rows={2} cols={30} 
+                            <InputTextarea id={field.name} {...field} rows={2} cols={40} autoResize
                             className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </>

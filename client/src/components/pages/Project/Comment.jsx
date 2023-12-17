@@ -33,7 +33,6 @@ export default function Comment({commentDetails}){
                 <span className='font-bold px-2'> 
                 {commentBy.username}
                 {commentBy.isAdmin && <i className="pi pi-verified ml-1 text-blue-500"></i>}
-
                 </span>
                     {commentDetails.text}</p> 
                 <p className='small text-gray-400'>

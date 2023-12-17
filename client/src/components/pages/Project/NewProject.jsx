@@ -56,43 +56,35 @@ export default function NewProject() {
     return (
         <div className='main'>
         <div className="card">
-             <Card title="New Project">
+             <Card title="New Project" subTitle="Choose a name and
+            briefly explain the project...">
             <div className="flex flex-initial sm:flex-row align-content-center">
             <form onSubmit={handleSubmit} className="gap-2 w-auto">     
-                {/* <label htmlFor="name" className="block mb-2">Choose a name for the project.</label> */}
-                    <div className="flex flex-initial align-items-center gap-3 py-3">
-                      <span className="p-float-label">
+                    <div className="flex flex-initial align-items-center gap-3 pb-3">
                         <InputText 
                           onChange={handleChange}
-                          className="md:min-w-max" 
+                          placeholder='Name'
                           type='text'
-                          // placeholder="Enter project name"
                           id='name'
                           />
-                        <label htmlFor="name">Name</label>
-                          </span>
                         </div>
-                        {/* <label htmlFor="description" className="block mb-2">Briefly explain what the project is about.</label> */}
-                        <div className="flex flex-wrap align-items-center gap-3 py-3">
-                        <span className="p-float-label">
+                        <div className="flex flex-row align-items-start gap-3 pb-3">
                         <InputTextarea 
                           id="description" 
-                          // placeholder='Description'
+                          placeholder='Description...'
+                          autoResize
                           onChange={handleChange}
                           rows={5} cols={50} 
                           />
-                          <label htmlFor="description">Description</label>
-                        
-                          </span>
                         </div>
-                        <div className="flex flex-column align-items-start gap-3 py-1">
+                        <div className="flex flex-column align-items-start gap-3 pb-1">
                             <div className="inline-flex">
-                              Select a due date.
+                              Set a deadline:
                             </div>
                             <Calendar value={date} id='endDate'
                             onChange={handleDateChange} />
                           </div>
-                        <div className="flex flex-row align-items-start gap-3 py-1">
+                        <div className="flex flex-row align-items-start gap-3 py-3">
                         <Button 
                           disabled={loading}
                           label={loading ? 'Loading...' : 'Submit'} 

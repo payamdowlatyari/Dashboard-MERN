@@ -1,115 +1,24 @@
-/* Dark mode default */
-/* :root {
-  --surface-a:#2a323d;
-  --surface-b:#20262e;
-  --surface-c:rgba(255, 255, 255, 0.04);
-  --surface-d:#3f4b5b;
-  --surface-e:#2a323d;
-  --surface-f:#2a323d;
-  --text-color:rgba(255, 255, 255, 0.87);
-  --text-color-secondary:rgba(255, 255, 255, 0.6);
-  --primary-color:#8dd0ff;
-  --primary-color-text:#151515;
-  --surface-0: #20262e;
-  --surface-50: #363c43;
-  --surface-100: #4d5158;
-  --surface-200: #63676d;
-  --surface-300: #797d82;
-  --surface-400: #909397;
-  --surface-500: #a6a8ab;
-  --surface-600: #bcbec0;
-  --surface-700: #d2d4d5;
-  --surface-800: #e9e9ea;
-  --surface-900: #ffffff;
-  --gray-50:#e9e9ea;
-  --gray-100: #d2d4d5;
-  --gray-200: #bcbec0;
-  --gray-300: #a6a8ab;
-  --gray-400: #909397;
-  --gray-500: #797d82;
-  --gray-600: #63676d;
-  --gray-700: #4d5158;
-  --gray-800: #363c43;
-  --gray-900: #20262e;
-  --content-padding:1.25rem;
-  --inline-spacing:0.5rem;
-  --border-radius:4px;
-  --surface-ground:#20262e;
-  --surface-section:#20262e;
-  --surface-card:#2a323d;
-  --surface-overlay:#2a323d;
-  --surface-border:#3f4b5b;
-  --surface-hover:rgba(255,255,255,.04);
-  --focus-ring: 0 0 0 1px #e3f3fe;
-  --maskbg: rgba(0, 0, 0, 0.4);
-  --highlight-bg: #8dd0ff;
-  --highlight-text-color: #151515;
-  color-scheme: dark;
-  transition: 1s;
-} */
-
-/* light mode */
-/* [data-theme='light'] {
-  --surface-a:#ffffff;
-  --surface-b:#efefef;
-  --surface-c:#e9ecef;
-  --surface-d:#dee2e6;
-  --surface-e:#ffffff;
-  --surface-f:#ffffff;
-  --text-color:#212529;
-  --text-color-secondary:#6c757d;
-  --primary-color:#007bff;
-  --primary-color-text:#ffffff;
-  --surface-0: #ffffff;
-  --surface-50: #f9fafb;
-  --surface-100: #f8f9fa;
-  --surface-200: #e9ecef;
-  --surface-300: #dee2e6;
-  --surface-400: #ced4da;
-  --surface-500: #adb5bd;
-  --surface-600: #6c757d;
-  --surface-700: #495057;
-  --surface-800: #343a40;
-  --surface-900: #212529;
-  --gray-50: #f9fafb;
-  --gray-100: #f8f9fa;
-  --gray-200: #e9ecef;
-  --gray-300: #dee2e6;
-  --gray-400: #ced4da;
-  --gray-500: #adb5bd;
-  --gray-600: #6c757d;
-  --gray-700: #495057;
-  --gray-800: #343a40;
-  --gray-900: #212529;
-  --content-padding:1.25rem;
-  --inline-spacing:0.5rem;
-  --border-radius:4px;
-  --surface-ground:#efefef;
-  --surface-section:#ffffff;
-  --surface-card:#ffffff;
-  --surface-overlay:#ffffff;
-  --surface-border:#dee2e6;
-  --surface-hover:#e9ecef;
-  --focus-ring: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
-  --maskbg: rgba(0, 0, 0, 0.4);
-  --highlight-bg: #007bff;
-  --highlight-text-color: #ffffff;
-  color-scheme: light;
-  transition: 1s;
-} */
-
  /* global  */
 body {
   margin: 0;
 }
 
-.main{
-  margin: 2em;
+@media (max-width: 520px) {
+  .main {
+    margin: 1em;
+    transition: 0.5s;
+  }
+}
+
+@media (min-width: 520px) {
+  .main {
+    margin: 2em;
+    transition: 0.5s;
+  }
 }
 
 .container {
   margin: 0 auto;
-  /* background-color: var(--surface-50); */
   color: var(--text-color);
 }
 
@@ -130,44 +39,18 @@ a:hover, .text-link:hover{
 
 form{
   align-items: center;
-  min-width: 250px;
+  min-width: 220px;
   margin: 5px;
 }
 
 input, select, option, label {
   max-width: 300px;
-  /* background-color: var(--surface-50); */
-  color: var(--text-color);
 }
-
-
-table, thead, tbody, tr, td, th, ul, li {
-  /* background-color: var(--surface-50); */
-  color: var(--text-color);
-}
-
 
  /* main classes  */
-/* .flex, .grid, .row, .col, .p-steps-item, .p-card-content .card, .p-panel-content, .p-panel-header, .p-calendar, 
-.p-float-label, .p-divider-content, .p-inputtext, .p-inputtext-sm, .p-toggleable-content .p-toggleable-content-enter-done,
-.p-panel, .p-card, .main-table, .p-steps-number, .p-steps-title, .p-menuitem-link, .p-steps .p-component .p-readonly,
-.p-datatable .p-datatable-header, .p-datatable .p-paginator-bottom, .data-table-thead, .p-sortable-column, .p-inputtext .p-component, 
-.p-hidden-accessible .p-dropdown-hidden-select, .p-dropdown-label .p-inputtext, .p-dropdown, .p-dropdown .p-hidden-accessible, 
-.p-hidden-accessible input, .p-hidden-accessible select, .p-hidden-accessible option, .p-dropdown-label .p-inputtext, .p-dropdown-item, 
-.p-dropdown-panel .p-component .p-ripple-disabled .p-connected-overlay-enter-done, .p-dropdown-items-wrapper, .p-dropdown-items,
-.p-dropdown .p-component .p-inputwrapper .p-inputwrapper-filled, .p-hidden-accessible .p-dropdown-hidden-select {
-  color: var(--text-color);
-  background-color: var(--surface-0);
-} */
-
  /* page  */
 .p-card {
   min-height: 78vh;
-  /* background-color: var(--surface-50); */
-}
-
-.p-card-component {
-  border: none;
 }
 
 /* nav  */
@@ -201,7 +84,6 @@ table, thead, tbody, tr, td, th, ul, li {
 
 /* fotter  */
 .footer{
-  /* color: var(--text-color-secondary); */
   bottom: 0;
   margin: 0 auto;
   padding: 0.25em 0.25em 0.25em 0.25em;
@@ -236,66 +118,31 @@ table, thead, tbody, tr, td, th, ul, li {
   font-size: 1.5em;
 }
 
-/* padding  */
-.p-h-1 {
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-}
-
-.p-v-1 {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-}
-
-.p-h-2 {
-  padding-left: 1em;
-  padding-right: 1em;
-}
-
-.p-v-2 {
-  padding-top: 1em;
-  padding-bottom: 1em;
-}
-
 /* description */
 .box-gray-description{
-  /* background-color: var(--surface-0); */
   border-radius: 5px;
   padding: 1em;
   margin: 0.5em;
 }
 
+@media (max-width: 380px) {
+  .box-gray-description {
+    padding: 0.25em;
+    margin: 0;
+    transition: 0.5s;
+  }
+}
+
 /* comments */
 .box-gray-comment{
-  /* background-color: var(--surface-0); */
   border-radius: 5px;
   padding: 0.5em;
   margin: 0.25em;
 }
 
-.p-panel.p-panel-toggleable .p-panel-header, .p-link, .p-panel-content{ 
-  /* background-color: var(--surface-0); */
-}
-
 .p-panel .p-panel-content {
   padding: 0.25em;
 }
-
-.p-panel-header{
-  border: transparent;
-  padding: 0.5em;
-}
-
-.p-steps-number{
-  /* background-color: var(--gray-200);
-  color: var(--gray-800); */
-}
-.p-steps .p-steps-item.p-disabled {
-  opacity: 0.5;
-}
-.p-steps .p-steps-item.p-highlight{
-  opacity: 1;
-} 
 
 .text-mini {
   color: var(--gray-500);

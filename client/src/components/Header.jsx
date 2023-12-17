@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signedOut } from '../redux/reducers/clientSlice';
-import { toggleTheme } from '../redux/reducers/themeSlice';
 import { signOut } from '../api';
 import { Avatar } from 'primereact/avatar';
 
@@ -11,14 +10,6 @@ export default function Header() {
   const { currentClient} = useSelector((state) => state.client);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const { dark } = useSelector((state) => state.theme);
-
-  const changeMyTheme = () => {
-    const newTheme = dark === true ? false : true;
-    dispatch(toggleTheme(newTheme))
-        
-  };
 
   const handleSignOut = async () => {
     try {
@@ -53,9 +44,6 @@ export default function Header() {
                 <Link to='/profile'>
                   <Avatar label={(currentClient.username).at(0)} shape="circle" className='avatar-round'/>
                 </Link>
-                {/* <span className={`p-3 text-link rounded cursor-pointer 
-                ${dark ? 'pi pi-sun' : 'pi pi-moon'}`}
-                onClick={() => changeMyTheme()} size='small'></span> */}
                   {currentClient && (<span onClick={handleSignOut} 
                       className='cursor-pointer align-items-center px-1 mx-1'>
                   <span className="text-link pi pi-sign-out medium px-1 mx-1"></span>
@@ -63,9 +51,6 @@ export default function Header() {
              </> 
             ) : ( 
               <>
-                {/* <span className={`p-3 text-link rounded cursor-pointer 
-                ${dark ? 'pi pi-sun' : 'pi pi-moon'}`}
-                onClick={() => changeMyTheme()} size='small'></span> */}
                 <Link className='text-link px-1 mx-1 py-1' to='/sign-in'>
                 Login
                 </Link>

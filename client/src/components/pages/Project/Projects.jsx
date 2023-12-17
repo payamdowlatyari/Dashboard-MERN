@@ -190,11 +190,10 @@ export default function Projects () {
               />
           </Link> 
         </span>
-        <span className="p-input-icon-left p-float-label">
+        <span className="p-input-icon-left">
             <i className="pi pi-search" />
             <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} 
-            className="p-inputtext-sm" />
-           <label htmlFor="search">Search</label>
+            className="p-inputtext-sm" placeholder="Search" />
         </span>
     </div>
   );

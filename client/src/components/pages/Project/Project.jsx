@@ -93,7 +93,7 @@ const dispatch = useDispatch();
 
     const subtitle = () => {
       return ( 
-        <span className="p-h-1 text-mini small">
+        <span className="px-1 text-mini small">
           <i className="pi pi-user mr-2"></i>   
           {projectOwner ? projectOwner.username : 'client'}
         </span>
@@ -106,30 +106,30 @@ const dispatch = useDispatch();
               {(!loading && projectItem) && 
               <Card title={projectItem.name} subTitle={subtitle} footer={footer}>
 
-                 <div className="grid text-center">
-                    <div className="md:col-4 sm:col-12">
-                      <span className="p-h-1 text-mini small">
-                      <span className="p-h-1">Started</span> 
+                 <div className="grid justify-center">
+                    <div className="md:col-3 sm:col-12 text-center">
+                      <span className="p-1 text-mini small">
+                      <span className="px-1">Started</span> 
                       <i className="pi pi-clock mr-2 vertical-align-bottom"></i>
                         {new Date(projectItem.startDate).toString().substring(0, 15)} 
                       </span>
                     </div>
-                    <div className="md:col-4 sm:col-12">
+                    <div className="md:col-6 sm:col-12 text-center my-2">
                       <Steps model={items} activeIndex={projectItem.status} 
-                        className="max-w-25rem m-auto text-xs"
+                        className="max-w-auto text-center text-xs"
                         />   
                     </div>
-                    <div className="md:col-4 sm:col-12">
-                      <span className="p-h-1 text-mini small">
-                      <span className="p-h-1">Due</span> 
+                    <div className="md:col-3 sm:col-12 text-center">
+                      <span className="p-1 text-mini small">
+                      <span className="px-1">Due</span> 
                       <i className="pi pi-clock mr-2 vertical-align-bottom"></i>
                       {new Date(projectItem.endDate).toString().substring(0, 15)}     
                       </span>
                     </div>
                 </div>   
                 <div className="box-gray-description">
-                  <p className="p-h-1">{projectItem.description} </p>
-                    <p className="p-h-1 text-mini small">
+                  <p className="px-1">{projectItem.description} </p>
+                    <p className="px-1 text-mini small">
                     <i className="pi pi-clock mr-2 vertical-align-bottom"></i>
                     {new Date(projectItem.updatedAt).toString().substring(0, 21)} 
                     </p>
@@ -146,11 +146,12 @@ const dispatch = useDispatch();
                       
                             {projectItem.comments && projectItem.comments.length > 0 ?
                                <Comments/>
-                                : <p className="mid-small">No Comments</p>}
-                    </Panel></div>
-                      <div className="text-mini p-h-1 p-v-2">
+                                : <p className="mid-small pl-3">No Comments</p>}
+                                <div className="text-mini">
                       <NewComment projectId={id}/>
                       </div>  
+                    </Panel></div>
+                      
               </Card>  
               }
           </div>
