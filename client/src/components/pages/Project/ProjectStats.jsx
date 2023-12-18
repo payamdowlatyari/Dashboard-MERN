@@ -4,6 +4,7 @@ import { fetchProjects } from "../../../api";
 import { Message } from "primereact/message";
 import { Badge } from 'primereact/badge';
 import { Link } from "react-router-dom";
+import { Button } from 'primereact/button';
 
 export default function ProjectStats () {
 
@@ -72,30 +73,36 @@ export default function ProjectStats () {
         <div className="grid">
             <div className="col-12 md:col-6 lg:col-3">
                 <div className="shadow-1 p-3 border-50 surface-card border-round">
-                    <div className="flex justify-content-between mb-3 surface-card">
-                        <div className="text-900 font-medium text-xl surface-card">  
-                        <Link to='/dashboard'>Projects
-                        </Link>   
-                        </div>
-                        <div className="flex align-items-center justify-content-center border-round">
-                        <i className="pi pi-briefcase p-overlay-badge home-page-icon surface-card">
-                            <Badge value={projectList.length} severity='danger'></Badge>
-                        </i>
+                    <div className="flex justify-content-center surface-card">
+                        <div className="text-900 font-medium surface-card">  
+                        <Link to='/dashboard'>
+                            <Button
+                              severity='secondary'
+                              label="Projects"
+                              size="large"
+                              text 
+                              >
+                              <Badge value={projectList.length} severity='danger'></Badge>                            
+                            </Button>
+                          </Link>          
                         </div>
                     </div>
                 </div>
             </div>
             <div className="col-12 md:col-6 lg:col-3">
                 <div className="shadow-1 p-3 border-50 border-round surface-card">
-                    <div className="flex justify-content-between mb-3 surface-card">
-                    <div className="text-900 font-medium text-xl"> 
-                    <Link to='/dashboard'>Requested
-                        </Link> 
-                      </div>
-                        <div className="flex align-items-center justify-content-center border-round">
-                            <i className="pi pi-file p-overlay-badge home-page-icon surface-card">
-                            <Badge value={getStatusCount('Requested')} severity="info"></Badge>
-                            </i>
+                    <div className="flex justify-content-center surface-card">
+                      <div className="text-900 font-medium"> 
+                        <Link to='/dashboard'>
+                            <Button
+                              severity='secondary'
+                              label="Requested"
+                              size="large"
+                              text 
+                              >
+                              <Badge value={getStatusCount('Requested')} severity="info"></Badge>
+                            </Button>
+                          </Link>            
                         </div>
                     </div>
                 
@@ -103,33 +110,37 @@ export default function ProjectStats () {
             </div>
             <div className="col-12 md:col-6 lg:col-3">
                 <div className="shadow-1 p-3 border-50 border-round surface-card">
-                    <div className="flex justify-content-between mb-3 surface-card">
-                    <div className="text-900 font-medium text-xl">
-                    <Link to='/dashboard'>In Progress
-                        </Link> 
+                    <div className="flex justify-content-center surface-card">
+                      <div className="text-900 font-medium">
+                      <Link to='/dashboard'>
+                        <Button
+                          severity='secondary'
+                          label="In Progress"
+                          size="large"
+                          text 
+                          >
+                          <Badge value={getStatusCount('In Progress')} severity="warning"></Badge>
+                        </Button>
+                      </Link>            
                       </div>
-                    <div className="flex align-items-center justify-content-center border-round">
-                        <i className="pi pi-file-edit p-overlay-badge home-page-icon surface-card">
-                            <Badge value={getStatusCount('In Progress')} severity="warning"></Badge>
-                        </i>
-                        </div>
                     </div>
-                
                 </div>
             </div>
             <div className="col-12 md:col-6 lg:col-3">
                 <div className="shadow-1 p-3 border-50 border-round surface-card">
-                    <div className="flex justify-content-between mb-3 surface-card">
-                    <div className="text-900 font-medium text-xl">
-                    <Link to='/dashboard'>Completed 
-                        </Link>                     
+                    <div className="flex justify-content-center surface-card">
+                      <div className="text-900 font-medium">
+                      <Link to='/dashboard'>
+                        <Button
+                          severity='secondary'
+                          label="Completed"
+                          size="large"
+                          text 
+                          >
+                          <Badge value={getStatusCount('Completed')} severity="success" ></Badge>
+                        </Button>
+                      </Link>            
                       </div>
-                    <div className="flex align-items-center justify-content-center border-round">
-                        <i className="pi pi-check-square p-overlay-badge home-page-icon surface-card">
-                            <Badge value={getStatusCount('Completed')} severity="success"></Badge>
-
-                        </i>
-                    </div>
                     </div>
                 </div>
             </div>
