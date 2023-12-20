@@ -3,9 +3,10 @@ import { errorHandler } from './error.js';
 
 export const verifyToken = (req, res, next) => {
 
-    console.log(req.cookies.access_token)
-    
-    const token = req.cookies.access_token;
+    const token = req.header("x-auth-token");
+    // const token = req.cookies.access_token;
+
+    console.log(token)
 
     if (!token) return next(errorHandler(401, 'You are not authenticated!'));
 

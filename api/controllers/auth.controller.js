@@ -44,14 +44,18 @@ export const signin = async (req, res, next) => {
     const { password: hashedPassword, ...rest } = validClient._doc;
     const expiryDate = new Date(Date.now() + 3600000 * 24); // 24 hours
     
-    res.cookie('access_token', token, { 
-          httpOnly: true, 
-          sameSite: 'none',
-          secure: true,
-          expires: expiryDate 
-      })
+    res
+    // .cookie('access_token', token, { 
+    //       httpOnly: true, 
+    //       sameSite: 'none',
+    //       secure: true,
+    //       expires: expiryDate 
+    //   })
       .status(200)
-      .json(rest);
+      .json({
+        client: rest, 
+        token
+      });
 
   } catch (error) {
     next(error);
@@ -71,7 +75,7 @@ export const google = async (req, res, next) => {
       
       res.cookie('access_token', token, {
           httpOnly: true,
-          
+
           expires: expiryDate,
         })
         .status(200)
