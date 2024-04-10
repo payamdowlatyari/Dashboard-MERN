@@ -41,6 +41,8 @@ export const signin = async (req, res, next) => {
 
     const token = jwt.sign({ id: validClient._id }, process.env.JWT_SECRET);
 
+    console.log(token)
+
     const { password: hashedPassword, ...rest } = validClient._doc;
     const expiryDate = new Date(Date.now() + 3600000 * 24); // 24 hours
     

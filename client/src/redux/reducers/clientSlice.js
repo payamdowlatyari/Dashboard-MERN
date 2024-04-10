@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import setAuthToken from '../../api/setAuthToken';
 
 const initialState = {
   token: localStorage.getItem("token"),
@@ -16,7 +17,12 @@ const clientSlice = createSlice({
     },
     signInSuccess: (state, action) => {
       state.currentClient = action.payload.client;
-      localStorage.setItem("token", action.payload.token);
+      
+      // localStorage.setItem("token", JSON.stringify(action.payload.token));
+      const { token } = action.payload
+      localStorage.setItem("token", token);
+      // Set token to Auth header
+      setAuthToken(token);
       state.loading = false;
       state.error = false;
     },

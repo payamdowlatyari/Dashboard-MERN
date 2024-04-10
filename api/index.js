@@ -7,7 +7,38 @@ import authRoutes from './routes/auth.route.js';
 import adminRoutes from './routes/admin.route.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
+
 dotenv.config();
+
+const swaggerDefinition = {
+  openapi: '3.0.0',
+  info: {
+    title: 'Express API for Dashboard MERN',
+    version: '1.0.0',
+    description:
+      'This is a REST API application made with Express. It retrieves data from MongoDB.',
+    contact: {
+      name: 'Dashboard MERN',
+      url: 'https://payamd-dashboard.vercel.app',
+    },
+  },
+  servers: [
+    {
+      url: 'https://dashboard-mern-sandy.vercel.app',
+      description: 'Development server',
+    },
+  ],
+};
+
+const options = {
+  swaggerDefinition,
+  // Paths to files containing OpenAPI definitions
+  apis: ['./routes/*.js'],
+};
+
+const swaggerSpec = swaggerJSDoc(options);
 
 const port = process.env.PORT || 8000
 mongoose.connect(process.env.MONGO)
@@ -19,11 +50,12 @@ mongoose.connect(process.env.MONGO)
   });
 
 const app = express();
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
   credentials: true,
-    origin: ["http://localhost:3000", "https://payamd-dashboard.vercel.app", "https://dashboard-mern-r47l.vercel.app"],
+    origin: ["http://localhost:3000", "https://payamd-dashboard.vercel.app"],
     methods: ["POST", "GET", "PUT","DELETE"]
 }));
 
@@ -36,6 +68,8 @@ app.get('/', (req, res) => {
     message: 'API is working!',
   });
 })
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/api/client', clientRoutes);
 app.use('/api/project', projectRoutes);

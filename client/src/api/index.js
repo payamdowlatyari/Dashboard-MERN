@@ -3,6 +3,20 @@ import { getBaseUrl } from './util';
 
 const url = getBaseUrl();
 
+axios.create({
+    // baseURL: getBaseUrl(),
+    headers: {
+      Authorization: {
+        toString () {
+          return `Bearer ${localStorage.getItem('token')}`
+        }
+      }
+    }
+  })
+
+  console.log(axios.defaults)
+  
+
 // api/auth
 export const signIn =(formData)=> axios.post(`${url}/api/auth/signin`, formData, { withCredentials: true })
 export const signUp =(formData)=> axios.post(`${url}/api/auth/signup`, formData, { withCredentials: true })

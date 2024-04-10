@@ -23,16 +23,16 @@ export default function AppRoutes() {
   const {currentClient} = useSelector(state => state.client)
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    }
-    // store.dispatch(loadUser());
+  // useEffect(() => {
+  //   if (localStorage.token) {
+  //     setAuthToken(localStorage.token);
+  //   }
+  //   // store.dispatch(loadUser());
 
-    window.addEventListener('storage', () => {
-      if (!localStorage.token) dispatch(signedOut());
-    });
-  }, []);
+  //   window.addEventListener('storage', () => {
+  //     if (!localStorage.token) dispatch(signedOut());
+  //   });
+  // }, []);
 
   return (
     <BrowserRouter>

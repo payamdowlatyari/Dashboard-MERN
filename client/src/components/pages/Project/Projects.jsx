@@ -202,7 +202,7 @@ export default function Projects () {
     <div className="card">
       {loading && <div className="text-center text-blue-500">
         <i className="pi pi-spin pi-spinner text-8xl"></i></div>}
-       {!loading && projectList.length > 0 ?
+       {!loading && projectList && projectList.length > 0 ?
             <DataTable value={projectList} size="small" editMode="row" dataKey="_id" 
             paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} globalFilter={globalFilter} header={header}
             onRowEditComplete={onRowEditComplete} tableStyle={{ minWidth: '25rem' }}>
